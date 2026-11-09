@@ -1,0 +1,23 @@
+# Resolved and frozen after installation. GPU torch installed separately.
+transformers>=5.15,<5.22
+huggingface-hub>=0.34,<2
+accelerate>=1.0,<2
+bitsandbytes>=0.48,<1
+peft>=0.17,<1
+datasets>=3,<6
+safetensors
+sentencepiece
+protobuf
+numpy
+pandas
+scipy
+matplotlib
+pyyaml
+jsonschema
+z3-solver
+pytest
+pip
+setuptools
+wheel
+curatorkit
+auditkit

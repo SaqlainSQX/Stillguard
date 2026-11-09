@@ -1,0 +1,27 @@
+# Experiment contract only. Benchmark data and runner are not implemented yet.
+model:
+  id: CohereLabs/tiny-aya-global
+  local_path: models/tiny-aya-global
+  revision: af89d219b53ed9b13b8a4645f9c8028973510324
+  quantization: nf4
+  double_quantization: true
+  compute_dtype: bfloat16
+  trust_remote_code: false
+generation:
+  do_sample: false
+  max_new_tokens: 160
+pilot:
+  independent_families: 6
+  cases_per_family: 6
+  conditions:
+    - original_policy
+    - warm_amendment_history
+    - cold_current_policy
+    - warm_current_policy_refresh
+    - repeated_no_change
+  controls:
+    - identical_simulator_state
+    - identical_authoritative_current_policy_for_history_comparison
+    - matched_history_length_and_position
+    - repeated_confirmation_panel
+  evaluation_gold_is_private: true

@@ -1,0 +1,205 @@
+{
+  "created_utc": "2026-11-09T08:16:24Z",
+  "assets": [
+    {
+      "kind": "repository",
+      "name": "CuratorKIT",
+      "url": "https://github.com/Lexsi-Labs/CuratorKIT",
+      "commit": "cee1aed21d14992f650c5dfe09094b9625d0ce87",
+      "archive": {
+        "path": "downloads\\sources\\CuratorKIT-cee1aed21d14.zip",
+        "bytes": 863919,
+        "sha256": "74163f070af2cb1380bcc80bf29f53286cd70af528366de48d48cccbbbae79a3"
+      }
+    },
+    {
+      "kind": "repository",
+      "name": "AuditKIT",
+      "url": "https://github.com/Lexsi-Labs/AuditKIT",
+      "commit": "9da5838e61ef54d560a37605ddbcb19aceded9b3",
+      "archive": {
+        "path": "downloads\\sources\\AuditKIT-9da5838e61ef.zip",
+        "bytes": 3953187,
+        "sha256": "e29933dde12df999ce20e66e9c4d1b80ee7563643f0666c5d5ad1d4db88ad80f"
+      }
+    },
+    {
+      "kind": "repository",
+      "name": "CircuitKIT",
+      "url": "https://github.com/Lexsi-Labs/CircuitKIT",
+      "commit": "227fafdaf1ae78ac1de492da07d8173d16f8863c",
+      "archive": {
+        "path": "downloads\\sources\\CircuitKIT-227fafdaf1ae.zip",
+        "bytes": 6624375,
+        "sha256": "412a4a589c2c24f009f63005c0fc08ce3fc3bcc5ee3ab7224a805a9da13c7531"
+      }
+    },
+    {
+      "kind": "paper",
+      "name": "formalization-gaming",
+      "url": "https://arxiv.org/pdf/2604.19459",
+      "path": "references\\papers\\2604.19459-formalization-gaming.pdf",
+      "bytes": 996940,
+      "sha256": "fef88016519c33a5494001be8a79c206096eca8ee069aa79b905ec1c07b5f9ba"
+    },
+    {
+      "kind": "paper",
+      "name": "tiny-aya",
+      "url": "https://arxiv.org/pdf/2603.11510",
+      "path": "references\\papers\\2603.11510-tiny-aya.pdf",
+      "bytes": 2227031,
+      "sha256": "036b1607b3f1d3c652e6efc38e49ea3cda7acee6b325178274dd827fc36a1bbe"
+    },
+    {
+      "kind": "paper",
+      "name": "signed-but-not-safe",
+      "url": "https://arxiv.org/pdf/2611.07483",
+      "path": "references\\papers\\2611.07483-signed-but-not-safe.pdf",
+      "bytes": 486127,
+      "sha256": "adbd07a982feca52af5459405d9c8a96d96c465d3b0169518e0d586d4d9990fb"
+    },
+    {
+      "kind": "repository",
+      "name": "memopops-reference",
+      "url": "https://github.com/SaqlainSQX/memopops",
+      "commit": "317e4517d9de0f102c3c1c3cdb8b539a1600eeb3",
+      "archive": {
+        "path": "downloads\\sources\\memopops-reference-317e4517d9de.zip",
+        "bytes": 2877507,
+        "sha256": "1977bcdc6d3fd547e781f63380ba3281cba4d11ea78c3948f810a3a0cf033578"
+      }
+    },
+    {
+      "kind": "paper",
+      "name": "policybank",
+      "url": "https://arxiv.org/pdf/2604.15505",
+      "path": "references\\papers\\2604.15505-policybank.pdf",
+      "bytes": 3514856,
+      "sha256": "99d376c69936d9679564abafd0d3e16ce154194b0474a7c1e2e7fd81e2c70577"
+    },
+    {
+      "kind": "paper",
+      "name": "budgeted-attack-scheduling",
+      "url": "https://arxiv.org/pdf/2610.25897",
+      "path": "references\\papers\\2610.25897-budgeted-attack-scheduling.pdf",
+      "bytes": 670189,
+      "sha256": "c60c8c1e881a845173cd15fe55cbe05b93f61be6c66b605c62acad7b506db09c"
+    },
+    {
+      "kind": "paper",
+      "name": "state-contamination",
+      "url": "https://arxiv.org/pdf/2605.16746",
+      "path": "references\\papers\\2605.16746-state-contamination.pdf",
+      "bytes": 985633,
+      "sha256": "68c8d821cabb3b9721e003e538900652a280bc8e48fcc3a9bb194ead5f274d91"
+    },
+    {
+      "kind": "paper",
+      "name": "safetune",
+      "url": "https://arxiv.org/pdf/2609.22153",
+      "path": "references\\papers\\2609.22153-safetune.pdf",
+      "bytes": 863293,
+      "sha256": "c30f57c6912e584631b7d540f2c994a331989e6cf339467a33f1ff29401a0d7d"
+    },
+    {
+      "kind": "paper",
+      "name": "agent-regression-selection",
+      "url": "https://arxiv.org/pdf/2609.24928",
+      "path": "references\\papers\\2609.24928-agent-regression-selection.pdf",
+      "bytes": 1056205,
+      "sha256": "e4c58c8c8f2f970093d1cfe533282f3ea2b649df0718b3d4a6c3aa19eee59c8f"
+    },
+    {
+      "kind": "paper",
+      "name": "iamragbench",
+      "url": "https://arxiv.org/pdf/2611.03431",
+      "path": "references\\papers\\2611.03431-iamragbench.pdf",
+      "bytes": 1511249,
+      "sha256": "7e46c432230ed480acacbbb61d2cc9a71b9f1a37462f964c06fa3eec03f46428"
+    },
+    {
+      "kind": "paper",
+      "name": "curatorkit",
+      "url": "https://arxiv.org/pdf/2606.21631",
+      "path": "references\\papers\\2606.21631-curatorkit.pdf",
+      "bytes": 955439,
+      "sha256": "66b1c09245f8c9037b1f28c2e18a733ff63f6fd598f2ddbdbf24816f749d6c29"
+    },
+    {
+      "kind": "paper",
+      "name": "spiralfovea",
+      "url": "https://arxiv.org/pdf/2607.00780",
+      "path": "references\\papers\\2607.00780-spiralfovea.pdf",
+      "bytes": 709178,
+      "sha256": "3250e805d52b739fdef3ebbda07e7b598192b04b4baaae68552af7ccc8e7522d"
+    },
+    {
+      "kind": "page",
+      "name": "hackathon",
+      "url": "https://hackathon.lexsi.ai/",
+      "path": "references\\pages\\hackathon.html",
+      "bytes": 151704,
+      "sha256": "55bd1a9579b13360a75a87287dd01551a19d0f7f4e89376f9bca02974636bfef"
+    },
+    {
+      "kind": "page",
+      "name": "auditkit",
+      "url": "https://auditkit.lexsi.ai/",
+      "path": "references\\pages\\auditkit.html",
+      "bytes": 40150,
+      "sha256": "7b8059a4124696220f61e4c907cdfe1366710b2fb56471cf2485fba9593d7e4b"
+    },
+    {
+      "kind": "repository",
+      "name": "SafeTune",
+      "url": "https://github.com/Lexsi-Labs/SafeTune",
+      "commit": "1d824f026742fe2ce58491a8414f51a264931840",
+      "archive": {
+        "path": "downloads\\sources\\SafeTune-1d824f026742.zip",
+        "bytes": 4026711,
+        "sha256": "a6acd41188ad9fd1682f6f488a7b7d29a812b838e0fec8df9e5aae80a8e66d66"
+      }
+    },
+    {
+      "kind": "paper",
+      "name": "quest",
+      "url": "https://arxiv.org/pdf/2605.09513",
+      "path": "references\\papers\\2605.09513-quest.pdf",
+      "bytes": 1412978,
+      "sha256": "b468f94cbf04af92778780d1ab05e6215e4be26e63ea1ed253a4e0ed8e92b7a3"
+    },
+    {
+      "kind": "page",
+      "name": "circuitkit",
+      "url": "https://circuitkit.lexsi.ai/",
+      "path": "references\\pages\\circuitkit.html",
+      "bytes": 58472,
+      "sha256": "3754c3b0744bf86ff083b1279bad9ce60aa1f892cfd0710e7f0452df065e1d03"
+    },
+    {
+      "kind": "page",
+      "name": "safetune-feature-map",
+      "url": "https://safetune.lexsi.ai/reference/feature-map/",
+      "path": "references\\pages\\safetune-feature-map.html",
+      "bytes": 57675,
+      "sha256": "bccc76610109e172af5c9818dedd57edbd6300051df95633eaf8a4ffa6dfc617"
+    },
+    {
+      "kind": "page",
+      "name": "curatorkit",
+      "url": "https://curatorkit.lexsi.ai/latest/",
+      "path": "references\\pages\\curatorkit.html",
+      "bytes": 52967,
+      "sha256": "f73f73a986b0c2a327ace8474e4d2dd0e2d0403c37ceded27d734fa5a34aeae9"
+    },
+    {
+      "kind": "model_card",
+      "name": "tiny-aya-model-card",
+      "path": "references\\pages\\tiny-aya-model-card.md",
+      "url": "https://huggingface.co/CohereLabs/tiny-aya-global",
+      "bytes": 9190,
+      "sha256": "640219fd6a7727b13a9fc23db5286acd0018b43d75902c29c6ac29abec0be8f1"
+    }
+  ],
+  "failures": []
+}

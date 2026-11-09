@@ -1,0 +1,61 @@
+{
+  "model_id": "CohereLabs/tiny-aya-global",
+  "revision": "af89d219b53ed9b13b8a4645f9c8028973510324",
+  "files": [
+    {
+      "name": "README.md",
+      "bytes": 9190,
+      "sha256": null
+    },
+    {
+      "name": "config.json",
+      "bytes": 1961,
+      "sha256": null
+    },
+    {
+      "name": "generation_config.json",
+      "bytes": 132,
+      "sha256": null
+    },
+    {
+      "name": "model-00001-of-00002.safetensors",
+      "bytes": 4992396352,
+      "sha256": "0590022d0efe06f12e08e1e94302f069dff404341b426f7435c6303725635fb1"
+    },
+    {
+      "name": "model-00002-of-00002.safetensors",
+      "bytes": 1706092176,
+      "sha256": "2ac3809931d113785058809f27775620e0b8aec6fbc7e163c9c09c08b5f90dab"
+    },
+    {
+      "name": "model.safetensors.index.json",
+      "bytes": 23597,
+      "sha256": null
+    },
+    {
+      "name": "signatures/tiny-aya-global.sig",
+      "bytes": 13410,
+      "sha256": null
+    },
+    {
+      "name": "signatures/verification-instructions.txt",
+      "bytes": 1436,
+      "sha256": null
+    },
+    {
+      "name": "special_tokens_map.json",
+      "bytes": 567,
+      "sha256": null
+    },
+    {
+      "name": "tokenizer.json",
+      "bytes": 21376527,
+      "sha256": "2227ea9c52e8afb3f98bfed2679008b275f2664de69dfde174b374389eb0225d"
+    },
+    {
+      "name": "tokenizer_config.json",
+      "bytes": 8169,
+      "sha256": null
+    }
+  ]
+}
