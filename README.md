@@ -6,6 +6,8 @@ Stillguard investigates whether legitimate policy updates cause small Aya agents
 
 Current stage: verified research setup. The policy-continuity pilot has not run; no safety improvement is claimed. Synthetic setup fixtures and model-load checks are labeled separately. See [the pilot protocol](docs/PROTOCOL.md).
 
+Execution: [action plan and steering gates](PLAN.md) · [task board](docs/TASKS.md) · [decision journal](docs/DECISIONS.md).
+
 ## Fresh clone (Windows + NVIDIA GPU)
 
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then:

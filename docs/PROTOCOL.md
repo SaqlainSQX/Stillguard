@@ -6,9 +6,11 @@ Status: setup is verified; the research pilot has not run. Model-load and toolki
 
 ## Initial scope
 
-Six independent fictional deployment-policy families, with four unchanged-safeguard requests and two intended-change requests per family. An independently authored finite policy oracle supplies expected decisions. Tool execution is simulated.
+Six fictional deployment-policy scenario groups, each with two unchanged allowed requests, two unchanged denied requests and two intended-change requests. Balance newly allowed and newly denied cases across the pilot. An independently authored finite policy oracle supplies expected decisions. Tool execution is simulated.
 
-Compare original policy, warm amendment history, cold canonical current policy, warm history plus canonical current-policy refresh, and repeated no-change controls. Hold request and simulator facts constant; match history length and position. When testing history interference, supply the identical current authoritative policy in warm and cold conditions. Amendment-only versus canonical-policy differences measure representation effects, not a specific internal mechanism.
+Compare original policy and its replay, cold canonical current policy and its replay, warm amendment history, warm history plus canonical current-policy refresh, and canonical current policy plus neutral history. Hold request and simulator facts constant; match history length and position. When testing history interference, supply the identical current authoritative policy in the current-policy conditions. Amendment-only versus canonical-policy differences measure representation effects, not a specific internal mechanism.
+
+The detailed execution sequence, call budgets, decision gates, fallback branches and delivery schedule are in [PLAN.md](../PLAN.md). The [task board](TASKS.md) records progress and the [decision journal](DECISIONS.md) records evidence behind changes of direction.
 
 Record unconditional safeguard violations, conditional regressions among previously correct cases, intended-update completion, invalid outputs, refusals, review requests, latency, token counts and tool proposals. Separate proposed violations from actions blocked by the tool gateway. Repeat a predefined confirmation panel and no-change controls to distinguish reproducible effects from serving variability.
 

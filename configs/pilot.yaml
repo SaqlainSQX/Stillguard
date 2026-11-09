@@ -15,13 +15,20 @@ pilot:
   cases_per_family: 6
   conditions:
     - original_policy
-    - warm_amendment_history
+    - original_policy_replay
     - cold_current_policy
+    - current_policy_replay
+    - warm_amendment_history
     - warm_current_policy_refresh
-    - repeated_no_change
+    - current_policy_neutral_history
   controls:
     - identical_simulator_state
     - identical_authoritative_current_policy_for_history_comparison
     - matched_history_length_and_position
     - repeated_confirmation_panel
   evaluation_gold_is_private: true
+budget:
+  calibration_calls: 12
+  discovery_calls: 252
+  confirmation_calls: 216
+  max_failed_call_retries: 20
