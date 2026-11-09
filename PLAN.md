@@ -1,6 +1,6 @@
 # Stillguard execution plan
 
-Prepared 9 November 2026. Evidence-driven plan; no pilot result is assumed.
+Prepared 9 November; revised 10 November 2026. User target: finish by 12 November IST. Evidence-driven plan; no pilot result is assumed.
 
 ## Objective and current state
 
@@ -10,7 +10,18 @@ Verified: official pinned model downloaded and hash-checked, local 4-bit GPU gen
 
 The first decision is whether this particular research thesis deserves the remaining time. Eleven proposal reviews are design work, not evidence that a model failure exists.
 
-Official submission deadline: 14 November, end of day AoE. Use 13 November IST for a submission-ready package and 14 November IST for final checks and submission buffer. Source: https://hackathon.lexsi.ai/#submit (checked 9 November).
+Official submission deadline: 14 November, end of day AoE. The working deadline is now **12 November IST for the complete submission-ready package**. Keep 13–14 November as buffer, not planned development time. Source: https://hackathon.lexsi.ai/#submit (checked 9 November).
+
+## Revised three-day critical path
+
+| Date (IST) | Required output | Decision / scope control |
+|---|---|---|
+| 10 November | Verified oracle/scorer, runnable Aya pilot, actual baseline traces and Gate A decision | Stop speculative planning; make the continue/reframe choice today. If full confirmation cannot finish, report the incomplete gate and finish it first on 11 November. No mitigation claims from an incomplete pilot. |
+| 11 November | Selected simple mitigation, real CuratorKIT/AuditKIT integration, reviewed held-out data and frozen evaluation configuration | Freeze the method and core features by day's end. Training is outside the default plan. |
+| 12 November | Held-out evaluation, reproducibility check, concise actual-run demo/report, HF artifacts and submission text/links | Finish the complete reviewable package. Reduce presentation polish before dropping evaluation controls. |
+| 13–14 November | Reserved buffer and submission | Only correctness fixes, access checks and submission handling; no planned new research. |
+
+Default deliverable: one model, one domain, two genuinely integrated track repositories, a controlled benchmark, one simple mitigation comparison and reproducible traces. Adapter training, a third toolkit, multilingual work and a full dashboard are excluded from the critical path. If measured runtime exceeds the budget, reduce evaluation breadth before launching the frozen test and disclose the smaller scope; never select cases by favorable test outcomes.
 
 ## Fixed operating rules
 
@@ -27,7 +38,7 @@ Official submission deadline: 14 November, end of day AoE. Use 13 November IST f
 
 ## Stage 1 — trustworthy task and scorer
 
-Target: first 2–3 working hours; estimates are planning bounds, not promises.
+Target: first 2–3 working hours on 10 November; estimates are planning bounds, not promises.
 
 Actions:
 
@@ -44,7 +55,7 @@ Exit gate: a model-independent hand-labeled fixture set agrees with the scorer; 
 
 ## Stage 2 — actual Aya runner and frozen discovery pilot
 
-Target: next 2–4 working hours. First measure real latency on 12 calibration calls; estimate the remaining budget from that measurement.
+Target: next 2–4 working hours on 10 November. First measure real latency on 12 calibration calls; estimate the remaining budget from that measurement. The pilot and gate have priority over every optional component.
 
 Actions:
 
@@ -95,14 +106,14 @@ Write the gate decision in `docs/DECISIONS.md`: observed evidence, limits, selec
 
 ## Stage 3 — the smallest useful intervention
 
-Target: 10 November, conditional on Gate A.
+Target: 11 November, conditional on Gate A.
 
 - [ ] Compare canonical current-policy refresh and a concise invariant reminder extracted from the authoritative policy.
 - [ ] Include an ordinary same-budget reminder so a gain is not attributed to our formulation when it comes from extra tokens or repetition alone.
 - [ ] Report cost/usefulness tradeoffs with the same request groups, settings and action gate.
-- [ ] If residual failures justify adaptation, run one tiny compatibility/VRAM check before preparing a training job.
-- [ ] If training proceeds, compare base versus adapted Aya under an identical harness; include equal-sized generic replay data. Use training/development groups only.
-- [ ] Add SafeTune only after identifying a specific supported intervention and demonstrating that its mechanism is actually active on this target.
+- [ ] Defer adaptation from the default plan. Consider a tiny compatibility/VRAM check only if all core development outputs are already complete with time remaining before the 11 November feature freeze.
+- [ ] If that optional training branch proceeds, compare base versus adapted Aya under an identical harness; include equal-sized generic replay data. Use training/development groups only. It must not delay the frozen evaluation or 12 November delivery.
+- [ ] Keep SafeTune optional; add it only if a specific supported intervention is already demonstrated active and the core two-repository deliverable is complete.
 
 Exit gate: the intervention reduces reviewed failures while retaining intended behavior. The earlier target of halving violations with at most five percentage points lost in intended-update completion is an engineering ambition, not a result or an acceptable substitute for reporting raw counts and uncertainty.
 
@@ -110,7 +121,7 @@ Stop optional training if compatibility cannot be established in two working hou
 
 ## Stage 4 — independent evaluation and robustness
 
-Target: 11–12 November.
+Target: prepare and freeze on 11 November; execute the final evaluation on 12 November.
 
 - [ ] Author a new held-out set targeting at least 20 distinct scenario groups, with grouped paraphrases and update sequences. Freeze it before method selection is finalized.
 - [ ] Check test wording for ambiguity and independently verify gold policy transitions. Clearly label synthetic scope.
@@ -124,16 +135,16 @@ Exit gate: all headline numbers trace to saved runs; a clean rerun reproduces re
 
 ## Stage 5 — usable demonstration and release package
 
-Target: 12–13 November; prioritize this over optional training and features.
+Target: draft report/artifact metadata alongside development on 11 November; complete the entire release package on 12 November. Prioritize this over optional training and features.
 
-- [ ] Build a compact comparison viewer over actual saved runs: policy, amendment, still-applicable safeguard, model proposal, expected action and intervention outcome.
+- [ ] Produce a compact comparison report over actual saved runs: policy, amendment, still-applicable safeguard, model proposal, expected action and intervention outcome. A saved HTML or terminal report is sufficient; no full dashboard is required.
 - [ ] Use a held-out group selected without seeing its outputs. Present both a legitimate allowed update and safeguard checks. Do not script a fake faulty model answer.
 - [ ] Prepare a public benchmark/data card, run logs, model/configuration references, and any adapter actually produced on Hugging Face. Organize the required public collections and verify access before submission.
 - [ ] Write the article/README with exact scope, prior work, rationale, multiple before/after metrics, failed approaches, compute cost and reproduction commands.
 - [ ] Verify the contribution uses at least two Track 2 repositories in a real pipeline. Imports and fixture scores do not count as research integrations.
 - [ ] Prepare the under-500-word abstract and submission links. Check current form requirements and latest event announcements.
 
-Feature freeze: end of 12 November IST. Submission-ready package: 13 November IST. On 14 November, fix correctness/reproducibility issues and submit before the official AoE cutoff; do not use the later timezone as planned development time.
+Feature/method freeze: end of 11 November IST, before held-out scoring. Submission-ready package: 12 November IST. Keep 13–14 November for buffer, access/correctness checks and submission; do not allocate new research to that buffer.
 
 ## Steering rules when progress deteriorates
 
@@ -146,9 +157,9 @@ Feature freeze: end of 12 November IST. Submission-ready package: 13 November IS
 | Mitigation succeeds only by denying work | Compare at comparable legitimate task completion or reject it | Raw traces, false-positive analysis |
 | Proposed mechanism adds no value beyond a simple baseline | Use the simple baseline and revise the contribution claim | Useful engineering result and artifact |
 | Training/install research consumes the schedule | Drop that branch; keep measured prompt/state mitigation | Audit and deployable configuration |
-| Less than two days remain and evaluation is unfinished | Stop new methods and domains; finish evaluation and report | A coherent smaller submission |
+| By 11 November the core runner or evaluation is behind schedule | Stop training, extra methods and presentation features; finish the controlled audit and report | A coherent smaller submission by 12 November |
 
-At most one major thesis pivot before the end of 11 November. Each pivot must name the failed assumption, an observed alternative failure, a falsifiable replacement question, a maximum exploration budget and the required reused components. After that point, narrow scope rather than restart. No speculative circuit discovery, RLHF, multilingual expansion or multi-agent system without direct evidence and spare time.
+At most one major thesis pivot, decided from the 10 November pilot with a bounded diagnostic budget. Each pivot must name the failed assumption, an observed alternative failure, a falsifiable replacement question, a maximum exploration budget and the required reused components. If evidence is delayed into 11 November, narrow the existing audit rather than restart. No speculative circuit discovery, RLHF, multilingual expansion or multi-agent system on the critical path.
 
 ## Git and experiment discipline
 

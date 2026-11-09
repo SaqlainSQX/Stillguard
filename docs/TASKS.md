@@ -1,6 +1,6 @@
 # Stillguard task board
 
-Updated 9 November 2026. See `../PLAN.md` for acceptance criteria and branch rules.
+Updated 10 November 2026. Finish target: **12 November IST**, with 13–14 November reserved as buffer. See `../PLAN.md` for acceptance criteria and branch rules.
 
 | ID | Deliverable | Depends on | Status |
 |---|---|---|---|
@@ -14,9 +14,11 @@ Updated 9 November 2026. See `../PLAN.md` for acceptance criteria and branch rul
 | T6 | Actual AuditKIT baseline sweep and confirmation panel | T5 | Pending |
 | G1 | Gate A evidence review and continue/reframe decision | T6 | Pending |
 | T7 | Simple mitigation and equal-budget comparison | G1 | Conditional |
-| T8 | Tiny adaptation compatibility test and one training run | T7 | Optional, evidence-dependent |
+| T8 | Tiny adaptation compatibility test and one training run | T7 | Deferred; outside the default three-day plan |
 | T9 | New grouped held-out evaluation and one ablation | T7 | Pending |
-| T10 | Actual-run comparison viewer and reproducibility check | T9 | Pending |
+| T10 | Lightweight actual-run report/demo and reproducibility check | T9 | Pending |
 | T11 | HF artifacts/collections, report and submission package | T9,T10 | Pending |
 
 Do not mark research stages complete from generated code alone. Completion requires their observable output and acceptance checks.
+
+Milestones: T1–T6 and G1 on 10 November; T7 plus frozen T9 data/config and draft release material on 11 November; final T9–T11 by 12 November. If a milestone slips, drop optional scope and preserve the scoring controls.

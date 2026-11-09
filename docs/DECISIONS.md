@@ -12,6 +12,14 @@ Next evidence required: model-independent scorer checks, measured calibration th
 
 Gate status: not reached. No decision to continue the research thesis has been justified by experiments.
 
+## D002 — 10 November 2026: finish by 12 November
+
+User constraint: today is 10 November and the complete work should finish by 12 November, leaving buffer before the event deadline.
+
+Decision: use a three-day critical path. Pilot and direction gate today; simple intervention, integration and evaluation freeze on 11 November; evaluation, reproducibility and full submission-ready package on 12 November. Reserve 13–14 November as buffer. Adapter training, a third toolkit and a full dashboard are not default deliverables. If evidence arrives late, narrow scope instead of launching another speculative thesis.
+
+Evidence status unchanged: setup passed; no research pilot results exist. Dates are targets, not completed milestones or guarantees.
+
 ## Entry template for the next gate
 
 - Date / decision ID:
