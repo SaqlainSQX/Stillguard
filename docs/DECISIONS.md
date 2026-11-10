@@ -38,6 +38,12 @@ Decision: proceed to the prepared resumable 12-call local Aya calibration. Do no
 
 Calibration integrity correction: the first preliminary launch exposed descriptive request IDs (including answer-like words). That process was stopped and its output marked ABORTED, excluded from all result claims. Retain its trace and account for logged/in-flight calls as setup overhead. Model-visible IDs are now opaque reqNNN values; descriptive case IDs remain evaluator-only. The fixture test guards this convention. Rerun calibration under the new dataset and code fingerprint.
 
+## D005 — 10 November 2026: diagnose basic policy comprehension first
+
+Valid development run `4dc4a0974c47` at code `bd2ffdf`: 12 calls, 12 valid proposals, 7 correct, no generation failures, about 22.16 seconds of generation, peak PyTorch CUDA allocation 2,686,910,464 bytes. All six allowed fixtures passed; five of six denied fixtures were incorrectly proposed for deployment. The mock gate blocked those violations. This is not a policy-history experiment.
+
+Decision: hold the history pilot and take the planned bounded diagnostic branch. Compare literal Boolean facts with lossless factual sentence wording while preserving policies, trusted states and gold decisions. No examples or expected labels are added to model inputs. Record prompt-format variants under separate run fingerprints. Additional diagnostic calls count as development overhead, not part of the frozen research pilot budget. Keep all earlier traces, including the excluded preliminary run.
+
 ## Entry template for the next gate
 
 - Date / decision ID:

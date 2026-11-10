@@ -1,6 +1,7 @@
 """Resumable local Aya calibration on development fixtures, not a research audit."""
 from pathlib import Path
 import hashlib
+import argparse
 import json
 import os
 import subprocess
@@ -22,6 +23,9 @@ def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--fact-format', choices=['json','sentences'], default='json')
+    args = parser.parse_args()
     import yaml
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
@@ -45,7 +49,8 @@ def main():
                     model_revision=model_lock['revision'], config_sha256=sha(ROOT/'configs/pilot.yaml'),
                     cases_sha256=sha(cases_path), policies_sha256=sha(policies_path),
                     generation=config['generation'], quantization=config['model'], seed=42,
-                    torch_version=torch.__version__, max_successful_calls=12, max_failed_calls=20)
+                    torch_version=torch.__version__, fact_format=args.fact_format,
+                    max_successful_calls=12, max_failed_calls=20)
     fingerprint = hashlib.sha256(json.dumps(manifest,sort_keys=True).encode()).hexdigest()
     folder = ROOT/'results'/('calibration-'+fingerprint[:12]); folder.mkdir(parents=True,exist_ok=True)
     if (folder/'ABORTED.json').exists():
@@ -78,7 +83,7 @@ def main():
             record = policies[case['policy_revision']]
             policy = Policy.from_dict({k:v for k,v in record.items() if k!='policy_text'})
             context = Context.from_dict(case['context'])
-            messages = make_messages(record['policy_text'],context)
+            messages = make_messages(record['policy_text'],context,fact_format=args.fact_format)
             inputs = tokenizer.apply_chat_template(messages,add_generation_prompt=True,tokenize=True,
                             return_dict=True,return_tensors='pt').to(model.device)
             start = time.perf_counter()

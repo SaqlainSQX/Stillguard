@@ -9,7 +9,7 @@ Updated 10 November 2026. Finish target: **12 November IST**, with 13–14 Novem
 | T1 | Policy/state/action schemas and independent oracle | P0 | Done for bounded deployment contract v1 |
 | T2 | Mock tool simulator and deterministic scorer | T1 | Done; proposal and gateway scored separately |
 | T3 | Hand-checked fixtures and focused scorer tests | T2 | Done; 12 development fixtures and 32 passing tests |
-| T4 | Resumable Aya runner and 12-call calibration | T3 | Runner prepared; actual calibration next |
+| T4 | Resumable Aya runner and 12-call calibration | T3 | First valid run: 12/12 valid JSON, 7/12 correct; basic-task diagnostic in progress |
 | T5 | Six-group discovery data, real CuratorKIT export and frozen manifest | T3,T4 | Pending |
 | T6 | Actual AuditKIT baseline sweep and confirmation panel | T5 | Pending |
 | G1 | Gate A evidence review and continue/reframe decision | T6 | Pending |

@@ -23,3 +23,13 @@ def test_extra_gold_field_in_context_is_rejected():
 @pytest.mark.parametrize('text', ['', '  ', None])
 def test_empty_policy_is_not_silently_accepted(text):
     with pytest.raises(ValueError): make_messages(text, None)
+
+
+def test_sentence_facts_preserve_negative_approval_and_revocation_without_gold():
+    c=Context('req001','w1','app1','staging',dict(tests_passed=True,reviewer_approved=False,
+        within_original_window=False,within_extension=True,revoked=True))
+    public=json.loads(make_messages('Policy text.',c,fact_format='sentences')[1]['content'])
+    assert public['request_id']=='req001'
+    assert set(public['facts'])=={'Tests passed.','Reviewer approval is absent.',
+        'Outside the original deployment window.','Inside the extension window.','Access has been revoked.'}
+    assert 'expected_action' not in public
