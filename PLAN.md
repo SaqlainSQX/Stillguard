@@ -6,11 +6,11 @@ Prepared 9 November; revised 10 November 2026. User target: finish by 12 Novembe
 
 Build a reproducible audit of whether a small Aya agent preserves unchanged safeguards while adapting to legitimate policy updates. Deliver a useful dataset, an actual CuratorKIT-to-AuditKIT model pipeline, measured mitigation tradeoffs, and inspectable transcripts.
 
-Verified: official pinned model downloaded and hash-checked, local 4-bit GPU generation, isolated environment, package lock/offline archive, synthetic toolkit plumbing and GitHub main branch. Implementation checkpoint 10 November: bounded schemas/oracle/simulator/scorer pass 33 tests; resumable real Aya development calibration is complete with documented basic-task limitations. Still pending: six-group research dataset, authenticated/matched policy-history runner, actual research CuratorKIT/AuditKIT integration, mitigation and held-out evaluation. See experiments/calibration-001/REPORT.md and the task board.
+Verified as of 10 November: official pinned local model/environment, independent oracle/scorer/gate, real CuratorKIT-to-Aya-to-AuditKIT pipeline, 468 pilot calls, 108 reminder-development calls and 62 tests. The pilot gate failed (two reproducible groups, threshold three); the reminder was rejected. Retain the simpler current-policy-only architecture and publish its limits. New 20-group/120-probe held-out raw source is frozen before final selection. Final input/config/runner freeze, actual held-out scoring and release packaging remain pending. See the experiment reports and task board.
 
-The first decision is whether this particular research thesis deserves the remaining time. Eleven proposal reviews are design work, not evidence that a model failure exists.
+The evidence-driven narrowing decision is recorded in D010â€“D013. Eleven proposal reviews were design work; claims now follow saved model outputs and controls, including null and failed results.
 
-Official submission deadline: 14 November, end of day AoE. The working deadline is now **12 November IST for the complete submission-ready package**. Keep 13–14 November as buffer, not planned development time. Source: https://hackathon.lexsi.ai/#submit (checked 9 November).
+Official submission deadline: 14 November, end of day AoE. The working deadline is now **12 November IST for the complete submission-ready package**. Keep 13â€“14 November as buffer, not planned development time. Source: https://hackathon.lexsi.ai/#submit (checked 9 November).
 
 ## Revised three-day critical path
 
@@ -19,7 +19,7 @@ Official submission deadline: 14 November, end of day AoE. The working deadline 
 | 10 November | Verified oracle/scorer, runnable Aya pilot, actual baseline traces and Gate A decision | Stop speculative planning; make the continue/reframe choice today. If full confirmation cannot finish, report the incomplete gate and finish it first on 11 November. No mitigation claims from an incomplete pilot. |
 | 11 November | Selected simple mitigation, real CuratorKIT/AuditKIT integration, reviewed held-out data and frozen evaluation configuration | Freeze the method and core features by day's end. Training is outside the default plan. |
 | 12 November | Held-out evaluation, reproducibility check, concise actual-run demo/report, HF artifacts and submission text/links | Finish the complete reviewable package. Reduce presentation polish before dropping evaluation controls. |
-| 13–14 November | Reserved buffer and submission | Only correctness fixes, access checks and submission handling; no planned new research. |
+| 13â€“14 November | Reserved buffer and submission | Only correctness fixes, access checks and submission handling; no planned new research. |
 
 Default deliverable: one model, one domain, two genuinely integrated track repositories, a controlled benchmark, one simple mitigation comparison and reproducible traces. Adapter training, a third toolkit, multilingual work and a full dashboard are excluded from the critical path. If measured runtime exceeds the budget, reduce evaluation breadth before launching the frozen test and disclose the smaller scope; never select cases by favorable test outcomes.
 
@@ -36,36 +36,36 @@ Default deliverable: one model, one domain, two genuinely integrated track repos
 9. Allow a cheap baseline to win. No compulsory fine-tuning, third toolkit or new algorithm.
 10. Preserve useful allowed behavior. Blocking all actions is not a successful mitigation.
 
-## Stage 1 — trustworthy task and scorer
+## Stage 1 â€” trustworthy task and scorer
 
-Target: first 2–3 working hours on 10 November; estimates are planning bounds, not promises.
+Target: first 2â€“3 working hours on 10 November; estimates are planning bounds, not promises.
 
 Actions:
 
-- [ ] Define a small policy AST and explicit policy/state/request schemas, including scope and revision IDs.
-- [ ] Write a deterministic finite-domain evaluator independently of the language model.
-- [ ] Define a mock action proposal schema and a separate execution gate. Score the proposal and final simulated outcome separately.
-- [ ] Hand-check allowed/denied boundary cases, negation, exceptions and unrelated updates. Check that applying an amendment preserves all intended invariants in gold.
-- [ ] Write meaningful tests: exhaustive small-state oracle checks, counterfactual pairs, malformed action rejection, and gold-exclusion checks on assembled prompts.
-- [ ] Author a dozen calibration requests, including allowed tasks. These are development fixtures, not held-out evidence.
+- [x] Define a small policy AST and explicit policy/state/request schemas, including scope and revision IDs.
+- [x] Write a deterministic finite-domain evaluator independently of the language model.
+- [x] Define a mock action proposal schema and a separate execution gate. Score the proposal and final simulated outcome separately.
+- [x] Hand-check allowed/denied boundary cases, negation, exceptions and unrelated updates. Check that applying an amendment preserves all intended invariants in gold.
+- [x] Write meaningful tests: exhaustive small-state oracle checks, counterfactual pairs, malformed action rejection, and gold-exclusion checks on assembled prompts.
+- [x] Author a dozen calibration requests, including allowed tasks. These are development fixtures, not held-out evidence.
 
 Outputs: `src/stillguard/` schemas, oracle, simulator and scorer; `tests/`; `data/raw/` calibration fixtures; a documented action contract.
 
 Exit gate: a model-independent hand-labeled fixture set agrees with the scorer; intentionally wrong and malformed proposals are detected. If this fails, fix the oracle before any research claims or expensive model runs.
 
-## Stage 2 — actual Aya runner and frozen discovery pilot
+## Stage 2 â€” actual Aya runner and frozen discovery pilot
 
-Target: next 2–4 working hours on 10 November. First measure real latency on 12 calibration calls; estimate the remaining budget from that measurement. The pilot and gate have priority over every optional component.
+Target: next 2â€“4 working hours on 10 November. First measure real latency on 12 calibration calls; estimate the remaining budget from that measurement. The pilot and gate have priority over every optional component.
 
 Actions:
 
-- [ ] Implement a local-files-only Aya runner using the pinned checkpoint, NF4 settings, eager attention and fixed generation settings.
-- [ ] Save actual rendered messages, token counts, output, parse status, latency, condition, scenario group, model revision, seed/settings, Git commit and config/dataset hashes.
-- [ ] Confirm that the schema is usable on both allowed and denied calibration requests. Repair a formatting/interface problem before treating output failures as safety violations.
-- [ ] Author six distinct scenario groups with six probes each: two unchanged allowed requests, two unchanged denied requests and two intended-change requests. Balance newly allowed/newly denied behavior across the pilot, and include useful allowed work in every group. Vary rule structure and amendment scope, not just names or numeric values.
-- [ ] Pass these through a real CuratorKIT validation/deduplication/export step. Preserve distinct condition variants and group IDs; deduplication must not erase counterfactual pairs.
-- [ ] Freeze the discovery dataset, prompt templates, scorer and generation configuration. Assign every run a content-derived ID.
-- [ ] Use AuditKIT with the real Aya adapter and task-specific scoring, retaining raw per-case traces. The previous lookup fixture is not this integration.
+- [x] Implement a local-files-only Aya runner using the pinned checkpoint, NF4 settings, eager attention and fixed generation settings.
+- [x] Save actual rendered messages, token counts, output, parse status, latency, condition, scenario group, model revision, seed/settings, Git commit and config/dataset hashes.
+- [x] Confirm that the schema is usable on both allowed and denied calibration requests. Repair a formatting/interface problem before treating output failures as safety violations.
+- [x] Author six distinct scenario groups with six probes each: two unchanged allowed requests, two unchanged denied requests and two intended-change requests. Balance newly allowed/newly denied behavior across the pilot, and include useful allowed work in every group. Vary rule structure and amendment scope, not just names or numeric values.
+- [x] Pass these through a real CuratorKIT validation/deduplication/export step. Preserve distinct condition variants and group IDs; deduplication must not erase counterfactual pairs.
+- [x] Freeze the discovery dataset, prompt templates, scorer and generation configuration. Assign every run a content-derived ID.
+- [x] Use AuditKIT with the real Aya adapter and task-specific scoring, retaining raw per-case traces. The previous lookup fixture is not this integration.
 
 ### Seven discovery conditions
 
@@ -81,13 +81,13 @@ Actions:
 
 In HC and NC, the current authoritative instruction must be identical. Match token counts and request positions, record any mismatch, and keep request facts/tool state identical. Neutral histories must contain no conflicting policy instructions. H must explicitly authorize ordered amendments in the application-supplied instruction; do not ask a lower-authority message to override an immutable system policy.
 
-Initial sweep: 6 groups × 6 probes × 7 conditions = 252 calls. Predefine a confirmation panel of 3 probes per group (one unchanged allowed, one unchanged denied, one intended change) and repeat P1/H/HC/NC three times: 216 calls. With 12 calibration calls, the intended first-pass budget is 480 calls. Reserve at most 20 failed-call retries; record every retry. Use fixed primary decoding; repeated runs measure serving variability, not independent scenario evidence.
+Initial sweep: 6 groups Ã— 6 probes Ã— 7 conditions = 252 calls. Predefine a confirmation panel of 3 probes per group (one unchanged allowed, one unchanged denied, one intended change) and repeat P1/H/HC/NC three times: 216 calls. With 12 calibration calls, the intended first-pass budget is 480 calls. Reserve at most 20 failed-call retries; record every retry. Use fixed primary decoding; repeated runs measure serving variability, not independent scenario evidence.
 
 If measured latency makes 480 calls infeasible, reduce confirmation breadth before launching it, record the protocol change and retain all conditions for the selected groups. Do not remove the strongest baseline or confirm only the failures that look interesting.
 
 Outputs: frozen pilot manifest, actual model JSONL traces, scorer output and `experiments/pilot-001/REPORT.md`.
 
-## Gate A — decide the direction from the pilot
+## Gate A â€” decide the direction from the pilot
 
 Review every apparent violation, its clean counterpart, its current-policy counterpart, and its no-change/control behavior. Report unconditional error rates as well as conditional regressions among previously correct requests.
 
@@ -104,13 +104,13 @@ A provisional engineering signal for proceeding is a reviewed effect in at least
 
 Write the gate decision in `docs/DECISIONS.md`: observed evidence, limits, selected branch, rejected interpretation and next budget. No automatic scope expansion.
 
-## Stage 3 — the smallest useful intervention
+## Stage 3 â€” the smallest useful intervention
 
 Target: 11 November, conditional on Gate A.
 
-- [ ] Compare canonical current-policy refresh and a concise invariant reminder extracted from the authoritative policy.
-- [ ] Include an ordinary same-budget reminder so a gain is not attributed to our formulation when it comes from extra tokens or repetition alone.
-- [ ] Report cost/usefulness tradeoffs with the same request groups, settings and action gate.
+- [x] Compare current-policy refresh with one local authoritative-policy reminder (full prose, not a learned invariant extractor); reject it on development outcomes.
+- [x] Include a token/position-matched generic reminder; disclose its repetitive padding and failed strict formatting control. Do not claim policy-specific safety from its zero primary accuracy.
+- [x] Report cost/usefulness tradeoffs with the same request groups, settings and action gate, plus a separately labeled exploratory exact-fence sensitivity check.
 - [ ] Defer adaptation from the default plan. Consider a tiny compatibility/VRAM check only if all core development outputs are already complete with time remaining before the 11 November feature freeze.
 - [ ] If that optional training branch proceeds, compare base versus adapted Aya under an identical harness; include equal-sized generic replay data. Use training/development groups only. It must not delay the frozen evaluation or 12 November delivery.
 - [ ] Keep SafeTune optional; add it only if a specific supported intervention is already demonstrated active and the core two-repository deliverable is complete.
@@ -119,7 +119,7 @@ Exit gate: the intervention reduces reviewed failures while retaining intended b
 
 Stop optional training if compatibility cannot be established in two working hours or one short job produces no development benefit. Keep a working audit/architectural result rather than depending on a training rescue.
 
-## Stage 4 — independent evaluation and robustness
+## Stage 4 â€” independent evaluation and robustness
 
 Target: prepare and freeze on 11 November; execute the final evaluation on 12 November.
 
@@ -133,7 +133,7 @@ Target: prepare and freeze on 11 November; execute the final evaluation on 12 No
 
 Exit gate: all headline numbers trace to saved runs; a clean rerun reproduces representative outputs within disclosed variability; a model-written explanation is not presented as causal evidence.
 
-## Stage 5 — usable demonstration and release package
+## Stage 5 â€” usable demonstration and release package
 
 Target: draft report/artifact metadata alongside development on 11 November; complete the entire release package on 12 November. Prioritize this over optional training and features.
 
@@ -144,7 +144,7 @@ Target: draft report/artifact metadata alongside development on 11 November; com
 - [ ] Verify the contribution uses at least two Track 2 repositories in a real pipeline. Imports and fixture scores do not count as research integrations.
 - [ ] Prepare the under-500-word abstract and submission links. Check current form requirements and latest event announcements.
 
-Feature/method freeze: end of 11 November IST, before held-out scoring. Submission-ready package: 12 November IST. Keep 13–14 November for buffer, access/correctness checks and submission; do not allocate new research to that buffer.
+Feature/method freeze: end of 11 November IST, before held-out scoring. Submission-ready package: 12 November IST. Keep 13â€“14 November for buffer, access/correctness checks and submission; do not allocate new research to that buffer.
 
 ## Steering rules when progress deteriorates
 
@@ -171,6 +171,6 @@ After every work block, update the task board and a short decision log: complete
 
 ## Immediate next action
 
-Stages 1–2 and Gate A are complete as of 10 November: 468 verified research calls and 48 passing tests. The original three-group gate failed (two groups reproduced), so follow D010's narrower audit/interface branch. Preserve all pilot controls and results.
+Stages 1â€“3 and Gate A are complete as of 10 November: 468 verified pilot calls, 108 verified reminder-development calls and 62 tests. The original three-group gate failed; the reminder was rejected. Preserve these outcomes and use the simpler current-policy-only action context as the architectural reference.
 
-Next bounded milestone: freeze one concise authoritative-policy reminder and an ordinary reminder matched for token count and placement; compare each against a fresh HC baseline across all 36 development cases (108 new calls maximum, separate from the completed pilot budget). Retain the existing P1 result as the simple cold-context baseline. No per-case gold decisions, oracle outputs or evaluator labels may enter reminder prompts. Author and freeze the new held-out groups before final method selection. Cap diagnosis/implementation at 90 minutes; if it fails or adds no value, retain the controlled audit and current-policy isolation baseline and prioritize the release package. No training is on the critical path.
+Next bounded milestone: curate and render the already frozen 20-group/120-probe held-out raw source, freeze P1/P1R/H/HC/NC inputs/configuration and test a resumable final runner. Commit the complete freeze before any held-out scoring. D013 and experiments/heldout-001/PROTOCOL.md specify 600 scheduled calls, at most 20 failed-generation retries (620 actual maximum), strict primary and separate exact-fence sensitivity metrics, and preselected demo group h01. Execute sequential blocks within continuation/compute limits, then finish the report and release package by 12 November. No new method search or training on the critical path.

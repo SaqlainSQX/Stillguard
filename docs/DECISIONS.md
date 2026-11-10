@@ -104,6 +104,18 @@ Exhaustive 64-state direct-condition/AST checks verify each policy. Truth functi
 
 This is a raw-source freeze only, not completion of T9. The pilot informed the grammar, and the source was authored during development prompting. Next: analyze the fixed development run once, select a provisional simple comparison without another wording search, then curate/render/freeze final evaluation inputs and configuration. Preserve every held-out source case. See docs/HELDOUT_DATA.md and manifests/heldout-source.json.
 
+## D013 — 10 November 2026: reject reminders and freeze the final comparison plan
+
+The fixed run `67b0c7b82603` completed 108 calls at clean commit `b9550f1`, with no failed calls; all frozen inputs and direct scores independently replayed. HC/PR/GR strict correctness was 16/14/0 out of 36, with 3/11/36 invalid outputs and 13/9/0 known unsafe proposals. Fresh HC matched the original HC in action and correctness on every case. PR gained two correct decisions and lost four; it did not fix either previously confirmed unsafe case. Lower known violations caused by invalid outputs are not improvement.
+
+GR emitted fenced JSON on every request and is a failed strict-interface control, not evidence that PR provides a specific safety mechanism. Disclosed exploratory offline exact-fence removal gives HC/PR/GR correctness 16/19/17 and unsafe payloads 13/15/17. No extra prose/keys or substantive content was repaired. These are secondary diagnostics; the original parser, primary results and gate behavior remain unchanged. See experiments/reminder-001/REPORT.md and hashed summaries.
+
+Decision: **end reminder search** and retain the simpler current-policy-only action context as the architectural reference, including its known errors. P1's earlier 26/36 is a separate reference, not a new contemporaneous result. No successful mitigation, training contribution or broad safety-drift claim. Preserve the negative comparison and weak generic control.
+
+After raw held-out source freeze at `114cbf6`, fix the final evaluation plan to P1/P1R/H/HC/NC over all 120 source probes: 600 scheduled calls, at most 20 failed-generation retries (620 actual maximum), seed 45 shuffle, same pinned model/generation settings. Predefine strict primary scores and a separate exact-fence sensitivity view. Select h01 for the demo before outcomes. The original pilot gate remains failed. Protocol: experiments/heldout-001/PROTOCOL.md.
+
+Next bounded milestone: real CuratorKIT recovery/export, matching and gold-exclusion tests, final prompt/config manifests and a tested resumable held-out runner. Commit that full freeze before any held-out scoring; raw data freeze alone does not authorize treating generated code as results. Then execute sequential bounded blocks and prioritize report/artifact release by 12 November. No new methods, extra models or optional training.
+
 ## Entry template for the next gate
 
 - Date / decision ID:

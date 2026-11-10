@@ -4,7 +4,7 @@
 
 Stillguard investigates whether legitimate policy updates cause small Aya agents to violate safeguards that remain unchanged. It measures correct adaptation alongside safety regressions, with matched-policy and no-change controls.
 
-Current stage: **468 actual research calls completed and verified; 48 tests pass.** The [pilot report](experiments/pilot-001/REPORT.md) records two history-specific unsafe cases reproduced in all three confirmation repeats. The original three-group gate was not met, and neutral history also degraded performance. We are narrowing to a controlled policy-interface/mitigation comparison; no safety improvement or broad update-induced drift is claimed. See [the pilot protocol](docs/PROTOCOL.md) and the separate [development calibration](experiments/calibration-001/REPORT.md).
+Current stage: **468 pilot calls plus 108 reminder-development calls completed and verified; 62 tests pass.** The [pilot](experiments/pilot-001/REPORT.md) found two reproducible history-specific unsafe cases, below the original three-group gate. The [reminder comparison](experiments/reminder-001/REPORT.md) failed, so we retain the simpler current-policy-only architecture and its known limitations. [New held-out source](docs/HELDOUT_DATA.md) contains 20 groups/120 probes; final scoring has not begun. No successful mitigation or broad update-induced drift is claimed.
 
 Execution: [action plan and steering gates](PLAN.md) · [task board](docs/TASKS.md) · [decision journal](docs/DECISIONS.md).
 
@@ -89,7 +89,7 @@ Licenses and upstream attribution files remain with the source snapshots. Keep r
 
 ## Next research step
 
-The pilot is complete. Next, compare a concise authoritative-policy reminder against an ordinary reminder with matched token/call budgets, retaining cold-current-policy and unchanged HC baselines. Measure valid task completion, unsafe proposals and legitimate adaptation together. Freeze new grouped held-out cases before final method selection. See decision D010 in [the decision journal](docs/DECISIONS.md).
+The pilot and one fixed reminder comparison are complete. Next, curate/render/freeze final evaluation inputs and the resumable runner for P1/P1R/H/HC/NC over all 120 held-out probes. The [final protocol](experiments/heldout-001/PROTOCOL.md) fixes controls, strict/format-sensitivity scores, budget and demo group before scoring. See D013 in [the decision journal](docs/DECISIONS.md).
 
 ## Upstream tools and inspiration
 

@@ -2,7 +2,7 @@
 
 Question: does a legitimate policy update cause an Aya agent to violate safeguards that remain unchanged, and which inexpensive intervention preserves safety while allowing the intended new behavior?
 
-Status: the 252-call discovery and 216-call confirmation phases are complete and independently verified. See [the pilot report](../experiments/pilot-001/REPORT.md). Two history-specific cases reproduced across three repeats, below the planned three-group gate; the next phase is a narrower interface/mitigation comparison. Model-load and toolkit fixtures remain separate from benchmark results.
+Status: the 252-call discovery and 216-call confirmation phases are complete and independently verified. Two history-specific cases reproduced across three repeats, below the planned three-group gate; see [the pilot report](../experiments/pilot-001/REPORT.md). A fixed 108-call [reminder comparison](../experiments/reminder-001/REPORT.md) was rejected. New held-out raw source is frozen; [final input/configuration preparation](../experiments/heldout-001/PROTOCOL.md) is next. Model-load and toolkit fixtures remain separate from benchmark results.
 
 ## Initial scope
 
