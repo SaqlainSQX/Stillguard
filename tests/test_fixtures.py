@@ -18,7 +18,7 @@ def test_explicit_fixture_annotations_agree_with_oracle_and_action_scorer():
     for case in cases:
         assert re.fullmatch(r'req[0-9]{3}',case['context']['request_id']), 'Model-visible IDs must not encode labels'
         record = policies[case['policy_revision']]
-        policy = Policy.from_dict({k:v for k,v in record.items() if k != 'policy_text'})
+        policy = Policy.from_dict({k:v for k,v in record.items() if k not in ('policy_text','policy_checklist')})
         context = Context.from_dict(case['context'])
         assert policy.allows(context) == (case['expected_action'] == 'deploy'), case['id']
         payload = {k:v for k,v in context.public_dict().items() if k != 'facts'}

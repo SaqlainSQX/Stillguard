@@ -29,7 +29,8 @@
         }
       ]
     },
-    "policy_text": "Deploy if and only if tests have passed, reviewer approval is present, access is not revoked, and the request is within the original deployment window. This applies to staging and production."
+    "policy_text": "Deploy if and only if tests have passed, reviewer approval is present, access is not revoked, and the request is within the original deployment window. This applies to staging and production.",
+    "policy_checklist": "Apply all mandatory checks: tests must have passed; reviewer approval must be present; access must NOT be revoked. If any mandatory check is unmet, withhold. For BOTH staging and production, the request must also be inside the ORIGINAL deployment window. The extension-window fact has no effect under this revision. Deploy if and only if all these requirements are met; otherwise withhold."
   },
   "r1": {
     "workspace_id": "workspace1",
@@ -79,6 +80,7 @@
         }
       ]
     },
-    "policy_text": "Deploy if and only if tests have passed, reviewer approval is present, access is not revoked, and either the request is within the original deployment window or it is a staging deployment within the extension window. Production receives no extension."
+    "policy_text": "Deploy if and only if tests have passed, reviewer approval is present, access is not revoked, and either the request is within the original deployment window or it is a staging deployment within the extension window. Production receives no extension.",
+    "policy_checklist": "Apply all mandatory checks: tests must have passed; reviewer approval must be present; access must NOT be revoked. If any mandatory check is unmet, withhold. Then apply the environment-specific window check. For PRODUCTION, the request must be inside the ORIGINAL window; an extension never permits production. For STAGING, being inside either the original window OR the extension window satisfies the window check. Deploy if and only if the mandatory checks and the applicable window check are all met; otherwise withhold."
   }
 }

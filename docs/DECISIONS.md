@@ -46,6 +46,12 @@ Decision: hold the history pilot and take the planned bounded diagnostic branch.
 
 ## Entry template for the next gate
 
+### D005 diagnostic follow-up
+
+At code `73c0af4`, lossless sentence facts produced 12 valid/9 correct development responses (`17796ff528cb`), including two unnecessary denials and one unauthorized production-extension proposal. The literal JSON-fact control repeated 12 valid/7 correct (`734dccb30da8`). No history comparison was run. These twelve-case development observations do not establish statistical improvement or generalization.
+
+Next bounded diagnostic: use manually authored explicit mandatory/environment-specific checklist wording with the same formal policies, trusted facts and expected answers. This is task-interface clarification, not a new mitigation claim. Keep both policy/fact formats in run manifests and retain all unsuccessful outputs. Do not use the diagnostic accuracy as a held-out result.
+
 - Date / decision ID:
 - Question and previous assumption:
 - Run IDs / code, config and dataset revisions:

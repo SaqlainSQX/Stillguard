@@ -25,6 +25,7 @@ def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--fact-format', choices=['json','sentences'], default='json')
+    parser.add_argument('--policy-format', choices=['prose','checklist'], default='prose')
     args = parser.parse_args()
     import yaml
     import torch
@@ -49,7 +50,7 @@ def main():
                     model_revision=model_lock['revision'], config_sha256=sha(ROOT/'configs/pilot.yaml'),
                     cases_sha256=sha(cases_path), policies_sha256=sha(policies_path),
                     generation=config['generation'], quantization=config['model'], seed=42,
-                    torch_version=torch.__version__, fact_format=args.fact_format,
+                    torch_version=torch.__version__, fact_format=args.fact_format, policy_format=args.policy_format,
                     max_successful_calls=12, max_failed_calls=20)
     fingerprint = hashlib.sha256(json.dumps(manifest,sort_keys=True).encode()).hexdigest()
     folder = ROOT/'results'/('calibration-'+fingerprint[:12]); folder.mkdir(parents=True,exist_ok=True)
@@ -81,9 +82,10 @@ def main():
         for case in cases:
             if case['id'] in done: continue
             record = policies[case['policy_revision']]
-            policy = Policy.from_dict({k:v for k,v in record.items() if k!='policy_text'})
+            policy = Policy.from_dict({k:v for k,v in record.items() if k not in ('policy_text','policy_checklist')})
             context = Context.from_dict(case['context'])
-            messages = make_messages(record['policy_text'],context,fact_format=args.fact_format)
+            document = record['policy_text' if args.policy_format=='prose' else 'policy_checklist']
+            messages = make_messages(document,context,fact_format=args.fact_format)
             inputs = tokenizer.apply_chat_template(messages,add_generation_prompt=True,tokenize=True,
                             return_dict=True,return_tensors='pt').to(model.device)
             start = time.perf_counter()
