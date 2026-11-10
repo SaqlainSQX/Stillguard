@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stillguard simulated deployment proposal v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["action", "request_id", "workspace_id", "resource_id", "environment"],
+  "properties": {
+    "action": {"enum": ["deploy", "withhold"]},
+    "request_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,79}$"},
+    "workspace_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,79}$"},
+    "resource_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,79}$"},
+    "environment": {"enum": ["staging", "production"]}
+  }
+}

@@ -28,6 +28,14 @@ An hourly thread continuation was requested and configured. Each run must inspec
 
 Next: complete policy/state/action schemas, strict mock proposal parsing and separate proposal/gateway scoring, then add fixtures and leakage checks before model calibration. Stage 1 is incomplete; Gate A has not been reached.
 
+## D004 — 10 November 2026: Stage 1 software gate passes
+
+Implemented strict immutable policy/context/proposal records, derived environment predicates, target binding, isolated mock gate receipts and separate proposal scoring. Invalid outputs remain unknown for violation scoring and incorrect for task correctness. The model cannot submit facts or approval changes. Scope mismatch stops evaluation.
+
+Thirty-two tests pass, including independent truth-table expectations, twelve explicit development annotations (six deploy/six withhold), target substitution, malformed/duplicate-key JSON, current-revision rechecking and gold-input exclusion. These validate software behavior, not the continuity hypothesis.
+
+Decision: proceed to the prepared resumable 12-call local Aya calibration. Do not begin history comparisons until formatting, task ability and throughput are reviewed. See ACTION_CONTRACT.md for exact initial scope and remaining controls.
+
 ## Entry template for the next gate
 
 - Date / decision ID:

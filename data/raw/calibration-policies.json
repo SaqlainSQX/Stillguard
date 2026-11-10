@@ -1,0 +1,84 @@
+{
+  "r0": {
+    "workspace_id": "workspace1",
+    "resource_id": "app1",
+    "revision_id": "r0",
+    "rule": {
+      "op": "and",
+      "children": [
+        {
+          "op": "atom",
+          "atom": "tests_passed"
+        },
+        {
+          "op": "atom",
+          "atom": "reviewer_approved"
+        },
+        {
+          "op": "not",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "revoked"
+            }
+          ]
+        },
+        {
+          "op": "atom",
+          "atom": "within_original_window"
+        }
+      ]
+    },
+    "policy_text": "Deploy if and only if tests have passed, reviewer approval is present, access is not revoked, and the request is within the original deployment window. This applies to staging and production."
+  },
+  "r1": {
+    "workspace_id": "workspace1",
+    "resource_id": "app1",
+    "revision_id": "r1",
+    "rule": {
+      "op": "and",
+      "children": [
+        {
+          "op": "atom",
+          "atom": "tests_passed"
+        },
+        {
+          "op": "atom",
+          "atom": "reviewer_approved"
+        },
+        {
+          "op": "not",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "revoked"
+            }
+          ]
+        },
+        {
+          "op": "or",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "within_original_window"
+            },
+            {
+              "op": "and",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "is_staging"
+                },
+                {
+                  "op": "atom",
+                  "atom": "within_extension"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "policy_text": "Deploy if and only if tests have passed, reviewer approval is present, access is not revoked, and either the request is within the original deployment window or it is a staging deployment within the extension window. Production receives no extension."
+  }
+}
