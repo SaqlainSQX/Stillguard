@@ -20,6 +20,14 @@ Decision: use a three-day critical path. Pilot and direction gate today; simple 
 
 Evidence status unchanged: setup passed; no research pilot results exist. Dates are targets, not completed milestones or guarantees.
 
+## D003 — 10 November 2026: start implementation and hourly continuation
+
+Implemented the initial finite Boolean oracle, explicit missing-fact rejection and exact decision-change enumeration. Seven tests pass, including exhaustive deployment-window extension checks that preserve approval and tests, explicit revocation, and malformed rules. These are software correctness checks, not Aya safety results.
+
+An hourly thread continuation was requested and configured. Each run must inspect current state, avoid overlapping work, respect all app/compute/access limits, checkpoint within 45 minutes, and disable further scheduling on completion or after 12 November IST. Scheduler availability and app usage limits still apply.
+
+Next: complete policy/state/action schemas, strict mock proposal parsing and separate proposal/gateway scoring, then add fixtures and leakage checks before model calibration. Stage 1 is incomplete; Gate A has not been reached.
+
 ## Entry template for the next gate
 
 - Date / decision ID:

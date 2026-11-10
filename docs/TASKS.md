@@ -6,7 +6,7 @@ Updated 10 November 2026. Finish target: **12 November IST**, with 13–14 Novem
 |---|---|---|---|
 | S0 | Model/environment/toolkit setup and GitHub repository | — | Done; setup evidence only |
 | P0 | Execution plan, gates and decision journal | S0 | Prepared |
-| T1 | Policy/state/action schemas and independent oracle | P0 | Next |
+| T1 | Policy/state/action schemas and independent oracle | P0 | In progress: Boolean oracle and seven passing tests; schemas still pending |
 | T2 | Mock tool simulator and deterministic scorer | T1 | Pending |
 | T3 | Hand-checked fixtures and focused scorer tests | T2 | Pending |
 | T4 | Resumable Aya runner and 12-call calibration | T3 | Pending |
