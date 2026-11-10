@@ -1,0 +1,25 @@
+# Discovery pilot contract; groups share structures and are not independent samples.
+prompt:
+  fact_format: json
+  policy_format: checklist
+  selection_basis: development_calibration_only
+model:
+  id: CohereLabs/tiny-aya-global
+  local_path: models/tiny-aya-global
+  revision: af89d219b53ed9b13b8a4645f9c8028973510324
+  quantization: nf4
+  double_quantization: true
+  compute_dtype: bfloat16
+  trust_remote_code: false
+generation:
+  do_sample: false
+  max_new_tokens: 160
+comparison:
+  cases: 36
+  conditions: [HC, PR, GR]
+  development_only: true
+  wording_variants: 1
+  repeated_generic_padding: Check
+budget:
+  development_calls: 108
+  max_failed_call_retries: 20

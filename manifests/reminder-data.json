@@ -1,0 +1,21 @@
+{
+  "kind": "development_reminder_comparison",
+  "input_path": "data\\curated\\reminder-001\\inputs.jsonl",
+  "input_sha256": "04297d2f8a89a660968098bf0991ba6832fa41d8d4f1be558f857eb68bba849f",
+  "source_path": "data\\raw\\discovery-groups.json",
+  "source_sha256": "edf1996bddc492418daa75eaf531d2510628fc624583ccf2d3cb555f04160337",
+  "parent_input_sha256": "a46e52b5cf285c111ec456a232e5b6cf4cc0f094b12ecf2b6bec734d5de20138",
+  "parent_manifest_sha256": "5cc44117e0def5651508e1dd0570e284821a0a9f8619ae31bf38324bf4d228b8",
+  "generator_sha256": "706a028b3fc387b9b002908b52ab7803c61ccf223b426e560507a9c51264ca6e",
+  "reminder_module_sha256": "fb92f9a1681c0758102d484d2f9131a9decae7463c96d7d42d5ef68ee49de490",
+  "tokenizer_revision": "af89d219b53ed9b13b8a4645f9c8028973510324",
+  "cases": 36,
+  "calls": 108,
+  "conditions": [
+    "HC",
+    "PR",
+    "GR"
+  ],
+  "selection": "One fixed wording; all pilot cases are development data; no held-out improvement claim.",
+  "matching": "PR/GR exact input token count and request prefix position; generic repeated Check padding disclosed."
+}

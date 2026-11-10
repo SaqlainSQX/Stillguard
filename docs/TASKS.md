@@ -13,7 +13,7 @@ Updated 10 November 2026. Finish target: **12 November IST**, with 13–14 Novem
 | T5 | Six-group discovery data, real CuratorKIT export and frozen manifest | T3,T4 | Done: 36 cases, 252 frozen inputs, exact HC/NC matching; see DISCOVERY_DATA.md |
 | T6 | Actual AuditKIT baseline sweep and confirmation panel | T5 | Done: 252 discovery + 216 confirmation calls; every score independently replayed |
 | G1 | Gate A evidence review and continue/reframe decision | T6 | Done: two reproducible groups, below three-group gate; narrow scope per D010 |
-| T7 | Simple mitigation and equal-budget comparison | G1 | Next: bounded reminder/interface comparison; no training |
+| T7 | Simple mitigation and equal-budget comparison | G1 | Frozen reminder/interface protocol and inputs; actual 108-call development comparison next |
 | T8 | Tiny adaptation compatibility test and one training run | T7 | Deferred; outside the default three-day plan |
 | T9 | New grouped held-out evaluation and one ablation | T7 | Pending |
 | T10 | Lightweight actual-run report/demo and reproducibility check | T9 | Pending |

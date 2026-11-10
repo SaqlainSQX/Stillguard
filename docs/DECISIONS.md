@@ -90,6 +90,12 @@ Decision: narrow to an update-aware action audit and one small policy-interface 
 
 Next bounded budget: at most 90 minutes of diagnosis/implementation and 108 new development generations: 36 cases × fresh HC, HC plus an authoritative-policy reminder, and HC plus an ordinary reminder matched in token count/placement. Freeze wording/config/data before any new calls. Reminders may use authoritative policy text, never oracle decisions, gold labels or evaluator metadata. Keep P1 as the strong current-policy-only baseline. Report allowed-task completion, intended changes, invalid outputs and unsafe proposals together. If the specific reminder adds no value beyond generic prompting or state isolation, keep the simpler method and report the null. Freeze new grouped held-out data before final selection; do not reuse these development outcomes as test evidence.
 
+## D011 — 10 November 2026: freeze one controlled reminder comparison
+
+Before any new model outcomes, freeze 36 existing curated development cases × HC/PR/GR (108 inputs). PR repeats only authoritative current policy prose before the final request. GR uses ordinary policy-checking instructions with disclosed repeated `Check` padding; real-tokenizer full length and request-prefix position exactly match PR. HC is byte-identical to the pilot archive baseline and is freshly generated. No AST, oracle answer or evaluator label enters a reminder.
+
+The separate runner retains the shared GPU lock, actual generation accounting, clean-tree/frozen-hash checks, strict independent scoring and AuditKIT agreement. The 108-generation cap includes logged failed calls across execution versions for this input digest. This is one fixed development wording, not a new test or a passed pilot gate. Protocol: experiments/reminder-001/PROTOCOL.md. Next: run the frozen comparison, keep all outputs and decide once; no extra variant search.
+
 ## Entry template for the next gate
 
 - Date / decision ID:
