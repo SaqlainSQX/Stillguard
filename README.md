@@ -4,7 +4,7 @@
 
 Stillguard investigates whether legitimate policy updates cause small Aya agents to violate safeguards that remain unchanged. It measures correct adaptation alongside safety regressions, with matched-policy and no-change controls.
 
-Current stage: 39 tests pass; real Aya development calibration completed; the [six-group discovery construction](docs/DISCOVERY_DATA.md) and 252 controlled inputs are frozen. The [calibration report](experiments/calibration-001/REPORT.md) records basic-task limitations and all format variants. Research outcomes are not yet established; no safety improvement is claimed. See [the pilot protocol](docs/PROTOCOL.md).
+Current stage: **468 actual research calls completed and verified; 48 tests pass.** The [pilot report](experiments/pilot-001/REPORT.md) records two history-specific unsafe cases reproduced in all three confirmation repeats. The original three-group gate was not met, and neutral history also degraded performance. We are narrowing to a controlled policy-interface/mitigation comparison; no safety improvement or broad update-induced drift is claimed. See [the pilot protocol](docs/PROTOCOL.md) and the separate [development calibration](experiments/calibration-001/REPORT.md).
 
 Execution: [action plan and steering gates](PLAN.md) · [task board](docs/TASKS.md) · [decision journal](docs/DECISIONS.md).
 
@@ -48,7 +48,7 @@ python scripts/smoke_toolkits.py
 | `references/planning/` | Previous design and review records |
 | `references/preparation/` | Existing curriculum, workbook and reading references |
 | `configs/pilot.yaml` | Model and pilot design contract |
-| `data/` | Separate raw, curated and split directories; benchmark not generated yet |
+| `data/` | Synthetic raw discovery cases and locally generated, frozen CuratorKIT exports |
 | `experiments/`, `results/`, `logs/` | Run configuration, output and setup logs |
 | `src/stillguard/` | Policy oracle, strict schemas, prompt projection and simulated proposal/gate scoring |
 | `notebooks/` | Reserved for later analysis |
@@ -89,8 +89,8 @@ Licenses and upstream attribution files remain with the source snapshots. Keep r
 
 ## Next research step
 
-Implement the six-family pilot in `configs/pilot.yaml`, with independently defined expected decisions, matched current-policy/history controls and a confirmation panel. Preserve held-out policy families before tuning a mitigation. The setup does not assert that the hypothesized failure exists.
+The pilot is complete. Next, compare a concise authoritative-policy reminder against an ordinary reminder with matched token/call budgets, retaining cold-current-policy and unchanged HC baselines. Measure valid task completion, unsafe proposals and legitimate adaptation together. Freeze new grouped held-out cases before final method selection. See decision D010 in [the decision journal](docs/DECISIONS.md).
 
 ## Upstream tools and inspiration
 
-The planned core pipeline uses [CuratorKIT](https://github.com/Lexsi-Labs/CuratorKIT) and [AuditKIT](https://github.com/Lexsi-Labs/AuditKIT). [SafeTune](https://github.com/Lexsi-Labs/SafeTune) and [CircuitKIT](https://github.com/Lexsi-Labs/CircuitKIT) are optional research references. Prior [Memopops](https://github.com/SaqlainSQX/memopops) work inspires revision-aware auditing; Stillguard's new experiments and results will be identified separately. Upstream licenses remain attached to downloaded snapshots.
+The actual research pipeline uses [CuratorKIT](https://github.com/Lexsi-Labs/CuratorKIT) and [AuditKIT](https://github.com/Lexsi-Labs/AuditKIT). [SafeTune](https://github.com/Lexsi-Labs/SafeTune) and [CircuitKIT](https://github.com/Lexsi-Labs/CircuitKIT) are optional research references. Prior [Memopops](https://github.com/SaqlainSQX/memopops) work inspires revision-aware auditing; Stillguard's new experiments and results are reported separately. Upstream licenses remain attached to downloaded snapshots.

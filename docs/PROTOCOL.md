@@ -2,7 +2,7 @@
 
 Question: does a legitimate policy update cause an Aya agent to violate safeguards that remain unchanged, and which inexpensive intervention preserves safety while allowing the intended new behavior?
 
-Status: setup is verified; the research pilot has not run. Model-load and toolkit fixtures are not benchmark results.
+Status: the 252-call discovery and 216-call confirmation phases are complete and independently verified. See [the pilot report](../experiments/pilot-001/REPORT.md). Two history-specific cases reproduced across three repeats, below the planned three-group gate; the next phase is a narrower interface/mitigation comparison. Model-load and toolkit fixtures remain separate from benchmark results.
 
 ## Initial scope
 

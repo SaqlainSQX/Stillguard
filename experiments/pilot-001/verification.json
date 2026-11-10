@@ -1,0 +1,9 @@
+{
+  "verified_calls": 468,
+  "dataset_sha256": "a46e52b5cf285c111ec456a232e5b6cf4cc0f094b12ecf2b6bec734d5de20138",
+  "checks": [
+    "frozen prompt/state/labels/tokens",
+    "independent full score replay",
+    "AuditKIT correctness agreement"
+  ]
+}

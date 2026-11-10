@@ -171,4 +171,6 @@ After every work block, update the task board and a short decision log: complete
 
 ## Immediate next action
 
-Implement Stage 1 only: schemas, independent oracle, simulator, scorer, fixtures and focused tests. Then calibrate the model runner and freeze the discovery pilot. No research model run, training or publication is performed merely by writing this plan.
+Stages 1–2 and Gate A are complete as of 10 November: 468 verified research calls and 48 passing tests. The original three-group gate failed (two groups reproduced), so follow D010's narrower audit/interface branch. Preserve all pilot controls and results.
+
+Next bounded milestone: freeze one concise authoritative-policy reminder and an ordinary reminder matched for token count and placement; compare each against a fresh HC baseline across all 36 development cases (108 new calls maximum, separate from the completed pilot budget). Retain the existing P1 result as the simple cold-context baseline. No per-case gold decisions, oracle outputs or evaluator labels may enter reminder prompts. Author and freeze the new held-out groups before final method selection. Cap diagnosis/implementation at 90 minutes; if it fails or adds no value, retain the controlled audit and current-policy isolation baseline and prioritize the release package. No training is on the critical path.
