@@ -143,18 +143,19 @@ def render_condition(group,case,condition,tokenizer=None):
     history=[header,{'role':'assistant','content':archive}]
     hc=[messages[0],*history,messages[1]]
     if tokenizer is None:raise ValueError('Real pinned tokenizer is required for history matching')
-    encode=lambda m:tokenizer.apply_chat_template(m,tokenize=True,add_generation_prompt=True)
-    target=len(encode(hc));prefix=len(tokenizer.apply_chat_template(hc[:-1],tokenize=True,add_generation_prompt=False))
+    encode=lambda m:tokenizer.apply_chat_template(m,tokenize=True,add_generation_prompt=True,return_dict=True)['input_ids']
+    count_prefix=lambda m:len(tokenizer.apply_chat_template(m[:-1],tokenize=True,add_generation_prompt=False,return_dict=True)['input_ids'])
+    target=len(encode(hc));prefix=count_prefix(hc)
     if condition=='HC':return hc,dict(input_tokens=target,request_prefix_tokens=prefix)
     for n in range(2048):
         neutral='Archived build log. No policy information is recorded here.'+' log'*n
         nc=[messages[0],header,{'role':'assistant','content':neutral},messages[1]]
-        length=len(encode(nc))
-        if length==target:
-            actual_prefix=len(tokenizer.apply_chat_template(nc[:-1],tokenize=True,add_generation_prompt=False))
-            if actual_prefix!=prefix:raise ValueError('Request token position mismatch')
+        actual_prefix=count_prefix(nc)
+        if actual_prefix==prefix:
+            length=len(encode(nc))
+            if length!=target:raise ValueError('Full input token length mismatch')
             return nc,dict(input_tokens=length,request_prefix_tokens=actual_prefix)
-        if length>target:break
+        if actual_prefix>prefix:break
     raise ValueError('Unable to exactly match neutral-history token length')
 
 

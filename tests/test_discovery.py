@@ -39,7 +39,11 @@ def test_real_pinned_tokenizer_matches_history_and_request_position():
         nc,nm=render_condition(group,case,'NC',tokenizer)
         assert hc[0]==nc[0] and hc[-1]==nc[-1]
         assert hm==nm
-        assert len(tokenizer.apply_chat_template(hc,tokenize=True,add_generation_prompt=True))==len(tokenizer.apply_chat_template(nc,tokenize=True,add_generation_prompt=True))
+        # Check independently against the actual tensor interface used for inference.
+        h=tokenizer.apply_chat_template(hc,tokenize=True,add_generation_prompt=True,return_dict=True,return_tensors='pt')
+        n=tokenizer.apply_chat_template(nc,tokenize=True,add_generation_prompt=True,return_dict=True,return_tensors='pt')
+        assert h['input_ids'].shape[1]==n['input_ids'].shape[1]==hm['input_tokens']
+        assert hm['input_tokens']>100 and hm['request_prefix_tokens']>100
 
 
 def test_frozen_artifact_keeps_every_case_and_control():

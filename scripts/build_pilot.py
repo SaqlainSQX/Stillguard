@@ -50,7 +50,7 @@ def main():
         row=recovered[key];group=row['payload']['group'];case={**row['payload']['case'],**row['labels']}
         for condition in CONDITIONS:
             messages,matching=render_condition(group,case,condition,tokenizer)
-            tokens=tokenizer.apply_chat_template(messages,tokenize=True,add_generation_prompt=True)
+            tokens=tokenizer.apply_chat_template(messages,tokenize=True,add_generation_prompt=True,return_dict=True)['input_ids']
             revision='before' if condition in ('P0','P0R') else 'after'
             assembled.append(dict(id=key+'-'+condition,case_id=key,group_id=group['group_id'],
                 structural_cluster=group['structural_cluster'],kind=case['kind'],confirmation=case['confirmation'],

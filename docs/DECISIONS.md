@@ -66,6 +66,12 @@ The first Curator adapter attempt revealed that SFT deduplication ignored the se
 
 Thirty-nine tests pass, including real pinned-tokenizer matching and actual AuditKIT adapter replay checks. Decide to launch the frozen discovery sweep with a 20-minute work-block limit; confirmation and Gate A interpretation remain pending. A GPU lock and resumable call logs prevent overlapping or silently repeated work.
 
+## D008 — 10 November 2026: tokenizer-count preflight catches invalid freeze
+
+The first discovery launch stopped before generation: the frozen count used the length of the tokenizer's encoding container rather than its input_ids. The saved error has model_calls=0 and is not model evidence. No research answer was generated under that invalid freeze.
+
+Corrected all counts to explicit input_ids and checked matching against the actual return_tensors interface used by inference, with nontrivial token-count assertions. Normalized JSON/JSONL line endings so clone/rebuild hashes are stable. Rebuilt the frozen inputs and passed all 39 tests. The old stopped run is retained for provenance; start the corrected dataset under a new run fingerprint.
+
 ## Entry template for the next gate
 
 - Date / decision ID:
