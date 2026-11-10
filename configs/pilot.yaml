@@ -1,4 +1,4 @@
-# Research pilot contract. Calibration runner exists; history runner/data pending.
+# Discovery pilot contract; groups share structures and are not independent samples.
 prompt:
   fact_format: json
   policy_format: checklist
@@ -15,7 +15,7 @@ generation:
   do_sample: false
   max_new_tokens: 160
 pilot:
-  independent_families: 6
+  scenario_groups: 6
   cases_per_family: 6
   conditions:
     - original_policy

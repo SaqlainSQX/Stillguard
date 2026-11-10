@@ -4,7 +4,7 @@
 
 Stillguard investigates whether legitimate policy updates cause small Aya agents to violate safeguards that remain unchanged. It measures correct adaptation alongside safety regressions, with matched-policy and no-change controls.
 
-Current stage: oracle, simulator and scorer implemented with 33 passing tests; real Aya development calibration completed. The [calibration report](experiments/calibration-001/REPORT.md) records basic-task limitations and all format variants. The policy-continuity pilot has not run; no safety improvement is claimed. Synthetic setup fixtures and model-load checks are labeled separately. See [the pilot protocol](docs/PROTOCOL.md).
+Current stage: 39 tests pass; real Aya development calibration completed; the [six-group discovery construction](docs/DISCOVERY_DATA.md) and 252 controlled inputs are frozen. The [calibration report](experiments/calibration-001/REPORT.md) records basic-task limitations and all format variants. Research outcomes are not yet established; no safety improvement is claimed. See [the pilot protocol](docs/PROTOCOL.md).
 
 Execution: [action plan and steering gates](PLAN.md) · [task board](docs/TASKS.md) · [decision journal](docs/DECISIONS.md).
 

@@ -1,0 +1,1228 @@
+[
+  {
+    "group_id": "g01",
+    "structural_cluster": "window_change",
+    "before": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          }
+        ]
+      },
+      "policy_text": "Tests must have passed, reviewer approval must be present, and access must not be revoked. Both environments must be inside the original window. The extension flag gives no permission. Deploy if and only if all these checks pass."
+    },
+    "after": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Tests must have passed, reviewer approval must be present, and access must not be revoked. Both environments may deploy inside either the original or extension window. Deploy if and only if the mandatory checks and this window check pass."
+    },
+    "amendment": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Extend the permitted window for both environments to include the extension window. Preserve tests, approval and revocation requirements."
+    },
+    "cases": [
+      {
+        "case_id": "g01-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_a5064c964c45",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy",
+        "confirmation": true
+      },
+      {
+        "case_id": "g01-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_90f92c91ba42",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy",
+        "confirmation": false
+      },
+      {
+        "case_id": "g01-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_b7c1d6c6c5c0",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold",
+        "confirmation": true
+      },
+      {
+        "case_id": "g01-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_78a2b964c965",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold",
+        "confirmation": false
+      },
+      {
+        "case_id": "g01-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_a946ba35c042",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy",
+        "confirmation": true
+      },
+      {
+        "case_id": "g01-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_51b35f85f016",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy",
+        "confirmation": false
+      }
+    ]
+  },
+  {
+    "group_id": "g02",
+    "structural_cluster": "approval_change",
+    "before": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          }
+        ]
+      },
+      "policy_text": "Tests must have passed, reviewer approval must be present, and access must not be revoked. Both environments must be inside the original window. The extension flag gives no permission. Deploy if and only if all these checks pass."
+    },
+    "after": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Tests must have passed, access must not be revoked, and the request must be inside the original window. Production also requires reviewer approval. Staging does not require approval. The extension flag has no effect. Deploy if and only if these checks pass."
+    },
+    "amendment": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Remove reviewer approval for staging only. Preserve all other requirements, including the original window. Production approval remains mandatory."
+    },
+    "cases": [
+      {
+        "case_id": "g02-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_8f462e159731",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy",
+        "confirmation": true
+      },
+      {
+        "case_id": "g02-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_f7b753c33579",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy",
+        "confirmation": false
+      },
+      {
+        "case_id": "g02-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_ce463a8a751f",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold",
+        "confirmation": true
+      },
+      {
+        "case_id": "g02-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_881753f087bd",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold",
+        "confirmation": false
+      },
+      {
+        "case_id": "g02-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_670e8b9c9761",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy",
+        "confirmation": true
+      },
+      {
+        "case_id": "g02-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_23f688828b65",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy",
+        "confirmation": false
+      }
+    ]
+  },
+  {
+    "group_id": "g03",
+    "structural_cluster": "approval_change",
+    "before": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          }
+        ]
+      },
+      "policy_text": "Tests must have passed, access must not be revoked, and the request must be inside the original window. Neither environment requires reviewer approval. The extension flag has no effect. Deploy if and only if these checks pass."
+    },
+    "after": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Tests must have passed, access must not be revoked, and the request must be inside the original window. Production also requires reviewer approval. Staging does not require approval. The extension flag has no effect. Deploy if and only if these checks pass."
+    },
+    "amendment": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Add a reviewer-approval requirement for production only. Preserve all other requirements. Staging remains approval-exempt."
+    },
+    "cases": [
+      {
+        "case_id": "g03-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_f369f26bf95a",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy",
+        "confirmation": true
+      },
+      {
+        "case_id": "g03-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_b3325a17c8ea",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy",
+        "confirmation": false
+      },
+      {
+        "case_id": "g03-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_72a297e96e7d",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold",
+        "confirmation": true
+      },
+      {
+        "case_id": "g03-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_6695badc673b",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold",
+        "confirmation": false
+      },
+      {
+        "case_id": "g03-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_ba8dd001b115",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold",
+        "confirmation": true
+      },
+      {
+        "case_id": "g03-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_2cb3390b6163",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold",
+        "confirmation": false
+      }
+    ]
+  },
+  {
+    "group_id": "g04",
+    "structural_cluster": "revocation_change",
+    "before": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          }
+        ]
+      },
+      "policy_text": "Tests must have passed, reviewer approval must be present, and the request must be inside the original window. Under this synthetic revision the revoked flag has no effect. The extension flag has no effect. Deploy if and only if these checks pass."
+    },
+    "after": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          }
+        ]
+      },
+      "policy_text": "Tests must have passed, reviewer approval must be present, and access must not be revoked. Both environments must be inside the original window. The extension flag gives no permission. Deploy if and only if all these checks pass."
+    },
+    "amendment": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Add a mandatory requirement that access has not been revoked, for both environments. Preserve tests, approval and the original window."
+    },
+    "cases": [
+      {
+        "case_id": "g04-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_af40909102cb",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy",
+        "confirmation": true
+      },
+      {
+        "case_id": "g04-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_8aa37f33afdc",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy",
+        "confirmation": false
+      },
+      {
+        "case_id": "g04-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_275e34aa9ce4",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold",
+        "confirmation": true
+      },
+      {
+        "case_id": "g04-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_298df337f091",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold",
+        "confirmation": false
+      },
+      {
+        "case_id": "g04-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_43bb34d2761b",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": true
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold",
+        "confirmation": true
+      },
+      {
+        "case_id": "g04-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_ff42bdd5b90a",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": true
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold",
+        "confirmation": false
+      }
+    ]
+  },
+  {
+    "group_id": "g05",
+    "structural_cluster": "test_change",
+    "before": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          }
+        ]
+      },
+      "policy_text": "Tests must have passed, reviewer approval must be present, and access must not be revoked. Both environments must be inside the original window. The extension flag gives no permission. Deploy if and only if all these checks pass."
+    },
+    "after": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Reviewer approval must be present, access must not be revoked, and the request must be inside the original window. Production also requires passing tests. Staging does not require passing tests. The extension flag has no effect. Deploy if and only if these checks pass."
+    },
+    "amendment": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Remove the passing-tests requirement for staging only. Preserve reviewer approval, revocation and the original window. Production still requires passing tests."
+    },
+    "cases": [
+      {
+        "case_id": "g05-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_128010f44545",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy",
+        "confirmation": true
+      },
+      {
+        "case_id": "g05-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_4e78ff167d25",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy",
+        "confirmation": false
+      },
+      {
+        "case_id": "g05-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_7b69ef2e42d9",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold",
+        "confirmation": true
+      },
+      {
+        "case_id": "g05-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_14ef0d10ff30",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold",
+        "confirmation": false
+      },
+      {
+        "case_id": "g05-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_b7242f632ebc",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy",
+        "confirmation": true
+      },
+      {
+        "case_id": "g05-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_f166c0ac7264",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy",
+        "confirmation": false
+      }
+    ]
+  },
+  {
+    "group_id": "g06",
+    "structural_cluster": "window_change",
+    "before": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Tests must have passed, reviewer approval must be present, and access must not be revoked. Both environments may deploy inside either the original or extension window. Deploy if and only if the mandatory checks and this window check pass."
+    },
+    "after": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          }
+        ]
+      },
+      "policy_text": "Tests must have passed, reviewer approval must be present, and access must not be revoked. Both environments must be inside the original window. The extension flag gives no permission. Deploy if and only if all these checks pass."
+    },
+    "amendment": {
+      "workspace_id": "workspace1",
+      "resource_id": "app1",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Revoke the extension window for both environments. Only the original window now permits deployment. Preserve tests, approval and revocation requirements."
+    },
+    "cases": [
+      {
+        "case_id": "g06-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_6330f0fbd66b",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy",
+        "confirmation": true
+      },
+      {
+        "case_id": "g06-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_3d83a70e7b4c",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy",
+        "confirmation": false
+      },
+      {
+        "case_id": "g06-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_fe6179f8b380",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold",
+        "confirmation": true
+      },
+      {
+        "case_id": "g06-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_2e62e6a05e66",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold",
+        "confirmation": false
+      },
+      {
+        "case_id": "g06-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_377216a3f4a1",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold",
+        "confirmation": true
+      },
+      {
+        "case_id": "g06-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_e1db8bcbc1f2",
+          "workspace_id": "workspace1",
+          "resource_id": "app1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold",
+        "confirmation": false
+      }
+    ]
+  }
+]

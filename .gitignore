@@ -25,3 +25,4 @@ manifests/runtime.json
 manifests/wheels.json
 manifests/offline-readiness.json
 manifests/model.json
+data/curated/

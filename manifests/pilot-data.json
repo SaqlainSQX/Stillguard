@@ -1,0 +1,26 @@
+{
+  "kind": "synthetic_discovery_pilot",
+  "source_sha256": "58fb65670de89811b9a8205fd5c191e14e31a8281322ce79c6552b6b7543c62a",
+  "input_sha256": "bae2b174efab1d266cefa21142cbd0f822e1e4a2be09bd23190f0b464f8a8e4e",
+  "input_path": "data\\curated\\pilot-001\\inputs.jsonl",
+  "source_path": "data\\raw\\discovery-groups.json",
+  "generator_sha256": "955e9ed6863afdbb58e48f89d368f45d55f264e31ee94d93f702c1fd200ef8b4",
+  "discovery_module_sha256": "60f8dcff3097eca77f64751baa14c2041edc80a201b27ac61ec052d9f0cfbe09",
+  "tokenizer_revision": "af89d219b53ed9b13b8a4645f9c8028973510324",
+  "source_rows": 37,
+  "curated_cases": 36,
+  "conditions": [
+    "P0",
+    "P0R",
+    "P1",
+    "P1R",
+    "H",
+    "HC",
+    "NC"
+  ],
+  "discovery_calls": 252,
+  "structural_clusters": 4,
+  "scenario_groups": 6,
+  "caveat": "Synthetic groups share policy structures; no independence or real-world representativeness claim.",
+  "input_format": "checklist policies and JSON facts; selected using development calibration only"
+}

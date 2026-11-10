@@ -58,6 +58,14 @@ Decision: end wording search and provisionally use explicit policy checklists pl
 
 Next: six research scenario groups, authenticated history construction and matched token/position controls, real CuratorKIT/AuditKIT dataflow, then frozen pilot traces. Gate A remains unreached. No training or UI work is justified yet.
 
+## D007 — 10 November 2026: freeze discovery construction before outcomes
+
+Six synthetic groups/36 probes are validated with exhaustive independent rule checks. They share four structural clusters and are not independent real-world samples. All 252 inputs are frozen with the pinned tokenizer; HC/NC match authoritative instructions, total tokens and request position. Cold replay prompts are identical. Gold labels, formal ASTs, descriptive group/case names and evaluator metadata are excluded from model inputs.
+
+The first Curator adapter attempt revealed that SFT deduplication ignored the separate input payload, collapsing cases by shared instruction/label. Coverage checks stopped the build. The corrected adapter puts complete source payloads in the dedup-relevant instruction field, preserving every case and removing only the declared duplicate (37 to 36). This is an integration correction, not a model result.
+
+Thirty-nine tests pass, including real pinned-tokenizer matching and actual AuditKIT adapter replay checks. Decide to launch the frozen discovery sweep with a 20-minute work-block limit; confirmation and Gate A interpretation remain pending. A GPU lock and resumable call logs prevent overlapping or silently repeated work.
+
 ## Entry template for the next gate
 
 - Date / decision ID:
