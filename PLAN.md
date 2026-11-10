@@ -6,7 +6,7 @@ Prepared 9 November; revised 10 November 2026. User target: finish by 12 Novembe
 
 Build a reproducible audit of whether a small Aya agent preserves unchanged safeguards while adapting to legitimate policy updates. Deliver a useful dataset, an actual CuratorKIT-to-AuditKIT model pipeline, measured mitigation tradeoffs, and inspectable transcripts.
 
-Verified: official pinned model downloaded and hash-checked, local 4-bit GPU generation, isolated environment, package lock/offline archive, synthetic toolkit plumbing, GitHub main branch. Not implemented: research dataset, policy oracle, simulator, model runner, research scoring, mitigation or pilot analysis.
+Verified: official pinned model downloaded and hash-checked, local 4-bit GPU generation, isolated environment, package lock/offline archive, synthetic toolkit plumbing and GitHub main branch. Implementation checkpoint 10 November: bounded schemas/oracle/simulator/scorer pass 33 tests; resumable real Aya development calibration is complete with documented basic-task limitations. Still pending: six-group research dataset, authenticated/matched policy-history runner, actual research CuratorKIT/AuditKIT integration, mitigation and held-out evaluation. See experiments/calibration-001/REPORT.md and the task board.
 
 The first decision is whether this particular research thesis deserves the remaining time. Eleven proposal reviews are design work, not evidence that a model failure exists.
 

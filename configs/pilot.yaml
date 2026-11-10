@@ -1,4 +1,8 @@
-# Experiment contract only. Benchmark data and runner are not implemented yet.
+# Research pilot contract. Calibration runner exists; history runner/data pending.
+prompt:
+  fact_format: json
+  policy_format: checklist
+  selection_basis: development_calibration_only
 model:
   id: CohereLabs/tiny-aya-global
   local_path: models/tiny-aya-global

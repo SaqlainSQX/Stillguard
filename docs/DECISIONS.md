@@ -44,13 +44,21 @@ Valid development run `4dc4a0974c47` at code `bd2ffdf`: 12 calls, 12 valid propo
 
 Decision: hold the history pilot and take the planned bounded diagnostic branch. Compare literal Boolean facts with lossless factual sentence wording while preserving policies, trusted states and gold decisions. No examples or expected labels are added to model inputs. Record prompt-format variants under separate run fingerprints. Additional diagnostic calls count as development overhead, not part of the frozen research pilot budget. Keep all earlier traces, including the excluded preliminary run.
 
-## Entry template for the next gate
-
 ### D005 diagnostic follow-up
 
 At code `73c0af4`, lossless sentence facts produced 12 valid/9 correct development responses (`17796ff528cb`), including two unnecessary denials and one unauthorized production-extension proposal. The literal JSON-fact control repeated 12 valid/7 correct (`734dccb30da8`). No history comparison was run. These twelve-case development observations do not establish statistical improvement or generalization.
 
 Next bounded diagnostic: use manually authored explicit mandatory/environment-specific checklist wording with the same formal policies, trusted facts and expected answers. This is task-interface clarification, not a new mitigation claim. Keep both policy/fact formats in run manifests and retain all unsuccessful outputs. Do not use the diagnostic accuracy as a held-out result.
+
+## D006 — 10 November 2026: finish the bounded calibration diagnostic
+
+Checklist/sentence facts scored 8/12 (`719afbe19d42`); checklist/JSON facts scored 10/12 (`b5f4c69f94a8`), both at code `45a4c86` with 12 valid proposals. The latter still deployed after failed tests and despite revocation. These are basic policy errors, not history effects.
+
+Decision: end wording search and provisionally use explicit policy checklists plus literal JSON facts when implementing the new discovery pilot. Maintain all planned cold/replay/history/neutral controls and retain all cases, including weak-baseline cases. Report unconditional errors separately from conditional regressions. Do not present development selection as held-out improvement. See experiments/calibration-001/REPORT.md for all five valid runs and excluded-call accounting.
+
+Next: six research scenario groups, authenticated history construction and matched token/position controls, real CuratorKIT/AuditKIT dataflow, then frozen pilot traces. Gate A remains unreached. No training or UI work is justified yet.
+
+## Entry template for the next gate
 
 - Date / decision ID:
 - Question and previous assumption:

@@ -4,7 +4,7 @@
 
 Stillguard investigates whether legitimate policy updates cause small Aya agents to violate safeguards that remain unchanged. It measures correct adaptation alongside safety regressions, with matched-policy and no-change controls.
 
-Current stage: verified research setup. The policy-continuity pilot has not run; no safety improvement is claimed. Synthetic setup fixtures and model-load checks are labeled separately. See [the pilot protocol](docs/PROTOCOL.md).
+Current stage: oracle, simulator and scorer implemented with 33 passing tests; real Aya development calibration completed. The [calibration report](experiments/calibration-001/REPORT.md) records basic-task limitations and all format variants. The policy-continuity pilot has not run; no safety improvement is claimed. Synthetic setup fixtures and model-load checks are labeled separately. See [the pilot protocol](docs/PROTOCOL.md).
 
 Execution: [action plan and steering gates](PLAN.md) · [task board](docs/TASKS.md) · [decision journal](docs/DECISIONS.md).
 
@@ -50,7 +50,8 @@ python scripts/smoke_toolkits.py
 | `configs/pilot.yaml` | Model and pilot design contract |
 | `data/` | Separate raw, curated and split directories; benchmark not generated yet |
 | `experiments/`, `results/`, `logs/` | Run configuration, output and setup logs |
-| `notebooks/`, `src/` | Reserved for the upcoming pilot implementation |
+| `src/stillguard/` | Policy oracle, strict schemas, prompt projection and simulated proposal/gate scoring |
+| `notebooks/` | Reserved for later analysis |
 | `manifests/` | Download provenance, pinned commits, package checksums and environment status |
 
 Toolkit source snapshots are kept separate from the installed distributions. Installed versions are in the lockfile; source commit IDs are in `manifests/assets.json`. Optional SafeTune/CircuitKIT source and examples are available for inspection; their full optional training/interpretability stacks are not installed into the core environment.
