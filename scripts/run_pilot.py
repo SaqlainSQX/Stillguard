@@ -60,6 +60,16 @@ def main():
                   config_sha256=sha(ROOT/'configs/pilot.yaml'),model_revision=lock_model['revision'],
                   seed=42,torch_version=torch.__version__,generation=config['generation'])
     run_id=hashlib.sha256(json.dumps(identity,sort_keys=True).encode()).hexdigest()
+    if args.phase=='confirmation':
+        discovery_ready=False
+        for previous in (ROOT/'results').glob('pilot-*'):
+            pm=previous/'manifest.json';ps=previous/'summary.json'
+            if not (pm.exists() and ps.exists()):continue
+            prior=json.loads(pm.read_text());summary=json.loads(ps.read_text())
+            same=all(prior.get(k)==identity[k] for k in ('execution_sha256','dataset_sha256','config_sha256','model_revision'))
+            if prior.get('phase')=='discovery' and same and summary.get('complete') and summary.get('working_tree_clean'):
+                discovery_ready=True
+        if not discovery_ready:raise RuntimeError('Complete the matching discovery phase before confirmation')
     folder=ROOT/'results'/('pilot-'+run_id[:12]);folder.mkdir(parents=True,exist_ok=True)
     lock=ROOT/'results/model-run.lock'
     try:fd=os.open(lock,os.O_CREAT|os.O_EXCL|os.O_WRONLY)

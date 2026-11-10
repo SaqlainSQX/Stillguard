@@ -29,7 +29,7 @@ def main():
                 output=json.dumps({k:case[k] for k in ('expected_before','expected_after')},sort_keys=True)))
     source_rows=folder/'source.jsonl'
     # One declared duplicate verifies real dedup; it must not remove repeated-call controls.
-    source_rows.write_text(''.join(json.dumps(r)+'\n' for r in records+[records[0]]),encoding='utf-8')
+    source_rows.write_text(''.join(json.dumps(r)+'\n' for r in records+[records[0]]),encoding='utf-8',newline='\n')
     curator=Curator(CuratorConfig(dataset=str(source_rows),dedup='exact',clean=False,max_tokens=8192,
                         export_formats=['alpaca'],output_dir=str(folder/'curator'))).run()
     recovered={}
@@ -58,7 +58,7 @@ def main():
                 context=case['context'],evaluator_policy={k:v for k,v in group[revision].items() if k!='policy_text'},
                 expected_action=case['expected_before' if revision=='before' else 'expected_after']))
     if len(assembled)!=252:raise RuntimeError('Condition coverage mismatch')
-    output=folder/'inputs.jsonl';output.write_text(''.join(json.dumps(r)+'\n' for r in assembled),encoding='utf-8')
+    output=folder/'inputs.jsonl';output.write_text(''.join(json.dumps(r)+'\n' for r in assembled),encoding='utf-8',newline='\n')
     manifest=dict(kind='synthetic_discovery_pilot',source_sha256=digest(source),input_sha256=digest(output),
                   input_path=str(output.relative_to(ROOT)),source_path=str(source.relative_to(ROOT)),
                   generator_sha256=digest(Path(__file__)),discovery_module_sha256=digest(ROOT/'src/stillguard/discovery.py'),
@@ -67,7 +67,7 @@ def main():
                   structural_clusters=4,scenario_groups=6,
                   caveat='Synthetic groups share policy structures; no independence or real-world representativeness claim.',
                   input_format='checklist policies and JSON facts; selected using development calibration only')
-    (ROOT/'manifests/pilot-data.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
+    (ROOT/'manifests/pilot-data.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8',newline='\n')
     print(json.dumps(manifest,indent=2))
 
 

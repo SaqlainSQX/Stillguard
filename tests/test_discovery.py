@@ -43,9 +43,13 @@ def test_real_pinned_tokenizer_matches_history_and_request_position():
 
 
 def test_frozen_artifact_keeps_every_case_and_control():
+    import hashlib
     root=Path(__file__).resolve().parents[1]
     path=root/'data/curated/pilot-001/inputs.jsonl'
     if not path.exists():pytest.skip('Run scripts/build_pilot.py to build pinned inputs')
+    manifest=json.loads((root/'manifests/pilot-data.json').read_text())
+    assert hashlib.sha256(path.read_bytes()).hexdigest()==manifest['input_sha256']
+    assert hashlib.sha256((root/manifest['source_path']).read_bytes()).hexdigest()==manifest['source_sha256']
     rows=[json.loads(line) for line in path.read_text().splitlines()]
     assert len(rows)==252 and len({r['id'] for r in rows})==252
     cases={}

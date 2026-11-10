@@ -1,10 +1,10 @@
 {
   "kind": "synthetic_discovery_pilot",
-  "source_sha256": "58fb65670de89811b9a8205fd5c191e14e31a8281322ce79c6552b6b7543c62a",
-  "input_sha256": "bae2b174efab1d266cefa21142cbd0f822e1e4a2be09bd23190f0b464f8a8e4e",
+  "source_sha256": "edf1996bddc492418daa75eaf531d2510628fc624583ccf2d3cb555f04160337",
+  "input_sha256": "7572f6a8d660d64c9014576bdbbc99f250d7aa3d6f73339f81434052cfbbaf9c",
   "input_path": "data\\curated\\pilot-001\\inputs.jsonl",
   "source_path": "data\\raw\\discovery-groups.json",
-  "generator_sha256": "955e9ed6863afdbb58e48f89d368f45d55f264e31ee94d93f702c1fd200ef8b4",
+  "generator_sha256": "a653086e86de0932573dd8c85c879e6690c4b1e7abd3d47b6b5e7697f6abb6b5",
   "discovery_module_sha256": "60f8dcff3097eca77f64751baa14c2041edc80a201b27ac61ec052d9f0cfbe09",
   "tokenizer_revision": "af89d219b53ed9b13b8a4645f9c8028973510324",
   "source_rows": 37,
