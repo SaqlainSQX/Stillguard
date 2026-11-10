@@ -36,6 +36,8 @@ Thirty-two tests pass, including independent truth-table expectations, twelve ex
 
 Decision: proceed to the prepared resumable 12-call local Aya calibration. Do not begin history comparisons until formatting, task ability and throughput are reviewed. See ACTION_CONTRACT.md for exact initial scope and remaining controls.
 
+Calibration integrity correction: the first preliminary launch exposed descriptive request IDs (including answer-like words). That process was stopped and its output marked ABORTED, excluded from all result claims. Retain its trace and account for logged/in-flight calls as setup overhead. Model-visible IDs are now opaque reqNNN values; descriptive case IDs remain evaluator-only. The fixture test guards this convention. Rerun calibration under the new dataset and code fingerprint.
+
 ## Entry template for the next gate
 
 - Date / decision ID:

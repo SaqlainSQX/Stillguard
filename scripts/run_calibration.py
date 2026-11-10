@@ -48,6 +48,8 @@ def main():
                     torch_version=torch.__version__, max_successful_calls=12, max_failed_calls=20)
     fingerprint = hashlib.sha256(json.dumps(manifest,sort_keys=True).encode()).hexdigest()
     folder = ROOT/'results'/('calibration-'+fingerprint[:12]); folder.mkdir(parents=True,exist_ok=True)
+    if (folder/'ABORTED.json').exists():
+        raise RuntimeError('This calibration was invalidated; do not resume it.')
     # Cross-run GPU lock: never overlap two calibration processes.
     lock = ROOT/'results/model-run.lock'
     try:

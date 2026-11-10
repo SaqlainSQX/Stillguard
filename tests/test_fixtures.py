@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+import re
 from collections import Counter
 from dataclasses import asdict
 from stillguard.schema import Policy, Context
@@ -15,6 +16,7 @@ def test_explicit_fixture_annotations_agree_with_oracle_and_action_scorer():
     assert len(cases) == 12 and len({c['id'] for c in cases}) == 12
     assert Counter(c['expected_action'] for c in cases) == {'deploy':6, 'withhold':6}
     for case in cases:
+        assert re.fullmatch(r'req[0-9]{3}',case['context']['request_id']), 'Model-visible IDs must not encode labels'
         record = policies[case['policy_revision']]
         policy = Policy.from_dict({k:v for k,v in record.items() if k != 'policy_text'})
         context = Context.from_dict(case['context'])
