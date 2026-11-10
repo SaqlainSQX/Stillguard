@@ -15,7 +15,7 @@ Updated 10 November 2026. Finish target: **12 November IST**, with 13–14 Novem
 | G1 | Gate A evidence review and continue/reframe decision | T6 | Done: two reproducible groups, below three-group gate; narrow scope per D010 |
 | T7 | Simple mitigation and equal-budget comparison | G1 | Frozen reminder/interface protocol and inputs; actual 108-call development comparison next |
 | T8 | Tiny adaptation compatibility test and one training run | T7 | Deferred; outside the default three-day plan |
-| T9 | New grouped held-out evaluation and one ablation | T7 | Pending |
+| T9 | New grouped held-out evaluation and one ablation | T7 | Raw source frozen: 20 groups / 120 probes; Curator export, final prompt/config freeze and actual evaluation pending |
 | T10 | Lightweight actual-run report/demo and reproducibility check | T9 | Pending |
 | T11 | HF artifacts/collections, report and submission package | T9,T10 | Pending |
 

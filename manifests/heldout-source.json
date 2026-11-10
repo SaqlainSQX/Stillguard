@@ -1,0 +1,29 @@
+{
+  "kind": "frozen_heldout_source_only",
+  "source_path": "data\\raw\\heldout-groups.json",
+  "source_sha256": "267a8e58f979308082cb45789d9c3b02457c2ad2047bf91cfb1619d16deef4d8",
+  "generator_sha256": "4bfa84394b5d5ce65c37d9c6eacf60122367aefde0a9a099620f604982d29d56",
+  "authoring_module_sha256": "bcd7e1463a79f4906b4bf05093ee7293b9858ffefc4346ea11389edf7eb1961c",
+  "discovery_module_sha256": "a2f743c68ba9a0bf632b44cba5b01d9fd8c5034ac3954c735b21009e8df3a7d2",
+  "pilot_source_sha256": "edf1996bddc492418daa75eaf531d2510628fc624583ccf2d3cb555f04160337",
+  "calibration_source_sha256": "65280ec875ceda7cd267b1d9cb32da45725c355e4154bc7d8ec92399892de207",
+  "validation": {
+    "groups": 20,
+    "cases": 120,
+    "structural_components": 3,
+    "current_truth_functions": 20,
+    "directions": {
+      "broaden": 10,
+      "restrict": 10
+    }
+  },
+  "freeze_date_ist": "2026-11-10",
+  "scope": "Twenty new policy compositions, 120 probes, three shared component templates; no model calls.",
+  "status": "Raw source frozen before final method selection. Curator export and final prompt/config freeze remain pending.",
+  "caveats": [
+    "No independence or real-world representativeness claim.",
+    "Logical functions are disjoint from discovery and calibration policies; primitive facts and rule components are shared.",
+    "Within-group probes and policy components are dependent; intended-change probes may vary irrelevant facts.",
+    "Original and extension window flags are independent synthetic facts and may both be true."
+  ]
+}

@@ -96,6 +96,14 @@ Before any new model outcomes, freeze 36 existing curated development cases × H
 
 The separate runner retains the shared GPU lock, actual generation accounting, clean-tree/frozen-hash checks, strict independent scoring and AuditKIT agreement. The 108-generation cap includes logged failed calls across execution versions for this input digest. This is one fixed development wording, not a new test or a passed pilot gate. Protocol: experiments/reminder-001/PROTOCOL.md. Next: run the frozen comparison, keep all outputs and decide once; no extra variant search.
 
+## D012 — 10 November 2026: freeze new held-out source before final selection
+
+The fixed 108-call development comparison completed cleanly. Before its aggregate analysis or final method selection, freeze raw held-out source `267a8e58f979308082cb45789d9c3b02457c2ad2047bf91cfb1619d16deef4d8`: 20 new rule-composition transitions / 120 probes, balanced broadening/restriction and current allowed/denied labels. No held-out model calls have occurred.
+
+Exhaustive 64-state direct-condition/AST checks verify each policy. Truth functions are disjoint from discovery and calibration; 20 current functions are unique and inverse transition duplicates are excluded. The groups still share three component templates, primitive facts and some before policies; they are not independent real-world families. Some within-group contrasts can vary irrelevant facts. Eight new tests cover deterministic authoring, actual calibration exclusion, boundary cases, corruption/scope errors and gold-metadata projection.
+
+This is a raw-source freeze only, not completion of T9. The pilot informed the grammar, and the source was authored during development prompting. Next: analyze the fixed development run once, select a provisional simple comparison without another wording search, then curate/render/freeze final evaluation inputs and configuration. Preserve every held-out source case. See docs/HELDOUT_DATA.md and manifests/heldout-source.json.
+
 ## Entry template for the next gate
 
 - Date / decision ID:

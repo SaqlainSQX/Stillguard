@@ -1,0 +1,15 @@
+# Held-out source 001
+
+Raw source frozen on 10 November, before final method selection and before any held-out model calls. It was authored during the fixed development reminder run and committed before aggregate analysis of that run. The pilot informed the question and vocabulary; this is not an independently collected real-world benchmark.
+
+`data/raw/heldout-groups.json` contains **20 policy-transition groups and 120 probes**: two unchanged allowed, two unchanged denied and two intended-change decisions per group. Ten transitions broaden permission and ten restrict it; current-policy labels balance 60 deploy/60 withhold. Request/workspace/resource identifiers are opaque and deterministic.
+
+Policies combine three scope choices each for testing and approval, plus five window conditions: original, either window, both windows, staging-extension/production-original, and the converse. Revocation remains forbidden. Original/extension flags are independent synthetic facts and may both be true. Each transition changes one component, while the others remain applicable. Authoritative prose spells out all environment exceptions and the exact current conjunction. These fictional policies are task contracts, not deployment-security recommendations.
+
+Before/after rule truth functions are checked over all 64 assignments of the five trusted facts and environment. They are disjoint from policy truth functions used in both discovery and calibration. All 20 current truth functions are unique; exact/inverse transition duplicates are excluded. A separately authored direct Python condition checks every AST and probe annotation. Boundary, corruption, scope-binding and evaluator-metadata projection tests accompany the authoring code.
+
+The deterministic selection balances changed component and direction without consulting model outputs. Before policies can recur, and all policies share primitive facts, scope/window components and authoring templates. **Twenty groups are not twenty independent real-world families.** There are three changed-component categories. Within-group probes are dependent; some intended-change contrasts can differ on irrelevant facts. Report counts at both group and component levels and avoid population/generalization or independence claims.
+
+This freezes **raw source only**. CuratorKIT export, rendering/matching of final methods, final configuration and their hashes still need freezing before evaluation. No held-out accuracy or mitigation improvement exists yet. Gold rules/labels/design metadata stay in evaluator records and must not enter model prompts. Retain all cases and do not change this source after seeing held-out outcomes.
+
+Rebuild deterministically with `python scripts/build_heldout_source.py`. The builder refuses to overwrite different existing source content. `manifests/heldout-source.json` records source, authoring/generator, discovery and calibration hashes. Any later correctness correction requires explicit versioning and disclosure.

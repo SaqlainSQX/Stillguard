@@ -1,0 +1,5533 @@
+[
+  {
+    "group_id": "h01",
+    "structural_cluster": "tests_composition",
+    "design": {
+      "before": [
+        "all",
+        "production",
+        "staging_extension"
+      ],
+      "after": [
+        "staging",
+        "production",
+        "staging_extension"
+      ],
+      "direction": "broaden"
+    },
+    "cases": [
+      {
+        "case_id": "h01-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_2813586c7b45",
+          "workspace_id": "ws_e271c59d5f",
+          "resource_id": "svc_44f7f471f1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h01-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_505d75517334",
+          "workspace_id": "ws_e271c59d5f",
+          "resource_id": "svc_44f7f471f1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h01-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_a6aacd1abb46",
+          "workspace_id": "ws_e271c59d5f",
+          "resource_id": "svc_44f7f471f1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h01-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_952ee19ffc40",
+          "workspace_id": "ws_e271c59d5f",
+          "resource_id": "svc_44f7f471f1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h01-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_2e791c4c289c",
+          "workspace_id": "ws_e271c59d5f",
+          "resource_id": "svc_44f7f471f1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h01-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_12e6c0d89bc6",
+          "workspace_id": "ws_e271c59d5f",
+          "resource_id": "svc_44f7f471f1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_e271c59d5f",
+      "resource_id": "svc_44f7f471f1",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in production. Staging is exempt from the approval requirement. Staging requires the extension-window flag. Production requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_e271c59d5f",
+      "resource_id": "svc_44f7f471f1",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. Staging requires the extension-window flag. Production requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_e271c59d5f",
+      "resource_id": "svc_44f7f471f1",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the tests requirement from all to staging. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. Staging requires the extension-window flag. Production requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h02",
+    "structural_cluster": "tests_composition",
+    "design": {
+      "before": [
+        "production",
+        "staging",
+        "original"
+      ],
+      "after": [
+        "all",
+        "staging",
+        "original"
+      ],
+      "direction": "restrict"
+    },
+    "cases": [
+      {
+        "case_id": "h02-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_dccf243930e3",
+          "workspace_id": "ws_790af8d1ef",
+          "resource_id": "svc_407a470de0",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h02-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_5cc0499cbaf6",
+          "workspace_id": "ws_790af8d1ef",
+          "resource_id": "svc_407a470de0",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h02-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_ae1d1df4848d",
+          "workspace_id": "ws_790af8d1ef",
+          "resource_id": "svc_407a470de0",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h02-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_45ad9cd09998",
+          "workspace_id": "ws_790af8d1ef",
+          "resource_id": "svc_407a470de0",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h02-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_32138e28cdf9",
+          "workspace_id": "ws_790af8d1ef",
+          "resource_id": "svc_407a470de0",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h02-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_a242135b280e",
+          "workspace_id": "ws_790af8d1ef",
+          "resource_id": "svc_407a470de0",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_790af8d1ef",
+      "resource_id": "svc_407a470de0",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. The original-window flag must be true in both environments. The extension flag gives no permission. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_790af8d1ef",
+      "resource_id": "svc_407a470de0",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in staging. Production is exempt from the approval requirement. The original-window flag must be true in both environments. The extension flag gives no permission. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_790af8d1ef",
+      "resource_id": "svc_407a470de0",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the tests requirement from production to all. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in staging. Production is exempt from the approval requirement. The original-window flag must be true in both environments. The extension flag gives no permission. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h03",
+    "structural_cluster": "approval_composition",
+    "design": {
+      "before": [
+        "staging",
+        "all",
+        "production_extension"
+      ],
+      "after": [
+        "staging",
+        "staging",
+        "production_extension"
+      ],
+      "direction": "broaden"
+    },
+    "cases": [
+      {
+        "case_id": "h03-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_ade3788007d8",
+          "workspace_id": "ws_bb32fdafb8",
+          "resource_id": "svc_0d14b744a5",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h03-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_de96a2b63867",
+          "workspace_id": "ws_bb32fdafb8",
+          "resource_id": "svc_0d14b744a5",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h03-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_164950c4a6db",
+          "workspace_id": "ws_bb32fdafb8",
+          "resource_id": "svc_0d14b744a5",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h03-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_1c2ed5f8012a",
+          "workspace_id": "ws_bb32fdafb8",
+          "resource_id": "svc_0d14b744a5",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h03-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_5cdafa41baab",
+          "workspace_id": "ws_bb32fdafb8",
+          "resource_id": "svc_0d14b744a5",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h03-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_e6576ccd29c8",
+          "workspace_id": "ws_bb32fdafb8",
+          "resource_id": "svc_0d14b744a5",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": false,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_bb32fdafb8",
+      "resource_id": "svc_0d14b744a5",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in both environments. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_bb32fdafb8",
+      "resource_id": "svc_0d14b744a5",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_bb32fdafb8",
+      "resource_id": "svc_0d14b744a5",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the approval requirement from all to staging. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h04",
+    "structural_cluster": "approval_composition",
+    "design": {
+      "before": [
+        "staging",
+        "production",
+        "production_extension"
+      ],
+      "after": [
+        "staging",
+        "all",
+        "production_extension"
+      ],
+      "direction": "restrict"
+    },
+    "cases": [
+      {
+        "case_id": "h04-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_c109dce52bef",
+          "workspace_id": "ws_3ca079e844",
+          "resource_id": "svc_4d402d2f1a",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h04-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_77ed7c2f02d6",
+          "workspace_id": "ws_3ca079e844",
+          "resource_id": "svc_4d402d2f1a",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h04-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_e290b77dbc4f",
+          "workspace_id": "ws_3ca079e844",
+          "resource_id": "svc_4d402d2f1a",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h04-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_afbd77398ab6",
+          "workspace_id": "ws_3ca079e844",
+          "resource_id": "svc_4d402d2f1a",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h04-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_b94221fc0d40",
+          "workspace_id": "ws_3ca079e844",
+          "resource_id": "svc_4d402d2f1a",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h04-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_b395b7368a64",
+          "workspace_id": "ws_3ca079e844",
+          "resource_id": "svc_4d402d2f1a",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_3ca079e844",
+      "resource_id": "svc_4d402d2f1a",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_3ca079e844",
+      "resource_id": "svc_4d402d2f1a",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in both environments. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_3ca079e844",
+      "resource_id": "svc_4d402d2f1a",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the approval requirement from production to all. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in both environments. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h05",
+    "structural_cluster": "window_composition",
+    "design": {
+      "before": [
+        "staging",
+        "staging",
+        "both"
+      ],
+      "after": [
+        "staging",
+        "staging",
+        "either"
+      ],
+      "direction": "broaden"
+    },
+    "cases": [
+      {
+        "case_id": "h05-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_2fc45acd34ec",
+          "workspace_id": "ws_2a33da39f6",
+          "resource_id": "svc_6a2a9af36e",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h05-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_7db878dcbacc",
+          "workspace_id": "ws_2a33da39f6",
+          "resource_id": "svc_6a2a9af36e",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h05-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_dcaccaba8507",
+          "workspace_id": "ws_2a33da39f6",
+          "resource_id": "svc_6a2a9af36e",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h05-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_30d4c83e6609",
+          "workspace_id": "ws_2a33da39f6",
+          "resource_id": "svc_6a2a9af36e",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h05-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_695eb253abeb",
+          "workspace_id": "ws_2a33da39f6",
+          "resource_id": "svc_6a2a9af36e",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h05-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_4942ab72ea37",
+          "workspace_id": "ws_2a33da39f6",
+          "resource_id": "svc_6a2a9af36e",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_2a33da39f6",
+      "resource_id": "svc_6a2a9af36e",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "and",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. In both environments, the original-window and extension-window flags must BOTH be true. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_2a33da39f6",
+      "resource_id": "svc_6a2a9af36e",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. In both environments, at least one of the original-window and extension-window flags must be true. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_2a33da39f6",
+      "resource_id": "svc_6a2a9af36e",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the window requirement from both to either. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. In both environments, at least one of the original-window and extension-window flags must be true. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h06",
+    "structural_cluster": "window_composition",
+    "design": {
+      "before": [
+        "production",
+        "production",
+        "original"
+      ],
+      "after": [
+        "production",
+        "production",
+        "both"
+      ],
+      "direction": "restrict"
+    },
+    "cases": [
+      {
+        "case_id": "h06-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_731444ebf707",
+          "workspace_id": "ws_08d4088971",
+          "resource_id": "svc_9a235407ae",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h06-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_250a67132575",
+          "workspace_id": "ws_08d4088971",
+          "resource_id": "svc_9a235407ae",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h06-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_1f8cf21e5383",
+          "workspace_id": "ws_08d4088971",
+          "resource_id": "svc_9a235407ae",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h06-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_f450446a7a33",
+          "workspace_id": "ws_08d4088971",
+          "resource_id": "svc_9a235407ae",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h06-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_656207c470c1",
+          "workspace_id": "ws_08d4088971",
+          "resource_id": "svc_9a235407ae",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h06-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_a34e6150a517",
+          "workspace_id": "ws_08d4088971",
+          "resource_id": "svc_9a235407ae",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_08d4088971",
+      "resource_id": "svc_9a235407ae",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. The original-window flag must be true in both environments. The extension flag gives no permission. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_08d4088971",
+      "resource_id": "svc_9a235407ae",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "and",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. In both environments, the original-window and extension-window flags must BOTH be true. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_08d4088971",
+      "resource_id": "svc_9a235407ae",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the window requirement from original to both. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. In both environments, the original-window and extension-window flags must BOTH be true. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h07",
+    "structural_cluster": "tests_composition",
+    "design": {
+      "before": [
+        "all",
+        "staging",
+        "original"
+      ],
+      "after": [
+        "staging",
+        "staging",
+        "original"
+      ],
+      "direction": "broaden"
+    },
+    "cases": [
+      {
+        "case_id": "h07-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_bbb7e21aed36",
+          "workspace_id": "ws_b6b399ee29",
+          "resource_id": "svc_5510f75db9",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h07-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_c9f28b3f6378",
+          "workspace_id": "ws_b6b399ee29",
+          "resource_id": "svc_5510f75db9",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h07-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_36a4a6366f29",
+          "workspace_id": "ws_b6b399ee29",
+          "resource_id": "svc_5510f75db9",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h07-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_31d77e62fc59",
+          "workspace_id": "ws_b6b399ee29",
+          "resource_id": "svc_5510f75db9",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h07-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_583472010a15",
+          "workspace_id": "ws_b6b399ee29",
+          "resource_id": "svc_5510f75db9",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h07-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_69ed7ff0377f",
+          "workspace_id": "ws_b6b399ee29",
+          "resource_id": "svc_5510f75db9",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_b6b399ee29",
+      "resource_id": "svc_5510f75db9",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in staging. Production is exempt from the approval requirement. The original-window flag must be true in both environments. The extension flag gives no permission. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_b6b399ee29",
+      "resource_id": "svc_5510f75db9",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. The original-window flag must be true in both environments. The extension flag gives no permission. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_b6b399ee29",
+      "resource_id": "svc_5510f75db9",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the tests requirement from all to staging. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. The original-window flag must be true in both environments. The extension flag gives no permission. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h08",
+    "structural_cluster": "tests_composition",
+    "design": {
+      "before": [
+        "staging",
+        "staging",
+        "staging_extension"
+      ],
+      "after": [
+        "all",
+        "staging",
+        "staging_extension"
+      ],
+      "direction": "restrict"
+    },
+    "cases": [
+      {
+        "case_id": "h08-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_0437386c067b",
+          "workspace_id": "ws_d6a81b668d",
+          "resource_id": "svc_ac49118dc2",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h08-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_cda0d5c427a2",
+          "workspace_id": "ws_d6a81b668d",
+          "resource_id": "svc_ac49118dc2",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h08-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_589b3f9236e2",
+          "workspace_id": "ws_d6a81b668d",
+          "resource_id": "svc_ac49118dc2",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h08-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_7a7e8b084a27",
+          "workspace_id": "ws_d6a81b668d",
+          "resource_id": "svc_ac49118dc2",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h08-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_44bce24508e9",
+          "workspace_id": "ws_d6a81b668d",
+          "resource_id": "svc_ac49118dc2",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h08-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_aabd01d66a48",
+          "workspace_id": "ws_d6a81b668d",
+          "resource_id": "svc_ac49118dc2",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_d6a81b668d",
+      "resource_id": "svc_ac49118dc2",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. Staging requires the extension-window flag. Production requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_d6a81b668d",
+      "resource_id": "svc_ac49118dc2",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in staging. Production is exempt from the approval requirement. Staging requires the extension-window flag. Production requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_d6a81b668d",
+      "resource_id": "svc_ac49118dc2",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the tests requirement from staging to all. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in staging. Production is exempt from the approval requirement. Staging requires the extension-window flag. Production requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h09",
+    "structural_cluster": "approval_composition",
+    "design": {
+      "before": [
+        "all",
+        "all",
+        "staging_extension"
+      ],
+      "after": [
+        "all",
+        "production",
+        "staging_extension"
+      ],
+      "direction": "broaden"
+    },
+    "cases": [
+      {
+        "case_id": "h09-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_67ddcfe5ea51",
+          "workspace_id": "ws_953569a6d9",
+          "resource_id": "svc_b028349931",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h09-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_c3a22d7f6d91",
+          "workspace_id": "ws_953569a6d9",
+          "resource_id": "svc_b028349931",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h09-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_82e3a0ebaaab",
+          "workspace_id": "ws_953569a6d9",
+          "resource_id": "svc_b028349931",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h09-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_ceed97de9896",
+          "workspace_id": "ws_953569a6d9",
+          "resource_id": "svc_b028349931",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h09-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_4e06b6165eb7",
+          "workspace_id": "ws_953569a6d9",
+          "resource_id": "svc_b028349931",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h09-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_61231de2a6b0",
+          "workspace_id": "ws_953569a6d9",
+          "resource_id": "svc_b028349931",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_953569a6d9",
+      "resource_id": "svc_b028349931",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in both environments. Staging requires the extension-window flag. Production requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_953569a6d9",
+      "resource_id": "svc_b028349931",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in production. Staging is exempt from the approval requirement. Staging requires the extension-window flag. Production requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_953569a6d9",
+      "resource_id": "svc_b028349931",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the approval requirement from all to production. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in production. Staging is exempt from the approval requirement. Staging requires the extension-window flag. Production requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h10",
+    "structural_cluster": "approval_composition",
+    "design": {
+      "before": [
+        "production",
+        "staging",
+        "production_extension"
+      ],
+      "after": [
+        "production",
+        "all",
+        "production_extension"
+      ],
+      "direction": "restrict"
+    },
+    "cases": [
+      {
+        "case_id": "h10-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_0eed6d698cae",
+          "workspace_id": "ws_418c230646",
+          "resource_id": "svc_7e48ad9503",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h10-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_a02813572f48",
+          "workspace_id": "ws_418c230646",
+          "resource_id": "svc_7e48ad9503",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h10-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_598618a68d54",
+          "workspace_id": "ws_418c230646",
+          "resource_id": "svc_7e48ad9503",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h10-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_cf1aa0d1fd83",
+          "workspace_id": "ws_418c230646",
+          "resource_id": "svc_7e48ad9503",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h10-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_860fe63a7218",
+          "workspace_id": "ws_418c230646",
+          "resource_id": "svc_7e48ad9503",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h10-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_05a2f5d50e6c",
+          "workspace_id": "ws_418c230646",
+          "resource_id": "svc_7e48ad9503",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_418c230646",
+      "resource_id": "svc_7e48ad9503",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_418c230646",
+      "resource_id": "svc_7e48ad9503",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in both environments. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_418c230646",
+      "resource_id": "svc_7e48ad9503",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the approval requirement from staging to all. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in both environments. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h11",
+    "structural_cluster": "window_composition",
+    "design": {
+      "before": [
+        "production",
+        "staging",
+        "original"
+      ],
+      "after": [
+        "production",
+        "staging",
+        "either"
+      ],
+      "direction": "broaden"
+    },
+    "cases": [
+      {
+        "case_id": "h11-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_d6dbb74f906c",
+          "workspace_id": "ws_df1e8cfedd",
+          "resource_id": "svc_a5d0fee0a1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h11-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_1b1146213f26",
+          "workspace_id": "ws_df1e8cfedd",
+          "resource_id": "svc_a5d0fee0a1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h11-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_e48ecef67a9e",
+          "workspace_id": "ws_df1e8cfedd",
+          "resource_id": "svc_a5d0fee0a1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h11-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_2f4fd9bf9256",
+          "workspace_id": "ws_df1e8cfedd",
+          "resource_id": "svc_a5d0fee0a1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h11-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_760cfe863312",
+          "workspace_id": "ws_df1e8cfedd",
+          "resource_id": "svc_a5d0fee0a1",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h11-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_85d52bc30e00",
+          "workspace_id": "ws_df1e8cfedd",
+          "resource_id": "svc_a5d0fee0a1",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_df1e8cfedd",
+      "resource_id": "svc_a5d0fee0a1",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. The original-window flag must be true in both environments. The extension flag gives no permission. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_df1e8cfedd",
+      "resource_id": "svc_a5d0fee0a1",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. In both environments, at least one of the original-window and extension-window flags must be true. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_df1e8cfedd",
+      "resource_id": "svc_a5d0fee0a1",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the window requirement from original to either. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. In both environments, at least one of the original-window and extension-window flags must be true. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h12",
+    "structural_cluster": "window_composition",
+    "design": {
+      "before": [
+        "all",
+        "all",
+        "production_extension"
+      ],
+      "after": [
+        "all",
+        "all",
+        "both"
+      ],
+      "direction": "restrict"
+    },
+    "cases": [
+      {
+        "case_id": "h12-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_73efa385899a",
+          "workspace_id": "ws_f04043ec33",
+          "resource_id": "svc_e4116f52ba",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h12-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_ec51aaa11346",
+          "workspace_id": "ws_f04043ec33",
+          "resource_id": "svc_e4116f52ba",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h12-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_da8b2e827167",
+          "workspace_id": "ws_f04043ec33",
+          "resource_id": "svc_e4116f52ba",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h12-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_8bc3625f5f1d",
+          "workspace_id": "ws_f04043ec33",
+          "resource_id": "svc_e4116f52ba",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h12-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_f48dfedc1225",
+          "workspace_id": "ws_f04043ec33",
+          "resource_id": "svc_e4116f52ba",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h12-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_476dbed8185e",
+          "workspace_id": "ws_f04043ec33",
+          "resource_id": "svc_e4116f52ba",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_f04043ec33",
+      "resource_id": "svc_e4116f52ba",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in both environments. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_f04043ec33",
+      "resource_id": "svc_e4116f52ba",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "and",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in both environments. In both environments, the original-window and extension-window flags must BOTH be true. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_f04043ec33",
+      "resource_id": "svc_e4116f52ba",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the window requirement from production_extension to both. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in both environments. In both environments, the original-window and extension-window flags must BOTH be true. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h13",
+    "structural_cluster": "tests_composition",
+    "design": {
+      "before": [
+        "all",
+        "production",
+        "production_extension"
+      ],
+      "after": [
+        "staging",
+        "production",
+        "production_extension"
+      ],
+      "direction": "broaden"
+    },
+    "cases": [
+      {
+        "case_id": "h13-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_e4e9dbd890cc",
+          "workspace_id": "ws_44480f01e6",
+          "resource_id": "svc_6e1b786acf",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h13-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_8053d4694364",
+          "workspace_id": "ws_44480f01e6",
+          "resource_id": "svc_6e1b786acf",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h13-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_97b59323de3f",
+          "workspace_id": "ws_44480f01e6",
+          "resource_id": "svc_6e1b786acf",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h13-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_64c8f5d3d082",
+          "workspace_id": "ws_44480f01e6",
+          "resource_id": "svc_6e1b786acf",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h13-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_2e3dccd4aab7",
+          "workspace_id": "ws_44480f01e6",
+          "resource_id": "svc_6e1b786acf",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h13-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_54ac45ab6fd8",
+          "workspace_id": "ws_44480f01e6",
+          "resource_id": "svc_6e1b786acf",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_44480f01e6",
+      "resource_id": "svc_6e1b786acf",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in production. Staging is exempt from the approval requirement. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_44480f01e6",
+      "resource_id": "svc_6e1b786acf",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_44480f01e6",
+      "resource_id": "svc_6e1b786acf",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the tests requirement from all to staging. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h14",
+    "structural_cluster": "tests_composition",
+    "design": {
+      "before": [
+        "staging",
+        "all",
+        "staging_extension"
+      ],
+      "after": [
+        "all",
+        "all",
+        "staging_extension"
+      ],
+      "direction": "restrict"
+    },
+    "cases": [
+      {
+        "case_id": "h14-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_8754bb918474",
+          "workspace_id": "ws_d544c1668a",
+          "resource_id": "svc_3dd52c954c",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h14-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_f9ce973c4abb",
+          "workspace_id": "ws_d544c1668a",
+          "resource_id": "svc_3dd52c954c",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h14-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_37af3e04bf82",
+          "workspace_id": "ws_d544c1668a",
+          "resource_id": "svc_3dd52c954c",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h14-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_ee545371e85a",
+          "workspace_id": "ws_d544c1668a",
+          "resource_id": "svc_3dd52c954c",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h14-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_0977e5275447",
+          "workspace_id": "ws_d544c1668a",
+          "resource_id": "svc_3dd52c954c",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h14-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_8ac85d7def9f",
+          "workspace_id": "ws_d544c1668a",
+          "resource_id": "svc_3dd52c954c",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_d544c1668a",
+      "resource_id": "svc_3dd52c954c",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in both environments. Staging requires the extension-window flag. Production requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_d544c1668a",
+      "resource_id": "svc_3dd52c954c",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in both environments. Staging requires the extension-window flag. Production requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_d544c1668a",
+      "resource_id": "svc_3dd52c954c",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the tests requirement from staging to all. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in both environments. Staging requires the extension-window flag. Production requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h15",
+    "structural_cluster": "approval_composition",
+    "design": {
+      "before": [
+        "staging",
+        "all",
+        "either"
+      ],
+      "after": [
+        "staging",
+        "production",
+        "either"
+      ],
+      "direction": "broaden"
+    },
+    "cases": [
+      {
+        "case_id": "h15-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_ce0c399c99ce",
+          "workspace_id": "ws_2f0b3c27d4",
+          "resource_id": "svc_fbc5359742",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h15-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_685ac67ea639",
+          "workspace_id": "ws_2f0b3c27d4",
+          "resource_id": "svc_fbc5359742",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h15-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_9dac858fb493",
+          "workspace_id": "ws_2f0b3c27d4",
+          "resource_id": "svc_fbc5359742",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h15-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_f149f94af334",
+          "workspace_id": "ws_2f0b3c27d4",
+          "resource_id": "svc_fbc5359742",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h15-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_075ebff1a9b3",
+          "workspace_id": "ws_2f0b3c27d4",
+          "resource_id": "svc_fbc5359742",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h15-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_4878b3bc9d00",
+          "workspace_id": "ws_2f0b3c27d4",
+          "resource_id": "svc_fbc5359742",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_2f0b3c27d4",
+      "resource_id": "svc_fbc5359742",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in both environments. In both environments, at least one of the original-window and extension-window flags must be true. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_2f0b3c27d4",
+      "resource_id": "svc_fbc5359742",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. In both environments, at least one of the original-window and extension-window flags must be true. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_2f0b3c27d4",
+      "resource_id": "svc_fbc5359742",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the approval requirement from all to production. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. In both environments, at least one of the original-window and extension-window flags must be true. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h16",
+    "structural_cluster": "approval_composition",
+    "design": {
+      "before": [
+        "production",
+        "production",
+        "both"
+      ],
+      "after": [
+        "production",
+        "all",
+        "both"
+      ],
+      "direction": "restrict"
+    },
+    "cases": [
+      {
+        "case_id": "h16-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_e2a27fde6380",
+          "workspace_id": "ws_902a23cb90",
+          "resource_id": "svc_c3a4abcf1c",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h16-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_f4a2c3fe3be1",
+          "workspace_id": "ws_902a23cb90",
+          "resource_id": "svc_c3a4abcf1c",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h16-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_1194864f0bcd",
+          "workspace_id": "ws_902a23cb90",
+          "resource_id": "svc_c3a4abcf1c",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h16-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_d73863630e06",
+          "workspace_id": "ws_902a23cb90",
+          "resource_id": "svc_c3a4abcf1c",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h16-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_abbd4e95ac29",
+          "workspace_id": "ws_902a23cb90",
+          "resource_id": "svc_c3a4abcf1c",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h16-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_3fc44150cea5",
+          "workspace_id": "ws_902a23cb90",
+          "resource_id": "svc_c3a4abcf1c",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_902a23cb90",
+      "resource_id": "svc_c3a4abcf1c",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "and",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. In both environments, the original-window and extension-window flags must BOTH be true. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_902a23cb90",
+      "resource_id": "svc_c3a4abcf1c",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "and",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in both environments. In both environments, the original-window and extension-window flags must BOTH be true. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_902a23cb90",
+      "resource_id": "svc_c3a4abcf1c",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the approval requirement from production to all. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in both environments. In both environments, the original-window and extension-window flags must BOTH be true. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h17",
+    "structural_cluster": "window_composition",
+    "design": {
+      "before": [
+        "staging",
+        "all",
+        "production_extension"
+      ],
+      "after": [
+        "staging",
+        "all",
+        "either"
+      ],
+      "direction": "broaden"
+    },
+    "cases": [
+      {
+        "case_id": "h17-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_0718f7b6f223",
+          "workspace_id": "ws_9805dc3eb1",
+          "resource_id": "svc_83ca48d91d",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h17-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_c87da58121a0",
+          "workspace_id": "ws_9805dc3eb1",
+          "resource_id": "svc_83ca48d91d",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h17-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_9bee3aa1b413",
+          "workspace_id": "ws_9805dc3eb1",
+          "resource_id": "svc_83ca48d91d",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h17-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_157e394fe132",
+          "workspace_id": "ws_9805dc3eb1",
+          "resource_id": "svc_83ca48d91d",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h17-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_a326b54c744c",
+          "workspace_id": "ws_9805dc3eb1",
+          "resource_id": "svc_83ca48d91d",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h17-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_902256ba52b0",
+          "workspace_id": "ws_9805dc3eb1",
+          "resource_id": "svc_83ca48d91d",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_9805dc3eb1",
+      "resource_id": "svc_83ca48d91d",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in both environments. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_9805dc3eb1",
+      "resource_id": "svc_83ca48d91d",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "reviewer_approved"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in both environments. In both environments, at least one of the original-window and extension-window flags must be true. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_9805dc3eb1",
+      "resource_id": "svc_83ca48d91d",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the window requirement from production_extension to either. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in both environments. In both environments, at least one of the original-window and extension-window flags must be true. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h18",
+    "structural_cluster": "window_composition",
+    "design": {
+      "before": [
+        "production",
+        "production",
+        "either"
+      ],
+      "after": [
+        "production",
+        "production",
+        "original"
+      ],
+      "direction": "restrict"
+    },
+    "cases": [
+      {
+        "case_id": "h18-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_a5cde02b12c1",
+          "workspace_id": "ws_3875ac1191",
+          "resource_id": "svc_3597d6a9c9",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h18-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_3f0a8fc9c155",
+          "workspace_id": "ws_3875ac1191",
+          "resource_id": "svc_3597d6a9c9",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h18-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_27265111b698",
+          "workspace_id": "ws_3875ac1191",
+          "resource_id": "svc_3597d6a9c9",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h18-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_5e477d2082fd",
+          "workspace_id": "ws_3875ac1191",
+          "resource_id": "svc_3597d6a9c9",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h18-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_5c7b7ff903ef",
+          "workspace_id": "ws_3875ac1191",
+          "resource_id": "svc_3597d6a9c9",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h18-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_86fb96e09b70",
+          "workspace_id": "ws_3875ac1191",
+          "resource_id": "svc_3597d6a9c9",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": false,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_3875ac1191",
+      "resource_id": "svc_3597d6a9c9",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. In both environments, at least one of the original-window and extension-window flags must be true. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_3875ac1191",
+      "resource_id": "svc_3597d6a9c9",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "atom",
+            "atom": "within_original_window"
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. The original-window flag must be true in both environments. The extension flag gives no permission. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_3875ac1191",
+      "resource_id": "svc_3597d6a9c9",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the window requirement from either to original. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. The original-window flag must be true in both environments. The extension flag gives no permission. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h19",
+    "structural_cluster": "tests_composition",
+    "design": {
+      "before": [
+        "all",
+        "staging",
+        "production_extension"
+      ],
+      "after": [
+        "production",
+        "staging",
+        "production_extension"
+      ],
+      "direction": "broaden"
+    },
+    "cases": [
+      {
+        "case_id": "h19-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_2a44beb15dc7",
+          "workspace_id": "ws_295ca561ae",
+          "resource_id": "svc_82e83616fe",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h19-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_abbf7144138c",
+          "workspace_id": "ws_295ca561ae",
+          "resource_id": "svc_82e83616fe",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h19-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_6092006c5d6e",
+          "workspace_id": "ws_295ca561ae",
+          "resource_id": "svc_82e83616fe",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h19-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_a0f14b23ee0b",
+          "workspace_id": "ws_295ca561ae",
+          "resource_id": "svc_82e83616fe",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h19-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_d91eaa65d878",
+          "workspace_id": "ws_295ca561ae",
+          "resource_id": "svc_82e83616fe",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h19-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_70b6fac31ee3",
+          "workspace_id": "ws_295ca561ae",
+          "resource_id": "svc_82e83616fe",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": false,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "deploy"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_295ca561ae",
+      "resource_id": "svc_82e83616fe",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in staging. Production is exempt from the approval requirement. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_295ca561ae",
+      "resource_id": "svc_82e83616fe",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "not",
+                    "children": [
+                      {
+                        "op": "atom",
+                        "atom": "is_staging"
+                      }
+                    ]
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_extension"
+                  }
+                ]
+              },
+              {
+                "op": "and",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  },
+                  {
+                    "op": "atom",
+                    "atom": "within_original_window"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_295ca561ae",
+      "resource_id": "svc_82e83616fe",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the tests requirement from all to production. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in production. Staging is exempt from the test requirement. Reviewer approval is required in staging. Production is exempt from the approval requirement. Production requires the extension-window flag. Staging requires the original-window flag. The other window flag has no effect in each environment. Access must not be revoked in either environment."
+    }
+  },
+  {
+    "group_id": "h20",
+    "structural_cluster": "tests_composition",
+    "design": {
+      "before": [
+        "staging",
+        "production",
+        "either"
+      ],
+      "after": [
+        "all",
+        "production",
+        "either"
+      ],
+      "direction": "restrict"
+    },
+    "cases": [
+      {
+        "case_id": "h20-c01",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_3ecca52717fa",
+          "workspace_id": "ws_9deaf83b0c",
+          "resource_id": "svc_460595e01a",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h20-c02",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "req_3c7206109bd3",
+          "workspace_id": "ws_9deaf83b0c",
+          "resource_id": "svc_460595e01a",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "deploy"
+      },
+      {
+        "case_id": "h20-c03",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_f98b3ff433b9",
+          "workspace_id": "ws_9deaf83b0c",
+          "resource_id": "svc_460595e01a",
+          "environment": "staging",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": true
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h20-c04",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "req_f5d545a83d6c",
+          "workspace_id": "ws_9deaf83b0c",
+          "resource_id": "svc_460595e01a",
+          "environment": "production",
+          "facts": {
+            "tests_passed": true,
+            "reviewer_approved": false,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "withhold",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h20-c05",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_4d2289b325de",
+          "workspace_id": "ws_9deaf83b0c",
+          "resource_id": "svc_460595e01a",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": true,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      },
+      {
+        "case_id": "h20-c06",
+        "kind": "intended_change",
+        "context": {
+          "request_id": "req_c1f1bb066f3f",
+          "workspace_id": "ws_9deaf83b0c",
+          "resource_id": "svc_460595e01a",
+          "environment": "production",
+          "facts": {
+            "tests_passed": false,
+            "reviewer_approved": true,
+            "within_original_window": false,
+            "within_extension": true,
+            "revoked": false
+          }
+        },
+        "expected_before": "deploy",
+        "expected_after": "withhold"
+      }
+    ],
+    "before": {
+      "workspace_id": "ws_9deaf83b0c",
+      "resource_id": "svc_460595e01a",
+      "revision_id": "r0",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "tests_passed"
+              },
+              {
+                "op": "not",
+                "children": [
+                  {
+                    "op": "atom",
+                    "atom": "is_staging"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in staging. Production is exempt from the test requirement. Reviewer approval is required in production. Staging is exempt from the approval requirement. In both environments, at least one of the original-window and extension-window flags must be true. Access must not be revoked in either environment."
+    },
+    "after": {
+      "workspace_id": "ws_9deaf83b0c",
+      "resource_id": "svc_460595e01a",
+      "revision_id": "r1",
+      "rule": {
+        "op": "and",
+        "children": [
+          {
+            "op": "atom",
+            "atom": "tests_passed"
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "reviewer_approved"
+              },
+              {
+                "op": "atom",
+                "atom": "is_staging"
+              }
+            ]
+          },
+          {
+            "op": "or",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "within_original_window"
+              },
+              {
+                "op": "atom",
+                "atom": "within_extension"
+              }
+            ]
+          },
+          {
+            "op": "not",
+            "children": [
+              {
+                "op": "atom",
+                "atom": "revoked"
+              }
+            ]
+          }
+        ]
+      },
+      "policy_text": "Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in production. Staging is exempt from the approval requirement. In both environments, at least one of the original-window and extension-window flags must be true. Access must not be revoked in either environment."
+    },
+    "amendment": {
+      "workspace_id": "ws_9deaf83b0c",
+      "resource_id": "svc_460595e01a",
+      "from_revision": "r0",
+      "to_revision": "r1",
+      "issuer": "synthetic-policy-owner",
+      "verified_by_harness": true,
+      "text": "Change only the tests requirement from staging to all. The full replacement current policy is: Deploy if and only if every applicable requirement below is satisfied. Passing tests are required in both environments. Reviewer approval is required in production. Staging is exempt from the approval requirement. In both environments, at least one of the original-window and extension-window flags must be true. Access must not be revoked in either environment."
+    }
+  }
+]
