@@ -72,6 +72,12 @@ The first discovery launch stopped before generation: the frozen count used the 
 
 Corrected all counts to explicit input_ids and checked matching against the actual return_tensors interface used by inference, with nontrivial token-count assertions. Normalized JSON/JSONL line endings so clone/rebuild hashes are stable. Rebuilt the frozen inputs and passed all 39 tests. The old stopped run is retained for provenance; start the corrected dataset under a new run fingerprint.
 
+## D009 — 10 November 2026: preserve nonapplicable metric denominators
+
+AuditKIT marked explicit unknown/nonapplicable metric scores as failures. The first denied request exposed this integration behavior: unnecessary withholding is not applicable when denial is expected. Corrected the adapter to omit nonapplicable metrics while preserving invalid-output and task-correctness scores. Direct traces still record nullable violation/withholding status and their denominators. Tests now exercise allowed, denied, malformed and repeated-call cases; 41 pass.
+
+Stopped preflight/integration runs are marked EXCLUDED and retained with their actual logged model-call counts. Start a new execution fingerprint after this scoring correction. No full discovery result or Gate A decision has been claimed.
+
 ## Entry template for the next gate
 
 - Date / decision ID:

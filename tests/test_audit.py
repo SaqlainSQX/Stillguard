@@ -1,4 +1,5 @@
 import json
+import pytest
 from stillguard.audit import evaluate_one
 from stillguard.discovery import source_groups,policy_from
 
@@ -20,3 +21,20 @@ def test_auditkit_calls_real_adapter_on_each_replay_and_scores_raw_actions(tmp_p
     assert all('evaluator_policy' not in p and 'expected_action' not in p for p in seen)
     assert a.headline['decision_correct']==0 and b.headline['decision_correct']==0
     assert a.headline['unnecessary_withhold']==1 and a.headline['proposal_violation']==0
+
+
+@pytest.mark.parametrize('valid',[True,False])
+def test_inapplicable_metrics_do_not_drop_denied_or_invalid_samples(tmp_path,monkeypatch,valid):
+    monkeypatch.setenv('XDG_CACHE_HOME',str(tmp_path))
+    group=source_groups()[0];case=group['cases'][2]
+    row=dict(messages=[{'role':'user','content':'No evaluator fields.'}],
+             evaluator_policy={k:v for k,v in group['after'].items() if k!='policy_text'},
+             context=case['context'],expected_action='withhold')
+    target={k:v for k,v in case['context'].items() if k!='facts'}
+    raw=json.dumps(dict(target,action='withhold')) if valid else 'invalid output'
+    result=evaluate_one(row,lambda p:[raw for _ in p],'inapplicable-test',str(valid))
+    assert result.failed_count==0
+    assert result.headline['decision_correct']==float(valid)
+    assert result.headline['output_valid']==float(valid)
+    assert 'unnecessary_withhold' not in result.headline
+    if not valid:assert 'proposal_violation' not in result.headline
