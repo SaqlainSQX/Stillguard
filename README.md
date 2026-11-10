@@ -4,7 +4,7 @@
 
 Stillguard investigates whether legitimate policy updates cause small Aya agents to violate safeguards that remain unchanged. It measures correct adaptation alongside safety regressions, with matched-policy and no-change controls.
 
-Current stage: **468 pilot calls plus 108 reminder-development calls completed and verified; 62 tests pass.** The [pilot](experiments/pilot-001/REPORT.md) found two reproducible history-specific unsafe cases, below the original three-group gate. The [reminder comparison](experiments/reminder-001/REPORT.md) failed, so we retain the simpler current-policy-only architecture and its known limitations. [New held-out source](docs/HELDOUT_DATA.md) contains 20 groups/120 probes; final scoring has not begun. No successful mitigation or broad update-induced drift is claimed.
+Current stage: **468 pilot calls plus 108 reminder-development calls completed and verified; 76 tests pass.** The [pilot](experiments/pilot-001/REPORT.md) found two reproducible history-specific unsafe cases, below the original three-group gate. The [reminder comparison](experiments/reminder-001/REPORT.md) failed, so we retain the simpler current-policy-only architecture and its known limitations. The [final pipeline freeze](experiments/heldout-001/FREEZE.md) covers 20 held-out groups/120 probes/600 inputs; outcome analysis is pending. No successful mitigation or broad update-induced drift is claimed.
 
 Execution: [action plan and steering gates](PLAN.md) · [task board](docs/TASKS.md) · [decision journal](docs/DECISIONS.md).
 
@@ -89,7 +89,7 @@ Licenses and upstream attribution files remain with the source snapshots. Keep r
 
 ## Next research step
 
-The pilot and one fixed reminder comparison are complete. Next, curate/render/freeze final evaluation inputs and the resumable runner for P1/P1R/H/HC/NC over all 120 held-out probes. The [final protocol](experiments/heldout-001/PROTOCOL.md) fixes controls, strict/format-sensitivity scores, budget and demo group before scoring. See D013 in [the decision journal](docs/DECISIONS.md).
+The final P1/P1R/H/HC/NC inputs/configuration and resumable runner are frozen. Complete the 600 scheduled calls in sequential bounded work blocks, independently verify all saved scores and analyze only the complete run. The [final protocol](experiments/heldout-001/PROTOCOL.md) fixes controls, strict/format-sensitivity scores, budget and demo group before scoring. See D014 in [the decision journal](docs/DECISIONS.md).
 
 ## Upstream tools and inspiration
 

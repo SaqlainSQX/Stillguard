@@ -1,0 +1,26 @@
+{
+  "kind": "frozen_heldout_inputs",
+  "source_sha256": "267a8e58f979308082cb45789d9c3b02457c2ad2047bf91cfb1619d16deef4d8",
+  "input_sha256": "011c34fda8a9bdb589e71d51b68dd9abf6c11eb7a1e70d98b7356a55141bcbee",
+  "input_path": "data\\curated\\heldout-001\\inputs.jsonl",
+  "source_path": "data\\raw\\heldout-groups.json",
+  "generator_sha256": "96a5832a28e3b617c0bc922cda6a4567774c8c4ed7556c62f3d2c6130f6c2d8b",
+  "source_manifest_sha256": "d784de54d5061e93da9e3c8dad08a8350dde11630c0527276d81660a6045b712",
+  "validation_module_sha256": "119723fe9e6b8c1d2bcaa4c381761b903efd5383a8d33623faf4625bf6a9f6f1",
+  "discovery_module_sha256": "a2f743c68ba9a0bf632b44cba5b01d9fd8c5034ac3954c735b21009e8df3a7d2",
+  "tokenizer_revision": "af89d219b53ed9b13b8a4645f9c8028973510324",
+  "source_rows": 121,
+  "curated_cases": 120,
+  "conditions": [
+    "P1",
+    "P1R",
+    "H",
+    "HC",
+    "NC"
+  ],
+  "scheduled_calls": 600,
+  "structural_clusters": 3,
+  "scenario_groups": 20,
+  "caveat": "Synthetic groups share policy structures; no independence or real-world representativeness claim.",
+  "input_format": "Frozen explicit environment-scope clauses and JSON facts; no final method tuning"
+}

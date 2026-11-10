@@ -1,0 +1,29 @@
+# Final held-out contract; raw source froze before final method selection.
+prompt:
+  fact_format: json
+  policy_format: explicit_environment_scope_clauses
+  selection_basis: D013_no_further_method_search
+model:
+  id: CohereLabs/tiny-aya-global
+  local_path: models/tiny-aya-global
+  revision: af89d219b53ed9b13b8a4645f9c8028973510324
+  quantization: nf4
+  double_quantization: true
+  compute_dtype: bfloat16
+  trust_remote_code: false
+generation:
+  do_sample: false
+  max_new_tokens: 160
+evaluation:
+  groups: 20
+  cases: 120
+  conditions: [P1, P1R, H, HC, NC]
+  seed: 45
+  demo_group: h01
+  primary_parser: strict_json_object
+  secondary_diagnostic: exact_outer_markdown_fence_only
+  method_search: false
+budget:
+  scheduled_calls: 600
+  max_actual_generations: 620
+  max_failed_call_retries: 20

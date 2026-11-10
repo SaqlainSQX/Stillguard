@@ -116,6 +116,14 @@ After raw held-out source freeze at `114cbf6`, fix the final evaluation plan to 
 
 Next bounded milestone: real CuratorKIT recovery/export, matching and gold-exclusion tests, final prompt/config manifests and a tested resumable held-out runner. Commit that full freeze before any held-out scoring; raw data freeze alone does not authorize treating generated code as results. Then execute sequential bounded blocks and prioritize report/artifact release by 12 November. No new methods, extra models or optional training.
 
+## D014 — 10 November 2026: complete the final input/configuration freeze
+
+Real CuratorKIT preserved all 120 held-out factual payloads/labels from 121 declared source rows and removed only the intentional duplicate. Assemble P1/P1R/H/HC/NC after curation to retain all 600 fresh-call controls. Input SHA-256: `011c34fda8a9bdb589e71d51b68dd9abf6c11eb7a1e70d98b7356a55141bcbee`; raw-source SHA remains unchanged.
+
+Seventy-six tests pass. Actual tensor-tokenizer checks validate every input count and all HC/NC token/position matches; cold replays are identical. The separately frozen exact-fence payload view records no gate receipts and cannot alter strict scoring. Shared locking, 620-generation global accounting including failures, content-derived execution IDs, per-call persistence, AuditKIT/direct agreement and clean-tree checks remain mandatory. See experiments/heldout-001/FREEZE.md.
+
+Decision: the full pre-scoring gate is satisfied; start only this frozen 600-call evaluation and resume in bounded blocks. Do not change methods, code/configuration or source from partial outcomes. Do not infer performance from this construction milestone or from incomplete traces. After completion, independently replay all primary and payload-sensitivity scores, report every condition and build the actual h01 demo/release package. Training and reminder search remain closed.
+
 ## Entry template for the next gate
 
 - Date / decision ID:
