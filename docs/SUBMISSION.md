@@ -19,11 +19,13 @@ We release the formally labelled source, frozen prompts/configuration, actual ca
 - Code/write-up: https://github.com/SaqlainSQX/Stillguard
 - Detailed report: experiments/heldout-001/REPORT.md
 - Saved actual-response demo: experiments/heldout-001/demo.html
-- Hugging Face dataset and public collections: publication links are recorded in manifests/publication.json once verified.
+- Hugging Face benchmark/logs: https://huggingface.co/datasets/SaqlainSQX/stillguard
+- Public dataset collection: https://huggingface.co/collections/SaqlainSQX/stillguard-datasets-and-audit-traces-6af3eacf31b186e19999681d
+- Public model-reference collection: https://huggingface.co/collections/SaqlainSQX/stillguard-evaluated-model-6af3eacfe8cfcf8046d4e2a3
 - Model used: CohereLabs/tiny-aya-global, revision af89d219b53ed9b13b8a4645f9c8028973510324.
 - Track repositories actually used together: CuratorKIT and AuditKIT. Optional SafeTune/CircuitKIT downloads are not integrations.
-- Registration email: enter the address used to register; it is deliberately not stored in this public repository.
+- Registration email and Discord username: enter the contacts used for the event; they are deliberately not stored in this public repository. The first form page was checked read-only; no answers were entered.
 
 The official form requests model/data collections and a write-up; a GitHub README is accepted. All newly created dataset/log repositories and collections must be public. No model/adapters were created: the model collection should identify the official upstream checkpoint and retain its access terms, without pretending to publish new weights or changing upstream gating.
 
-Before submitting: verify the public artifact links, include all planned conditions/failed attempts, check the abstract word count and confirm the registration details. **No submission form has been sent.**
+Public links, all 68 payload checksums, the 36/120/600 viewer splits and anonymous 600-score replay are verified. The abstract has 254 words. A clean isolated source snapshot reproduced identical analysis and demo without site packages or weights. Confirm your registration details and review the final links before submitting. **No submission form has been sent.** Submit at https://hackathon.lexsi.ai/submission/ after your final review.

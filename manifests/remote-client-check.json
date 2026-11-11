@@ -1,0 +1,9 @@
+{
+  "anonymous": true,
+  "revision": "1c78bee56da3080c5f9f446e03bfe1d3826e63f5",
+  "remote_dataset_client_splits": {
+    "cases/development": 36,
+    "cases/heldout": 120,
+    "calls/heldout": 600
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "anonymous_dataset_read": true,
+  "dataset_gated": false,
+  "anonymous_collections_read": 2,
+  "verified_calls_from_public_download": 600,
+  "payload_scores_verified": 600,
+  "pinned_dataset_commit": "5b2c14b6e2a8f80abe0ec976421932f0b80f9f13",
+  "downloaded_files": 6,
+  "all_payload_files_downloaded_and_verified": 68
+}

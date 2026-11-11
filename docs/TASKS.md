@@ -5,7 +5,7 @@ Updated 11 November 2026. Finish target: **12 November IST**, with 13–14 Novem
 | ID | Deliverable | Depends on | Status |
 |---|---|---|---|
 | S0 | Model/environment/toolkit setup and GitHub repository | — | Done; setup evidence only |
-| P0 | Execution plan, gates and decision journal | S0 | Prepared |
+| P0 | Execution plan, gates and decision journal | S0 | Done; maintained through public release |
 | T1 | Policy/state/action schemas and independent oracle | P0 | Done for bounded deployment contract v1 |
 | T2 | Mock tool simulator and deterministic scorer | T1 | Done; proposal and gateway scored separately |
 | T3 | Hand-checked fixtures and focused scorer tests | T2 | Done; 12 development fixtures; full suite now 91 passing tests |
@@ -17,8 +17,10 @@ Updated 11 November 2026. Finish target: **12 November IST**, with 13–14 Novem
 | T8 | Tiny adaptation compatibility test and one training run | T7 | Deferred; outside the default three-day plan |
 | T9 | New grouped held-out evaluation and one ablation | T7 | Done: 600/600 calls, zero failures; all strict/payload scores replayed; full tradeoff report complete |
 | T10 | Lightweight actual-run report/demo and reproducibility check | T9 | Done: all 30 preselected h01 responses exported; HTML and tradeoff chart visually checked |
-| T11 | HF artifacts/collections, report and submission package | T9,T10 | Report/card/MIT/254-word abstract and allowlisted exporter prepared; HF publication/access checks pending |
+| T11 | HF artifacts/collections, report and submission package | T9,T10 | Done: public HF bundle/collections, anonymous full replay, clean source reproduction and viewer/client checks; owner review/form submission remain |
 
 Do not mark research stages complete from generated code alone. Completion requires their observable output and acceptance checks.
 
-Milestones: T1–T6 and G1 on 10 November; T7 plus frozen T9 data/config and draft release material on 11 November; final T9–T11 by 12 November. If a milestone slips, drop optional scope and preserve the scoring controls.
+Completed ahead of 12 November: all required implementation/evaluation/release milestones. Optional T8 training was intentionally dropped. No submission form has been sent.
+
+Original milestones: T1–T6 and G1 on 10 November; T7 plus frozen T9 data/config and draft release material on 11 November; final T9–T11 by 12 November. If a milestone slips, drop optional scope and preserve the scoring controls.

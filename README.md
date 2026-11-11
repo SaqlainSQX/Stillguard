@@ -23,6 +23,8 @@ The 20 held-out groups contain 120 probes and 20 unique current-policy truth fun
 
 CuratorKIT actually ingests/deduplicates/exports complete factual payloads; AuditKIT evaluates every real model generation against the separate scorer. A prespecified exact-fence payload diagnostic exposes formatting-dependent safety measurements without changing the actual strict gate. SafeTune/CircuitKIT are references, not claimed integrations. This submission fits Track 2a's domain-specific safety benchmark deliverable.
 
+[Hugging Face benchmark and logs](https://huggingface.co/datasets/SaqlainSQX/stillguard) · [Dataset collection](https://huggingface.co/collections/SaqlainSQX/stillguard-datasets-and-audit-traces-6af3eacf31b186e19999681d) · [Evaluated model collection](https://huggingface.co/collections/SaqlainSQX/stillguard-evaluated-model-6af3eacfe8cfcf8046d4e2a3)
+
 Execution: [plan](PLAN.md) · [tasks](docs/TASKS.md) · [decisions](docs/DECISIONS.md). Original code/policy fixtures/case annotations are MIT; [upstream model and dependency terms stay separate](THIRD_PARTY_NOTICES.md).
 
 ## Reproduce the final audit
@@ -119,7 +121,7 @@ Licenses and upstream attribution files remain with the source snapshots. Keep r
 
 ## Release status
 
-Final scoring, independent strict/payload replay, report and the preselected h01 demo are complete. Hugging Face publication, collection links and the final submission checklist are being verified; no submission form has been sent. The working finish target remains November 12 IST.
+Final scoring, report, saved h01 demo, MIT original-material release and public Hugging Face collections are complete. All published payload hashes and viewer splits are verified. A clean isolated source snapshot reproduced every score and the identical demo from anonymous downloads, without weights or site packages. See [submission links and abstract](docs/SUBMISSION.md). No submission form has been sent.
 
 ## Upstream tools and inspiration
 

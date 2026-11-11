@@ -144,6 +144,16 @@ The owner explicitly chose MIT for original code and synthetic data. LICENSE/THI
 
 Next: commit the reviewed report/card/export tools, build an allowlisted local bundle, test its case/call reader schemas and checksums, publish the new dataset/log artifacts and public collections on Hugging Face, and verify all submission links. The registration email stays out of Git; no submission form has been sent. A 254-word abstract is prepared. Respect the user's updated 90-minute continuation limit and all existing compute/access limits.
 
+## D017 — 11 November 2026: finish public release and clean reproduction
+
+Published SaqlainSQX/stillguard on Hugging Face with public data/log and evaluated-base-model collections. Payload commit `5b2c14b6e2a8f80abe0ec976421932f0b80f9f13` contains the reviewed code-commit `f6741c9` bundle; metadata commit `1c78bee56da3080c5f9f446e03bfe1d3826e63f5` adds verification records. All 68 original payload blobs remain unchanged. No weights/adapters were rehosted or fabricated; the model collection references the allowed official base under its upstream access terms.
+
+Anonymous checks confirm public ungated dataset access, both readable collections, all payload file hashes, and all 600 strict/payload scores replayed from public downloads. A clean tracked source archive, Python isolated mode and disabled site packages reproduce the full analysis and byte-identical h01 demo without model weights. The remote datasets client loads cases/development=36, cases/heldout=120 and calls/heldout=600 at the metadata revision. Viewer previews and all three size counts are checked; a transient metadata refresh required waiting, not changing the data. See manifests/publication.json, public-access-check.json, clean-reproduction.json, remote-client-check.json and dataset-viewer-check.json.
+
+The final report preserves the new-permission loss, matched-control limitations, failed pilot gate and failed reminder. Original materials are MIT per the owner's explicit choice; upstream model terms remain separate. Code/data/logs, real-response demo, checked figure, reproducibility notes, public links and the 254-word abstract are complete. Ninety-one tests pass. The registration email and Discord contact remain private, and no submission form was filled or sent.
+
+Decision: the planned submission-ready work is complete ahead of the owner's 12 November target. Stop recurring work under the standing automation's original on-completion rule; do not run new experiments or rewrite the finished thesis automatically. The 90-minute timer was configured as requested before completion. Owner review and actual submission are the remaining human steps, not claimed completed here. Additional work requires a new direction or review feedback.
+
 ## Entry template for the next gate
 
 - Date / decision ID:

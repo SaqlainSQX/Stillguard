@@ -1,0 +1,11 @@
+{
+  "source_commit": "f6741c98295fc9adfb03420876c9f86b43384088",
+  "isolated_python": true,
+  "site_packages_disabled": true,
+  "public_download_only": true,
+  "verified_calls": 600,
+  "payload_verified": 600,
+  "analysis_equal": true,
+  "demo_byte_equal": true,
+  "model_weights_required": false
+}

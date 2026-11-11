@@ -1,0 +1,46 @@
+{
+  "size_status": 200,
+  "pending_jobs": 0,
+  "failed_jobs": [],
+  "preview_checks": [
+    {
+      "config": "cases",
+      "split": "development",
+      "status": 200,
+      "preview_rows": 36,
+      "error": null
+    },
+    {
+      "config": "cases",
+      "split": "heldout",
+      "status": 200,
+      "preview_rows": 60,
+      "error": null
+    },
+    {
+      "config": "calls",
+      "split": "heldout",
+      "status": 200,
+      "preview_rows": 58,
+      "error": null
+    }
+  ],
+  "splits": [
+    {
+      "config": "cases",
+      "split": "development",
+      "num_rows": 36
+    },
+    {
+      "config": "cases",
+      "split": "heldout",
+      "num_rows": 120
+    },
+    {
+      "config": "calls",
+      "split": "heldout",
+      "num_rows": 600
+    }
+  ],
+  "verified_anonymously": true
+}
