@@ -4,7 +4,7 @@
 
 Stillguard investigates whether legitimate policy updates cause small Aya agents to violate safeguards that remain unchanged. It measures correct adaptation alongside safety regressions, with matched-policy and no-change controls.
 
-Current stage: **468 pilot calls plus 108 reminder-development calls completed and verified; 76 tests pass.** The [pilot](experiments/pilot-001/REPORT.md) found two reproducible history-specific unsafe cases, below the original three-group gate. The [reminder comparison](experiments/reminder-001/REPORT.md) failed, so we retain the simpler current-policy-only architecture and its known limitations. The [final pipeline freeze](experiments/heldout-001/FREEZE.md) covers 20 held-out groups/120 probes/600 inputs; outcome analysis is pending. No successful mitigation or broad update-induced drift is claimed.
+Current stage: **468 pilot calls plus 108 reminder-development calls completed and verified; 84 tests pass.** The [pilot](experiments/pilot-001/REPORT.md) found two reproducible history-specific unsafe cases, below the original three-group gate. The [reminder comparison](experiments/reminder-001/REPORT.md) failed, so we retain the simpler current-policy-only architecture and its known limitations. The [final pipeline freeze](experiments/heldout-001/FREEZE.md) covers 20 held-out groups/120 probes/600 inputs; outcome analysis is pending. No successful mitigation or broad update-induced drift is claimed.
 
 Execution: [action plan and steering gates](PLAN.md) · [task board](docs/TASKS.md) · [decision journal](docs/DECISIONS.md).
 

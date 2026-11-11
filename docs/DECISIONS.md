@@ -124,6 +124,14 @@ Seventy-six tests pass. Actual tensor-tokenizer checks validate every input coun
 
 Decision: the full pre-scoring gate is satisfied; start only this frozen 600-call evaluation and resume in bounded blocks. Do not change methods, code/configuration or source from partial outcomes. Do not infer performance from this construction milestone or from incomplete traces. After completion, independently replay all primary and payload-sensitivity scores, report every condition and build the actual h01 demo/release package. Training and reminder search remain closed.
 
+## D015 — 11 November 2026: resume the unchanged final run from its bounded checkpoint
+
+The first model block stopped normally on 10 November with 383/600 calls saved, zero failures, clean tracked worktree and released GPU lock. Run `3b6f24e74100` retains execution commit `c23ab9b`; execution/data fingerprints were rechecked unchanged. No partial outcome analysis was performed. The remaining 217 calls must resume this run, not restart the experiment or rebuild inputs.
+
+Eighty-four tests pass. Complete-run analysis, full strict/payload replay verification and the preselected h01 HTML demo generators are now tested. They reject incomplete coverage; HTML escapes untrusted model output. Their preparation is not completion of the evaluation or demo. Public PROGRESS.json records counts only, not performance conclusions. A local, unreleased dataset-card draft exists in results/DATASET_CARD_draft.md.
+
+The user's 11 November timer request changes the standing continuation cycle and maximum work window to 90 minutes; all usage/access/compute limits still apply, and model blocks remain at most 35 minutes. Next: resume `python scripts/run_heldout.py --max-minutes 35`, verify all 600 primary and sensitivity scores only after completion, analyze every condition and generate the fixed h01 demo. Do not change execution sources/configuration or select cases from partial outcomes. Finish release preparation by 12 November IST.
+
 ## Entry template for the next gate
 
 - Date / decision ID:

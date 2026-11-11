@@ -1,0 +1,16 @@
+{
+  "run_id": "3b6f24e7410028d5bf9310c2a340bdce5bda9d5f65430e114c3e9e469f73346f",
+  "phase": "heldout",
+  "planned_calls": 600,
+  "completed": 383,
+  "complete": false,
+  "failed_calls": 0,
+  "generation_seconds": 1471.4707840000628,
+  "peak_cuda_bytes": 2761041920,
+  "current_code_commit": "c23ab9b72329b9c4a4bb95c4e8f973a17b9c10a0",
+  "working_tree_clean": true,
+  "outcome_analysis_pending": true,
+  "resume_command": "python scripts/run_heldout.py --max-minutes 35",
+  "note": "Bounded first block stopped normally; complete-run guards reject analysis, verification and demo export until all 600 calls finish.",
+  "frozen_execution_fingerprint_verified": true
+}
