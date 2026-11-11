@@ -1,12 +1,42 @@
 # Stillguard
 
-**Policies change. Safeguards should hold.**
+**Policies change. Safeguards should hold—and legitimate permissions should still work.**
 
-Stillguard investigates whether legitimate policy updates cause small Aya agents to violate safeguards that remain unchanged. It measures correct adaptation alongside safety regressions, with matched-policy and no-change controls.
+Stillguard is a reproducible, formally labelled audit of small-model decisions after authorized policy updates. It separates unchanged safeguards, legitimate new permissions, basic rule errors, output-format failures and actions blocked by an independent simulated gateway. The actual pipeline uses CuratorKIT, pinned local Tiny Aya Global and AuditKIT.
 
-Current stage: **468 pilot calls plus 108 reminder-development calls completed and verified; 84 tests pass.** The [pilot](experiments/pilot-001/REPORT.md) found two reproducible history-specific unsafe cases, below the original three-group gate. The [reminder comparison](experiments/reminder-001/REPORT.md) failed, so we retain the simpler current-policy-only architecture and its known limitations. The [final pipeline freeze](experiments/heldout-001/FREEZE.md) covers 20 held-out groups/120 probes/600 inputs; outcome analysis is pending. No successful mitigation or broad update-induced drift is claimed.
+The final audit is complete: **600 held-out calls independently verified; 91 tests pass.** Across the pilot, reminder development and final evaluation, 1,176 actual calls are preserved, with calibration/excluded attempts reported separately. No new weights or adapter were trained.
 
-Execution: [action plan and steering gates](PLAN.md) · [task board](docs/TASKS.md) · [decision journal](docs/DECISIONS.md).
+| Held-out result | Obsolete archive (HC) | Current policy only (P1) |
+|---|---:|---:|
+| Correct decisions / 120 | 45 | 71 |
+| Known unsafe proposals | 43 | 26 |
+| Invalid / violation unknown | 23 | 5 |
+| All allowed tasks completed / 60 | 40 | 39 |
+| **Legitimate new permissions accepted / 20** | **11** | **5** |
+| New restrictions obeyed / 20 | 5 | 12 |
+
+**Better aggregate scores concealed worse legitimate adaptation.** Current-policy-only context gained 21.7 percentage points of correctness but lost 30 points of new-permission completion. The trusted-amendment reference H also scored 71/120. Only one held-out case survived the strict history-specific controls; neutral filler itself caused many failures. We do not claim broad update-induced safety drift, a new internal mechanism or a successful safety repair preserving usefulness. The original pilot gate and the fixed reminder intervention failed, and those results remain public.
+
+[Full results and limitations](experiments/heldout-001/REPORT.md) · [Saved actual-response demo](experiments/heldout-001/demo.html) · [Dataset card](docs/DATASET_CARD.md) · [Frozen protocol](experiments/heldout-001/PROTOCOL.md) · [Machine-readable results](experiments/heldout-001/summary.json)
+
+The 20 held-out groups contain 120 probes and 20 unique current-policy truth functions disjoint from development. They share three component templates and some before policies; they are not independent real-world families. Policy/probe authoring was AI-assisted, with exhaustive direct-condition/AST checks over 64 states. Gold labels never enter model prompts. Every deployment is simulated. The gateway blocks unsafe execution by construction; that is not model-safety credit.
+
+CuratorKIT actually ingests/deduplicates/exports complete factual payloads; AuditKIT evaluates every real model generation against the separate scorer. A prespecified exact-fence payload diagnostic exposes formatting-dependent safety measurements without changing the actual strict gate. SafeTune/CircuitKIT are references, not claimed integrations. This submission fits Track 2a's domain-specific safety benchmark deliverable.
+
+Execution: [plan](PLAN.md) · [tasks](docs/TASKS.md) · [decisions](docs/DECISIONS.md). Original code/policy fixtures/case annotations are MIT; [upstream model and dependency terms stay separate](THIRD_PARTY_NOTICES.md).
+
+## Reproduce the final audit
+
+After the environment and official model are prepared below:
+
+```powershell
+python scripts/build_heldout.py
+python -m pytest -q
+# Clean committed worktree required. Calls resume by frozen identity:
+python scripts/run_heldout.py --max-minutes 35
+```
+
+For saved-answer replay, use the release's original `provenance/inputs/heldout.jsonl` and `provenance/runs/heldout-3b6f24e74100` folder with `scripts/verify_heldout.py` and `scripts/analyze_heldout.py`. Replay needs no GPU or weights; regeneration uses the official checkpoint. See the [exact commands](experiments/heldout-001/REPORT.md) and [frozen identities](experiments/heldout-001/FREEZE.md). Generation took 39.48 minutes on an RTX 4060 Laptop GPU; tooling/reloads/pauses are additional. Windows generation is tested; Linux/cloud is unvalidated.
 
 ## Fresh clone (Windows + NVIDIA GPU)
 
@@ -87,9 +117,9 @@ The smoke loader uses 4-bit NF4 quantization on the GPU, eager attention, local 
 
 Licenses and upstream attribution files remain with the source snapshots. Keep reused prior work distinct from the new hackathon contribution. No artifacts are uploaded or published by the setup scripts.
 
-## Next research step
+## Release status
 
-The final P1/P1R/H/HC/NC inputs/configuration and resumable runner are frozen. Complete the 600 scheduled calls in sequential bounded work blocks, independently verify all saved scores and analyze only the complete run. The [final protocol](experiments/heldout-001/PROTOCOL.md) fixes controls, strict/format-sensitivity scores, budget and demo group before scoring. See D014 in [the decision journal](docs/DECISIONS.md).
+Final scoring, independent strict/payload replay, report and the preselected h01 demo are complete. Hugging Face publication, collection links and the final submission checklist are being verified; no submission form has been sent. The working finish target remains November 12 IST.
 
 ## Upstream tools and inspiration
 

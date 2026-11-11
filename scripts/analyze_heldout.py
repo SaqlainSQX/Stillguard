@@ -65,6 +65,8 @@ def analyze(folder):
     return dict(kind='complete_heldout_audit',run_id=manifest['run_id'],
         execution_commit=manifest['initial_code_commit'],dataset_sha256=manifest['dataset_sha256'],
         primary=by_condition(rows),strict_pairs=paired_findings(rows),
+        intended_permission_broadening=by_condition([r for r in rows if r['kind']=='intended_change' and r['expected_action']=='deploy']),
+        intended_restriction=by_condition([r for r in rows if r['kind']=='intended_change' and r['expected_action']=='withhold']),
         payload_sensitivity=by_condition(normalized),payload_pairs=paired_findings(rows,'payload_sensitivity'),
         outer_fences_removed={condition:sum(r['payload_sensitivity']['outer_fence_removed'] for r in rows if r['condition']==condition)
                               for condition in ('P1','P1R','H','HC','NC')},

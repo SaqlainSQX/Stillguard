@@ -6,11 +6,11 @@ Prepared 9 November; revised 10 November 2026. User target: finish by 12 Novembe
 
 Build a reproducible audit of whether a small Aya agent preserves unchanged safeguards while adapting to legitimate policy updates. Deliver a useful dataset, an actual CuratorKIT-to-AuditKIT model pipeline, measured mitigation tradeoffs, and inspectable transcripts.
 
-Verified as of 10 November: official pinned local model/environment, independent oracle/scorer/gate, real CuratorKIT-to-Aya-to-AuditKIT pipeline, 468 pilot calls, 108 reminder-development calls and 84 tests. The pilot gate failed (two reproducible groups, threshold three); the reminder was rejected. Retain the simpler current-policy-only architecture and publish its limits. New 20-group/120-probe held-out raw source is frozen before final selection. Final input/config/runner freeze is complete; actual held-out scoring and release packaging remain pending. See the experiment reports and task board.
+Verified as of 10 November: official pinned local model/environment, independent oracle/scorer/gate, real CuratorKIT-to-Aya-to-AuditKIT pipeline, 468 pilot calls, 108 reminder-development calls and 91 tests. The pilot gate failed (two reproducible groups, threshold three); the reminder was rejected. Retain the simpler current-policy-only architecture and publish its limits. New 20-group/120-probe held-out raw source is frozen before final selection. Final input/config/runner freeze, all 600 held-out calls, independent verification and the saved h01 demo are complete. Publication/release access checks remain. See the experiment reports and task board.
 
-The evidence-driven narrowing decision is recorded in D010â€“D013. Eleven proposal reviews were design work; claims now follow saved model outputs and controls, including null and failed results.
+The evidence-driven narrowing decision is recorded in D010–D013. Eleven proposal reviews were design work; claims now follow saved model outputs and controls, including null and failed results.
 
-Official submission deadline: 14 November, end of day AoE. The working deadline is now **12 November IST for the complete submission-ready package**. Keep 13â€“14 November as buffer, not planned development time. Source: https://hackathon.lexsi.ai/#submit (checked 9 November).
+Official submission deadline: **15 November, 11:59 PM AoE**, rechecked 11 November at https://hackathon.lexsi.ai/#submit (supersedes the 14 November note). The working deadline remains **12 November IST** for the submission-ready package; keep the later days as review/submission buffer.
 
 ## Revised three-day critical path
 
@@ -19,7 +19,7 @@ Official submission deadline: 14 November, end of day AoE. The working deadline 
 | 10 November | Verified oracle/scorer, runnable Aya pilot, actual baseline traces and Gate A decision | Stop speculative planning; make the continue/reframe choice today. If full confirmation cannot finish, report the incomplete gate and finish it first on 11 November. No mitigation claims from an incomplete pilot. |
 | 11 November | Selected simple mitigation, real CuratorKIT/AuditKIT integration, reviewed held-out data and frozen evaluation configuration | Freeze the method and core features by day's end. Training is outside the default plan. |
 | 12 November | Held-out evaluation, reproducibility check, concise actual-run demo/report, HF artifacts and submission text/links | Finish the complete reviewable package. Reduce presentation polish before dropping evaluation controls. |
-| 13â€“14 November | Reserved buffer and submission | Only correctness fixes, access checks and submission handling; no planned new research. |
+| 13–14 November | Reserved buffer and submission | Only correctness fixes, access checks and submission handling; no planned new research. |
 
 Default deliverable: one model, one domain, two genuinely integrated track repositories, a controlled benchmark, one simple mitigation comparison and reproducible traces. Adapter training, a third toolkit, multilingual work and a full dashboard are excluded from the critical path. If measured runtime exceeds the budget, reduce evaluation breadth before launching the frozen test and disclose the smaller scope; never select cases by favorable test outcomes.
 
@@ -36,9 +36,9 @@ Default deliverable: one model, one domain, two genuinely integrated track repos
 9. Allow a cheap baseline to win. No compulsory fine-tuning, third toolkit or new algorithm.
 10. Preserve useful allowed behavior. Blocking all actions is not a successful mitigation.
 
-## Stage 1 â€” trustworthy task and scorer
+## Stage 1 — trustworthy task and scorer
 
-Target: first 2â€“3 working hours on 10 November; estimates are planning bounds, not promises.
+Target: first 2–3 working hours on 10 November; estimates are planning bounds, not promises.
 
 Actions:
 
@@ -53,9 +53,9 @@ Outputs: `src/stillguard/` schemas, oracle, simulator and scorer; `tests/`; `dat
 
 Exit gate: a model-independent hand-labeled fixture set agrees with the scorer; intentionally wrong and malformed proposals are detected. If this fails, fix the oracle before any research claims or expensive model runs.
 
-## Stage 2 â€” actual Aya runner and frozen discovery pilot
+## Stage 2 — actual Aya runner and frozen discovery pilot
 
-Target: next 2â€“4 working hours on 10 November. First measure real latency on 12 calibration calls; estimate the remaining budget from that measurement. The pilot and gate have priority over every optional component.
+Target: next 2–4 working hours on 10 November. First measure real latency on 12 calibration calls; estimate the remaining budget from that measurement. The pilot and gate have priority over every optional component.
 
 Actions:
 
@@ -81,13 +81,13 @@ Actions:
 
 In HC and NC, the current authoritative instruction must be identical. Match token counts and request positions, record any mismatch, and keep request facts/tool state identical. Neutral histories must contain no conflicting policy instructions. H must explicitly authorize ordered amendments in the application-supplied instruction; do not ask a lower-authority message to override an immutable system policy.
 
-Initial sweep: 6 groups Ã— 6 probes Ã— 7 conditions = 252 calls. Predefine a confirmation panel of 3 probes per group (one unchanged allowed, one unchanged denied, one intended change) and repeat P1/H/HC/NC three times: 216 calls. With 12 calibration calls, the intended first-pass budget is 480 calls. Reserve at most 20 failed-call retries; record every retry. Use fixed primary decoding; repeated runs measure serving variability, not independent scenario evidence.
+Initial sweep: 6 groups × 6 probes × 7 conditions = 252 calls. Predefine a confirmation panel of 3 probes per group (one unchanged allowed, one unchanged denied, one intended change) and repeat P1/H/HC/NC three times: 216 calls. With 12 calibration calls, the intended first-pass budget is 480 calls. Reserve at most 20 failed-call retries; record every retry. Use fixed primary decoding; repeated runs measure serving variability, not independent scenario evidence.
 
 If measured latency makes 480 calls infeasible, reduce confirmation breadth before launching it, record the protocol change and retain all conditions for the selected groups. Do not remove the strongest baseline or confirm only the failures that look interesting.
 
 Outputs: frozen pilot manifest, actual model JSONL traces, scorer output and `experiments/pilot-001/REPORT.md`.
 
-## Gate A â€” decide the direction from the pilot
+## Gate A — decide the direction from the pilot
 
 Review every apparent violation, its clean counterpart, its current-policy counterpart, and its no-change/control behavior. Report unconditional error rates as well as conditional regressions among previously correct requests.
 
@@ -104,7 +104,7 @@ A provisional engineering signal for proceeding is a reviewed effect in at least
 
 Write the gate decision in `docs/DECISIONS.md`: observed evidence, limits, selected branch, rejected interpretation and next budget. No automatic scope expansion.
 
-## Stage 3 â€” the smallest useful intervention
+## Stage 3 — the smallest useful intervention
 
 Target: 11 November, conditional on Gate A.
 
@@ -119,21 +119,21 @@ Exit gate: the intervention reduces reviewed failures while retaining intended b
 
 Stop optional training if compatibility cannot be established in two working hours or one short job produces no development benefit. Keep a working audit/architectural result rather than depending on a training rescue.
 
-## Stage 4 â€” independent evaluation and robustness
+## Stage 4 — independent evaluation and robustness
 
 Target: prepare and freeze on 11 November; execute the final evaluation on 12 November.
 
-- [ ] Author a new held-out set targeting at least 20 distinct scenario groups, with grouped paraphrases and update sequences. Freeze it before method selection is finalized.
-- [ ] Check test wording for ambiguity and independently verify gold policy transitions. Clearly label synthetic scope.
-- [ ] Select one method using development data, then run the frozen test once. If a scorer bug is discovered, version the fix, explain it and rerun all affected methods.
-- [ ] Include legitimate broadening, new restrictions/revocation, narrow exceptions and unrelated amendments. Any expiry case uses explicit simulated time, not the machine clock.
-- [ ] Perform one meaningful ablation tied to the claimed mechanism; avoid a broad method grid.
-- [ ] Report paired counts, family/group-level uncertainty, refusal/invalid-output rates, legitimate task success, costs and limitations. Do not treat paraphrases or repeated decoding as independent families.
-- [ ] Keep unsuccessful attacks and null results in the report, not just the best transcript.
+- [x] Author 20 new held-out policy-composition groups / 120 state probes and freeze them before final method selection. Scope is single amendments and structured probes, not a new paraphrase or multi-amendment corpus; shared-template limits are disclosed.
+- [x] Check test wording for ambiguity and independently verify gold policy transitions. Clearly label synthetic scope.
+- [x] Select one method using development data, then run the frozen test once. If a scorer bug is discovered, version the fix, explain it and rerun all affected methods.
+- [x] Include legitimate broadening, new restrictions/revocation, narrow exceptions and unrelated amendments. Any expiry case uses explicit simulated time, not the machine clock.
+- [x] Perform one meaningful ablation tied to the claimed mechanism; avoid a broad method grid.
+- [x] Report paired counts, family/group-level uncertainty, refusal/invalid-output rates, legitimate task success, costs and limitations. Do not treat paraphrases or repeated decoding as independent families.
+- [x] Keep unsuccessful attacks and null results in the report, not just the best transcript.
 
 Exit gate: all headline numbers trace to saved runs; a clean rerun reproduces representative outputs within disclosed variability; a model-written explanation is not presented as causal evidence.
 
-## Stage 5 â€” usable demonstration and release package
+## Stage 5 — usable demonstration and release package
 
 Target: draft report/artifact metadata alongside development on 11 November; complete the entire release package on 12 November. Prioritize this over optional training and features.
 
@@ -144,7 +144,7 @@ Target: draft report/artifact metadata alongside development on 11 November; com
 - [ ] Verify the contribution uses at least two Track 2 repositories in a real pipeline. Imports and fixture scores do not count as research integrations.
 - [ ] Prepare the under-500-word abstract and submission links. Check current form requirements and latest event announcements.
 
-Feature/method freeze: end of 11 November IST, before held-out scoring. Submission-ready package: 12 November IST. Keep 13â€“14 November for buffer, access/correctness checks and submission; do not allocate new research to that buffer.
+Feature/method freeze: end of 11 November IST, before held-out scoring. Submission-ready package: 12 November IST. Keep 13–14 November for buffer, access/correctness checks and submission; do not allocate new research to that buffer.
 
 ## Steering rules when progress deteriorates
 
@@ -171,6 +171,6 @@ After every work block, update the task board and a short decision log: complete
 
 ## Immediate next action
 
-Stages 1â€“3 and Gate A are complete as of 10 November: 468 verified pilot calls, 108 verified reminder-development calls and 84 tests. The original three-group gate failed; the reminder was rejected. Preserve these outcomes and use the simpler current-policy-only action context as the architectural reference.
+Stages 1–3 and Gate A are complete as of 10 November: 468 verified pilot calls, 108 verified reminder-development calls and 91 tests. The original three-group gate failed; the reminder was rejected. Preserve these outcomes and use the simpler current-policy-only action context as the architectural reference.
 
-Next bounded milestone: complete the matching frozen P1/P1R/H/HC/NC run over all 600 inputs using `scripts/run_heldout.py` in sequential bounded blocks. Full CuratorKIT preservation, tokenizer matching, final config/runner freeze and 84 tests are complete (D014; experiments/heldout-001/FREEZE.md). Keep the 620-actual-generation cap including logged failures, shared GPU lock and independent scorer gate. Do not tune methods or analyze partial outcomes. After completion, replay all saved strict and payload-sensitivity scores, report every condition and build the preselected h01 actual-response demo plus release package. No new method search or training on the critical path.
+Next bounded milestone: build and validate the allowlisted release bundle from the completed 600-call run, publish datasets/logs and public Hugging Face collections, verify access and finish the submission link sheet. Evaluation and h01 demo are complete (D016); no more model calls or method search are needed. Preserve the failed gate, rejected reminder and the new-permission loss in every write-up. The owner selected MIT for original materials; retain separate upstream terms and exclude credentials, weights and environments. Work in the user's updated maximum 90-minute continuations, checkpoint earlier near limits, and target completion by 12 November IST. Do not submit the form without the user's registration details/instruction.

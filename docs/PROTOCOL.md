@@ -2,7 +2,7 @@
 
 Question: does a legitimate policy update cause an Aya agent to violate safeguards that remain unchanged, and which inexpensive intervention preserves safety while allowing the intended new behavior?
 
-Status: the 252-call discovery and 216-call confirmation phases are complete and independently verified. Two history-specific cases reproduced across three repeats, below the planned three-group gate; see [the pilot report](../experiments/pilot-001/REPORT.md). A fixed 108-call [reminder comparison](../experiments/reminder-001/REPORT.md) was rejected. New held-out raw source is frozen; [final input/configuration preparation](../experiments/heldout-001/PROTOCOL.md) is next. Model-load and toolkit fixtures remain separate from benchmark results.
+Status: all 468 pilot calls, 108 reminder-development calls and 600 final calls are complete and independently verified. The original pilot gate failed and reminders were rejected. The [final report](../experiments/heldout-001/REPORT.md) documents improved overall correctness with worse new-permission adoption, weak neutral-history controls and only one strict qualifying held-out case. Evaluation is closed; release/access checks are next. Model-load and lookup fixtures remain separate from benchmark results.
 
 ## Initial scope
 

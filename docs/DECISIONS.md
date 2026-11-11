@@ -132,6 +132,18 @@ Eighty-four tests pass. Complete-run analysis, full strict/payload replay verifi
 
 The user's 11 November timer request changes the standing continuation cycle and maximum work window to 90 minutes; all usage/access/compute limits still apply, and model blocks remain at most 35 minutes. Next: resume `python scripts/run_heldout.py --max-minutes 35`, verify all 600 primary and sensitivity scores only after completion, analyze every condition and generate the fixed h01 demo. Do not change execution sources/configuration or select cases from partial outcomes. Finish release preparation by 12 November IST.
 
+## D016 — 11 November 2026: complete and verify all held-out outcomes
+
+Run `3b6f24e74100` completed all 600 scheduled calls with zero failures/retries and clean tracked worktrees. All primary and payload-sensitivity scores independently replayed; AuditKIT agrees. P1/P1R have no action/correctness flips, including 64 pairs split across the model restart/checkpoint. Total generation time is 2,368.67 seconds; block snapshots preserve the observed peak allocation separately from the final block's peak.
+
+P1/HC strict correctness is 71/45 out of 120, with 26/43 known unsafe proposals and 5/23 invalid outputs. However, new-permission completion drops from 11/20 under HC to 5/20 under P1, while new restrictions improve from 5/20 to 12/20. Aggregate allowed completion (40/60 versus 39/60) hides the adaptation loss. H ties P1 at 71/120. One primary held-out case qualifies beyond stable cold and neutral controls; two qualify in the separate payload view. Neutral filler has extensive validity failures. No broad causal continuity or successful safety-with-usefulness claim is justified.
+
+Decision: close evaluation/method search and release the domain-specific benchmark/audit under Track 2a problem 2, including negative findings. Do not train or invent an extra method to rescue the thesis. The original three-group pilot gate remains failed. Final report, machine-readable results, verification, all h01 demo responses and a checked tradeoff figure are generated. Ninety-one tests pass; the saved HTML was rendered in an isolated headless browser and inspected.
+
+The owner explicitly chose MIT for original code and synthetic data. LICENSE/THIRD_PARTY_NOTICES distinguish those rights from the base model's declared CC-BY-NC-4.0 and upstream dependencies. No weights/adapters were created or redistributed. The official event page, rechecked today, now lists 15 November 11:59 PM AoE; the internal 12 November target remains unchanged.
+
+Next: commit the reviewed report/card/export tools, build an allowlisted local bundle, test its case/call reader schemas and checksums, publish the new dataset/log artifacts and public collections on Hugging Face, and verify all submission links. The registration email stays out of Git; no submission form has been sent. A 254-word abstract is prepared. Respect the user's updated 90-minute continuation limit and all existing compute/access limits.
+
 ## Entry template for the next gate
 
 - Date / decision ID:
