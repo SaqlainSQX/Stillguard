@@ -127,6 +127,8 @@ Licenses and upstream attribution files remain with the source snapshots. Keep r
 
 ## Release status
 
+An optional [owner-reviewed fictional transfer attempt](experiments/transfer-001/REPORT.md) added 96 calls after the original release. All failed its strict output contract; it provides no successful transfer evidence and is retained as a negative appendix. The original 1,176-call research corpus and all frozen held-out results remain unchanged. The expanded software suite passes 121 tests.
+
 Final scoring, report, saved h01 demo, MIT original-material release and public Hugging Face collections are complete. All published payload hashes and viewer splits are verified. A clean isolated source snapshot reproduced every score and the identical demo from anonymous downloads, without weights or site packages. See [submission links and abstract](docs/SUBMISSION.md). No submission form has been sent.
 
 ## Upstream tools and inspiration

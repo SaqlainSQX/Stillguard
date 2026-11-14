@@ -22,6 +22,8 @@ Updated 14 November 2026. Original finish target: **12 November IST**, with 13�
 
 Do not mark research stages complete from generated code alone. Completion requires their observable output and acceptance checks.
 
+Post-review transfer extension (14 November): owner approved AI-authored fictional scenarios; 96/96 new calls completed, but every response failed strict output formatting. Retained as a failed appendix in experiments/transfer-001/REPORT.md, not successful cross-domain validation. Original heldout unchanged; 121 tests pass. No rescue tuning or further inference.
+
 Completed ahead of 12 November: all required implementation/evaluation/release milestones. Optional T8 training was intentionally dropped. No submission form has been sent.
 
 Original milestones: T1–T6 and G1 on 10 November; T7 plus frozen T9 data/config and draft release material on 11 November; final T9–T11 by 12 November. If a milestone slips, drop optional scope and preserve the scoring controls.
