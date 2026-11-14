@@ -26,3 +26,5 @@ manifests/wheels.json
 manifests/offline-readiness.json
 manifests/model.json
 data/curated/
+# Local simulated jury critiques; keep strategic reviews off the public release.
+/docs/reviews-2026-11-14/

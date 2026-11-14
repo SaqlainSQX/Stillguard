@@ -1,0 +1,617 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "case_id": "example_01",
+      "context": {
+        "request_id": "example_request_01",
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_1",
+        "environment": "production",
+        "facts": {
+          "tests_passed": true,
+          "reviewer_approved": true,
+          "within_original_window": true,
+          "within_extension": true,
+          "revoked": false
+        }
+      },
+      "before_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_1",
+        "revision_id": "example_r0",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "atom",
+              "atom": "reviewer_approved"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "after_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_1",
+        "revision_id": "example_r1",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "or",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "reviewer_approved"
+                },
+                {
+                  "op": "atom",
+                  "atom": "is_staging"
+                }
+              ]
+            },
+            {
+              "op": "atom",
+              "atom": "within_original_window"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "example_02",
+      "context": {
+        "request_id": "example_request_02",
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_1",
+        "environment": "production",
+        "facts": {
+          "tests_passed": true,
+          "reviewer_approved": true,
+          "within_original_window": true,
+          "within_extension": true,
+          "revoked": true
+        }
+      },
+      "before_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_1",
+        "revision_id": "example_r0",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "atom",
+              "atom": "reviewer_approved"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "after_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_1",
+        "revision_id": "example_r1",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "or",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "reviewer_approved"
+                },
+                {
+                  "op": "atom",
+                  "atom": "is_staging"
+                }
+              ]
+            },
+            {
+              "op": "atom",
+              "atom": "within_original_window"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "example_03",
+      "context": {
+        "request_id": "example_request_03",
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_1",
+        "environment": "staging",
+        "facts": {
+          "tests_passed": true,
+          "reviewer_approved": false,
+          "within_original_window": true,
+          "within_extension": true,
+          "revoked": false
+        }
+      },
+      "before_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_1",
+        "revision_id": "example_r0",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "atom",
+              "atom": "reviewer_approved"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "after_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_1",
+        "revision_id": "example_r1",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "or",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "reviewer_approved"
+                },
+                {
+                  "op": "atom",
+                  "atom": "is_staging"
+                }
+              ]
+            },
+            {
+              "op": "atom",
+              "atom": "within_original_window"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "example_04",
+      "context": {
+        "request_id": "example_request_04",
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_1",
+        "environment": "production",
+        "facts": {
+          "tests_passed": true,
+          "reviewer_approved": true,
+          "within_original_window": false,
+          "within_extension": true,
+          "revoked": false
+        }
+      },
+      "before_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_1",
+        "revision_id": "example_r0",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "atom",
+              "atom": "reviewer_approved"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "after_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_1",
+        "revision_id": "example_r1",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "or",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "reviewer_approved"
+                },
+                {
+                  "op": "atom",
+                  "atom": "is_staging"
+                }
+              ]
+            },
+            {
+              "op": "atom",
+              "atom": "within_original_window"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "example_05",
+      "context": {
+        "request_id": "example_request_05",
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_2",
+        "environment": "production",
+        "facts": {
+          "tests_passed": true,
+          "reviewer_approved": true,
+          "within_original_window": true,
+          "within_extension": true,
+          "revoked": false
+        }
+      },
+      "before_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_2",
+        "revision_id": "example_r0",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "atom",
+              "atom": "within_original_window"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "after_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_2",
+        "revision_id": "example_r1",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "atom",
+              "atom": "within_extension"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "example_06",
+      "context": {
+        "request_id": "example_request_06",
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_2",
+        "environment": "production",
+        "facts": {
+          "tests_passed": false,
+          "reviewer_approved": true,
+          "within_original_window": true,
+          "within_extension": true,
+          "revoked": false
+        }
+      },
+      "before_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_2",
+        "revision_id": "example_r0",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "atom",
+              "atom": "within_original_window"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "after_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_2",
+        "revision_id": "example_r1",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "atom",
+              "atom": "within_extension"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "example_07",
+      "context": {
+        "request_id": "example_request_07",
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_2",
+        "environment": "production",
+        "facts": {
+          "tests_passed": true,
+          "reviewer_approved": true,
+          "within_original_window": false,
+          "within_extension": true,
+          "revoked": false
+        }
+      },
+      "before_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_2",
+        "revision_id": "example_r0",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "atom",
+              "atom": "within_original_window"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "after_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_2",
+        "revision_id": "example_r1",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "atom",
+              "atom": "within_extension"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "example_08",
+      "context": {
+        "request_id": "example_request_08",
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_2",
+        "environment": "production",
+        "facts": {
+          "tests_passed": true,
+          "reviewer_approved": true,
+          "within_original_window": true,
+          "within_extension": false,
+          "revoked": false
+        }
+      },
+      "before_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_2",
+        "revision_id": "example_r0",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "atom",
+              "atom": "within_original_window"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "after_policy": {
+        "workspace_id": "example_workspace",
+        "resource_id": "example_service_2",
+        "revision_id": "example_r1",
+        "rule": {
+          "op": "and",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "tests_passed"
+            },
+            {
+              "op": "atom",
+              "atom": "within_extension"
+            },
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "revoked"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

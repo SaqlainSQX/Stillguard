@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "contract_sha256": "4c79e11b84da846e3ff4005f3260267aa14c010f9b124db0cf818b83e70d7cf0",
+  "records": [
+    {
+      "case_id": "example_01",
+      "raw_output": "{\"action\": \"deploy\", \"request_id\": \"example_request_01\", \"workspace_id\": \"example_workspace\", \"resource_id\": \"example_service_1\", \"environment\": \"production\"}"
+    },
+    {
+      "case_id": "example_02",
+      "raw_output": "{\"action\": \"withhold\", \"request_id\": \"example_request_02\", \"workspace_id\": \"example_workspace\", \"resource_id\": \"example_service_1\", \"environment\": \"production\"}"
+    },
+    {
+      "case_id": "example_03",
+      "raw_output": "{\"action\": \"deploy\", \"request_id\": \"example_request_03\", \"workspace_id\": \"example_workspace\", \"resource_id\": \"example_service_1\", \"environment\": \"staging\"}"
+    },
+    {
+      "case_id": "example_04",
+      "raw_output": "{\"action\": \"withhold\", \"request_id\": \"example_request_04\", \"workspace_id\": \"example_workspace\", \"resource_id\": \"example_service_1\", \"environment\": \"production\"}"
+    },
+    {
+      "case_id": "example_05",
+      "raw_output": "{\"action\": \"deploy\", \"request_id\": \"example_request_05\", \"workspace_id\": \"example_workspace\", \"resource_id\": \"example_service_2\", \"environment\": \"production\"}"
+    },
+    {
+      "case_id": "example_06",
+      "raw_output": "{\"action\": \"withhold\", \"request_id\": \"example_request_06\", \"workspace_id\": \"example_workspace\", \"resource_id\": \"example_service_2\", \"environment\": \"production\"}"
+    },
+    {
+      "case_id": "example_07",
+      "raw_output": "{\"action\": \"deploy\", \"request_id\": \"example_request_07\", \"workspace_id\": \"example_workspace\", \"resource_id\": \"example_service_2\", \"environment\": \"production\"}"
+    },
+    {
+      "case_id": "example_08",
+      "raw_output": "{\"action\": \"withhold\", \"request_id\": \"example_request_08\", \"workspace_id\": \"example_workspace\", \"resource_id\": \"example_service_2\", \"environment\": \"production\"}"
+    }
+  ]
+}

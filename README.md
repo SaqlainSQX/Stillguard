@@ -4,7 +4,7 @@
 
 Stillguard is a reproducible, formally labelled audit of small-model decisions after authorized policy updates. It separates unchanged safeguards, legitimate new permissions, basic rule errors, output-format failures and actions blocked by an independent simulated gateway. The actual pipeline uses CuratorKIT, pinned local Tiny Aya Global and AuditKIT.
 
-The final audit is complete: **600 held-out calls independently verified; 91 tests pass.** Across the pilot, reminder development and final evaluation, 1,176 actual calls are preserved, with calibration/excluded attempts reported separately. No new weights or adapter were trained.
+The final audit is complete: **600 held-out calls independently verified; 117 tests pass.** Across the pilot, reminder development and final evaluation, 1,176 actual calls are preserved, with calibration/excluded attempts reported separately. No new weights or adapter were trained.
 
 | Held-out result | Obsolete archive (HC) | Current policy only (P1) |
 |---|---:|---:|
@@ -24,6 +24,12 @@ The 20 held-out groups contain 120 probes and 20 unique current-policy truth fun
 CuratorKIT actually ingests/deduplicates/exports complete factual payloads; AuditKIT evaluates every real model generation against the separate scorer. A prespecified exact-fence payload diagnostic exposes formatting-dependent safety measurements without changing the actual strict gate. SafeTune/CircuitKIT are references, not claimed integrations. This submission fits Track 2a's domain-specific safety benchmark deliverable.
 
 [Hugging Face benchmark and logs](https://huggingface.co/datasets/SaqlainSQX/stillguard) · [Dataset collection](https://huggingface.co/collections/SaqlainSQX/stillguard-datasets-and-audit-traces-6af3eacf31b186e19999681d) · [Evaluated model collection](https://huggingface.co/collections/SaqlainSQX/stillguard-evaluated-model-6af3eacfe8cfcf8046d4e2a3)
+
+## Use the finding in a regression check
+
+Before merging a deployment agent or policy change, compare two saved proposal sets against the same current policy. The [CPU-only policy-change check](docs/POLICY_CHANGE_CHECK.md) separates unchanged safeguards, new restrictions and legitimate new permissions, binds outputs to a hashed fixture, and returns a failing CI exit status when explicit safety/usefulness budgets are exceeded. It reports absolute candidate quality as well as paired regressions, so a bad baseline cannot excuse a bad candidate.
+
+The [eight-request integration example](examples/policy-change/README.md) demonstrates an accuracy increase from 3/8 to 6/8 that still fails because both newly allowed successes disappear. Those example answers are **scripted fixtures**, not new model results. A read-only exporter also applies the check to all 120 actual HC/P1 pairs from the frozen audit. This addition makes the diagnostic reusable; it does not establish a successful model repair, production safety, or broader generalization.
 
 Execution: [plan](PLAN.md) · [tasks](docs/TASKS.md) · [decisions](docs/DECISIONS.md). Original code/policy fixtures/case annotations are MIT; [upstream model and dependency terms stay separate](THIRD_PARTY_NOTICES.md).
 

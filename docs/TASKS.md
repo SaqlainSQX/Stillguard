@@ -1,6 +1,6 @@
 # Stillguard task board
 
-Updated 11 November 2026. Finish target: **12 November IST**, with 13–14 November reserved as buffer. See `../PLAN.md` for acceptance criteria and branch rules.
+Updated 14 November 2026. Original finish target: **12 November IST**, with 13–14 November reserved as buffer. The owner authorized a further five-adviser improvement review and implementation on 14 November. See `../PLAN.md` for acceptance criteria and branch rules.
 
 | ID | Deliverable | Depends on | Status |
 |---|---|---|---|
@@ -18,6 +18,7 @@ Updated 11 November 2026. Finish target: **12 November IST**, with 13–14 Novem
 | T9 | New grouped held-out evaluation and one ablation | T7 | Done: 600/600 calls, zero failures; all strict/payload scores replayed; full tradeoff report complete |
 | T10 | Lightweight actual-run report/demo and reproducibility check | T9 | Done: all 30 preselected h01 responses exported; HTML and tradeoff chart visually checked |
 | T11 | HF artifacts/collections, report and submission package | T9,T10 | Done: public HF bundle/collections, anonymous full replay, clean source reproduction and viewer/client checks; owner review/form submission remain |
+| T12 | Five-adviser improvement decision and usable policy-change CI check | T11, owner request | Done: saved-output CLI, two authored integration transitions, independently verified actual HC/P1 replay, 117 passing tests; frozen audit unchanged; see IMPROVEMENT_001.md |
 
 Do not mark research stages complete from generated code alone. Completion requires their observable output and acceptance checks.
 

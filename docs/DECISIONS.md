@@ -154,6 +154,16 @@ The final report preserves the new-permission loss, matched-control limitations,
 
 Decision: the planned submission-ready work is complete ahead of the owner's 12 November target. Stop recurring work under the standing automation's original on-completion rule; do not run new experiments or rewrite the finished thesis automatically. The 90-minute timer was configured as requested before completion. Owner review and actual submission are the remaining human steps, not claimed completed here. Additional work requires a new direction or review feedback.
 
+## D018 — 14 November 2026: turn the diagnostic into a policy-change regression check
+
+The owner requested exactly five fresh improvement advisers and implementation of the best feasible option. Their recommendations and tradeoffs are recorded in `IMPROVEMENT_001.md`. Select a bounded deployment-policy CI workflow over a rushed corrective-method search or a purported independent transfer study without independent human authorship.
+
+The new CPU-only checker derives transition slices from trusted policies, scores both proposal sets against the current policy, and separately gates absolute candidate quality and paired safety/usefulness regressions. Strict contract fingerprints, output coverage, scope/revision consistency and explicit budgets prevent silent denominator changes or a bad baseline excusing a bad candidate. Authored examples remain labelled software fixtures. The original actual HC/P1 pairs reproduce 45→71 correct, with 10 lost allowed successes including six new permissions; the check fails. This is retrospective reanalysis, not fresh validation or model repair.
+
+The suite passes 117 tests; isolated standard-library export independently replays all 600 original strict/payload scores. Sixteen frozen audit files retain their original hashes. No new model calls, weights, adapters or original held-out changes. Solo participation is confirmed by the owner. Strategic raw simulated jury reviews remain local; public code includes the improvement decision and actual-result verification. Existing HF payload remains unchanged and identifies its original code snapshot; the new tool is a subsequent GitHub extension.
+
+Decision: ship the bounded practical workflow, retain all scientific limitations and failed results, and avoid an uncalibrated new score claim. Actual event submission remains the owner's action.
+
 ## Entry template for the next gate
 
 - Date / decision ID:
