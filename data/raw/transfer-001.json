@@ -1,0 +1,967 @@
+[
+  {
+    "group_id": "A1",
+    "before_rule": {
+      "op": "and",
+      "children": [
+        {
+          "op": "atom",
+          "atom": "member"
+        },
+        {
+          "op": "atom",
+          "atom": "trained"
+        },
+        {
+          "op": "atom",
+          "atom": "active"
+        },
+        {
+          "op": "not",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "suspended"
+            }
+          ]
+        }
+      ]
+    },
+    "after_rule": {
+      "op": "and",
+      "children": [
+        {
+          "op": "or",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "member"
+            },
+            {
+              "op": "and",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "sponsor"
+                },
+                {
+                  "op": "atom",
+                  "atom": "agreement"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "op": "atom",
+          "atom": "trained"
+        },
+        {
+          "op": "atom",
+          "atom": "active"
+        },
+        {
+          "op": "not",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "suspended"
+            }
+          ]
+        }
+      ]
+    },
+    "cases": [
+      {
+        "case_id": "A1-01",
+        "group_id": "A1",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "A1-request-1",
+          "subject_id": "A1-subject",
+          "resource_id": "A1-resource",
+          "facts": {
+            "member": true,
+            "trained": true,
+            "active": true,
+            "suspended": false,
+            "sponsor": false,
+            "agreement": false
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "grant"
+      },
+      {
+        "case_id": "A1-02",
+        "group_id": "A1",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "A1-request-2",
+          "subject_id": "A1-subject",
+          "resource_id": "A1-resource",
+          "facts": {
+            "member": true,
+            "trained": true,
+            "active": true,
+            "suspended": false,
+            "sponsor": false,
+            "agreement": true
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "grant"
+      },
+      {
+        "case_id": "A1-03",
+        "group_id": "A1",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "A1-request-3",
+          "subject_id": "A1-subject",
+          "resource_id": "A1-resource",
+          "facts": {
+            "member": true,
+            "trained": true,
+            "active": true,
+            "suspended": false,
+            "sponsor": true,
+            "agreement": false
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "grant"
+      },
+      {
+        "case_id": "A1-04",
+        "group_id": "A1",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "A1-request-4",
+          "subject_id": "A1-subject",
+          "resource_id": "A1-resource",
+          "facts": {
+            "member": false,
+            "trained": false,
+            "active": false,
+            "suspended": false,
+            "sponsor": false,
+            "agreement": false
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "A1-05",
+        "group_id": "A1",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "A1-request-5",
+          "subject_id": "A1-subject",
+          "resource_id": "A1-resource",
+          "facts": {
+            "member": false,
+            "trained": false,
+            "active": false,
+            "suspended": false,
+            "sponsor": false,
+            "agreement": true
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "A1-06",
+        "group_id": "A1",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "A1-request-6",
+          "subject_id": "A1-subject",
+          "resource_id": "A1-resource",
+          "facts": {
+            "member": false,
+            "trained": false,
+            "active": false,
+            "suspended": false,
+            "sponsor": true,
+            "agreement": false
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "A1-07",
+        "group_id": "A1",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "A1-request-7",
+          "subject_id": "A1-subject",
+          "resource_id": "A1-resource",
+          "facts": {
+            "member": false,
+            "trained": false,
+            "active": false,
+            "suspended": false,
+            "sponsor": true,
+            "agreement": true
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "A1-08",
+        "group_id": "A1",
+        "kind": "new_permission",
+        "context": {
+          "request_id": "A1-request-8",
+          "subject_id": "A1-subject",
+          "resource_id": "A1-resource",
+          "facts": {
+            "member": false,
+            "trained": true,
+            "active": true,
+            "suspended": false,
+            "sponsor": true,
+            "agreement": true
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "grant"
+      }
+    ]
+  },
+  {
+    "group_id": "A2",
+    "before_rule": {
+      "op": "and",
+      "children": [
+        {
+          "op": "atom",
+          "atom": "reviewed"
+        },
+        {
+          "op": "atom",
+          "atom": "agreement"
+        },
+        {
+          "op": "not",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "embargo"
+            }
+          ]
+        }
+      ]
+    },
+    "after_rule": {
+      "op": "and",
+      "children": [
+        {
+          "op": "atom",
+          "atom": "reviewed"
+        },
+        {
+          "op": "atom",
+          "atom": "agreement"
+        },
+        {
+          "op": "not",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "embargo"
+            }
+          ]
+        },
+        {
+          "op": "or",
+          "children": [
+            {
+              "op": "not",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "face"
+                }
+              ]
+            },
+            {
+              "op": "atom",
+              "atom": "consent"
+            },
+            {
+              "op": "atom",
+              "atom": "synthetic"
+            }
+          ]
+        }
+      ]
+    },
+    "cases": [
+      {
+        "case_id": "A2-01",
+        "group_id": "A2",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "A2-request-1",
+          "subject_id": "A2-subject",
+          "resource_id": "A2-resource",
+          "facts": {
+            "reviewed": true,
+            "agreement": true,
+            "embargo": false,
+            "face": false,
+            "consent": false,
+            "synthetic": false
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "grant"
+      },
+      {
+        "case_id": "A2-02",
+        "group_id": "A2",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "A2-request-2",
+          "subject_id": "A2-subject",
+          "resource_id": "A2-resource",
+          "facts": {
+            "reviewed": true,
+            "agreement": true,
+            "embargo": false,
+            "face": false,
+            "consent": false,
+            "synthetic": true
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "grant"
+      },
+      {
+        "case_id": "A2-03",
+        "group_id": "A2",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "A2-request-3",
+          "subject_id": "A2-subject",
+          "resource_id": "A2-resource",
+          "facts": {
+            "reviewed": true,
+            "agreement": true,
+            "embargo": false,
+            "face": false,
+            "consent": true,
+            "synthetic": false
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "grant"
+      },
+      {
+        "case_id": "A2-04",
+        "group_id": "A2",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "A2-request-4",
+          "subject_id": "A2-subject",
+          "resource_id": "A2-resource",
+          "facts": {
+            "reviewed": false,
+            "agreement": false,
+            "embargo": false,
+            "face": false,
+            "consent": false,
+            "synthetic": false
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "A2-05",
+        "group_id": "A2",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "A2-request-5",
+          "subject_id": "A2-subject",
+          "resource_id": "A2-resource",
+          "facts": {
+            "reviewed": false,
+            "agreement": false,
+            "embargo": false,
+            "face": false,
+            "consent": false,
+            "synthetic": true
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "A2-06",
+        "group_id": "A2",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "A2-request-6",
+          "subject_id": "A2-subject",
+          "resource_id": "A2-resource",
+          "facts": {
+            "reviewed": false,
+            "agreement": false,
+            "embargo": false,
+            "face": false,
+            "consent": true,
+            "synthetic": false
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "A2-07",
+        "group_id": "A2",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "A2-request-7",
+          "subject_id": "A2-subject",
+          "resource_id": "A2-resource",
+          "facts": {
+            "reviewed": false,
+            "agreement": false,
+            "embargo": false,
+            "face": false,
+            "consent": true,
+            "synthetic": true
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "A2-08",
+        "group_id": "A2",
+        "kind": "new_restriction",
+        "context": {
+          "request_id": "A2-request-8",
+          "subject_id": "A2-subject",
+          "resource_id": "A2-resource",
+          "facts": {
+            "reviewed": true,
+            "agreement": true,
+            "embargo": false,
+            "face": true,
+            "consent": false,
+            "synthetic": false
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "deny"
+      }
+    ]
+  },
+  {
+    "group_id": "B1",
+    "before_rule": {
+      "op": "and",
+      "children": [
+        {
+          "op": "atom",
+          "atom": "member"
+        },
+        {
+          "op": "atom",
+          "atom": "quota"
+        },
+        {
+          "op": "atom",
+          "atom": "compatible"
+        },
+        {
+          "op": "not",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "suspended"
+            }
+          ]
+        }
+      ]
+    },
+    "after_rule": {
+      "op": "and",
+      "children": [
+        {
+          "op": "or",
+          "children": [
+            {
+              "op": "and",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "member"
+                },
+                {
+                  "op": "atom",
+                  "atom": "quota"
+                }
+              ]
+            },
+            {
+              "op": "and",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "course"
+                },
+                {
+                  "op": "atom",
+                  "atom": "induction"
+                },
+                {
+                  "op": "atom",
+                  "atom": "offpeak"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "op": "atom",
+          "atom": "compatible"
+        },
+        {
+          "op": "not",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "suspended"
+            }
+          ]
+        }
+      ]
+    },
+    "cases": [
+      {
+        "case_id": "B1-01",
+        "group_id": "B1",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "B1-request-1",
+          "subject_id": "B1-subject",
+          "resource_id": "B1-resource",
+          "facts": {
+            "member": true,
+            "course": false,
+            "induction": false,
+            "quota": true,
+            "offpeak": false,
+            "compatible": true,
+            "suspended": false
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "grant"
+      },
+      {
+        "case_id": "B1-02",
+        "group_id": "B1",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "B1-request-2",
+          "subject_id": "B1-subject",
+          "resource_id": "B1-resource",
+          "facts": {
+            "member": true,
+            "course": false,
+            "induction": false,
+            "quota": true,
+            "offpeak": true,
+            "compatible": true,
+            "suspended": false
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "grant"
+      },
+      {
+        "case_id": "B1-03",
+        "group_id": "B1",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "B1-request-3",
+          "subject_id": "B1-subject",
+          "resource_id": "B1-resource",
+          "facts": {
+            "member": true,
+            "course": false,
+            "induction": true,
+            "quota": true,
+            "offpeak": false,
+            "compatible": true,
+            "suspended": false
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "grant"
+      },
+      {
+        "case_id": "B1-04",
+        "group_id": "B1",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "B1-request-4",
+          "subject_id": "B1-subject",
+          "resource_id": "B1-resource",
+          "facts": {
+            "member": false,
+            "course": false,
+            "induction": false,
+            "quota": false,
+            "offpeak": false,
+            "compatible": false,
+            "suspended": false
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "B1-05",
+        "group_id": "B1",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "B1-request-5",
+          "subject_id": "B1-subject",
+          "resource_id": "B1-resource",
+          "facts": {
+            "member": false,
+            "course": false,
+            "induction": false,
+            "quota": false,
+            "offpeak": false,
+            "compatible": false,
+            "suspended": true
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "B1-06",
+        "group_id": "B1",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "B1-request-6",
+          "subject_id": "B1-subject",
+          "resource_id": "B1-resource",
+          "facts": {
+            "member": false,
+            "course": false,
+            "induction": false,
+            "quota": false,
+            "offpeak": false,
+            "compatible": true,
+            "suspended": false
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "B1-07",
+        "group_id": "B1",
+        "kind": "new_permission",
+        "context": {
+          "request_id": "B1-request-7",
+          "subject_id": "B1-subject",
+          "resource_id": "B1-resource",
+          "facts": {
+            "member": false,
+            "course": true,
+            "induction": true,
+            "quota": false,
+            "offpeak": true,
+            "compatible": true,
+            "suspended": false
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "grant"
+      },
+      {
+        "case_id": "B1-08",
+        "group_id": "B1",
+        "kind": "new_permission",
+        "context": {
+          "request_id": "B1-request-8",
+          "subject_id": "B1-subject",
+          "resource_id": "B1-resource",
+          "facts": {
+            "member": false,
+            "course": true,
+            "induction": true,
+            "quota": true,
+            "offpeak": true,
+            "compatible": true,
+            "suspended": false
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "grant"
+      }
+    ]
+  },
+  {
+    "group_id": "B2",
+    "before_rule": {
+      "op": "and",
+      "children": [
+        {
+          "op": "atom",
+          "atom": "registered"
+        },
+        {
+          "op": "atom",
+          "atom": "deadline"
+        },
+        {
+          "op": "atom",
+          "atom": "compatible"
+        },
+        {
+          "op": "not",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "maintenance"
+            }
+          ]
+        }
+      ]
+    },
+    "after_rule": {
+      "op": "and",
+      "children": [
+        {
+          "op": "atom",
+          "atom": "registered"
+        },
+        {
+          "op": "atom",
+          "atom": "deadline"
+        },
+        {
+          "op": "atom",
+          "atom": "compatible"
+        },
+        {
+          "op": "not",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "maintenance"
+            }
+          ]
+        },
+        {
+          "op": "or",
+          "children": [
+            {
+              "op": "atom",
+              "atom": "smoke"
+            },
+            {
+              "op": "and",
+              "children": [
+                {
+                  "op": "atom",
+                  "atom": "emergency"
+                },
+                {
+                  "op": "atom",
+                  "atom": "short"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "cases": [
+      {
+        "case_id": "B2-01",
+        "group_id": "B2",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "B2-request-1",
+          "subject_id": "B2-subject",
+          "resource_id": "B2-resource",
+          "facts": {
+            "registered": true,
+            "deadline": true,
+            "compatible": true,
+            "maintenance": false,
+            "smoke": false,
+            "emergency": true,
+            "short": true
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "grant"
+      },
+      {
+        "case_id": "B2-02",
+        "group_id": "B2",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "B2-request-2",
+          "subject_id": "B2-subject",
+          "resource_id": "B2-resource",
+          "facts": {
+            "registered": true,
+            "deadline": true,
+            "compatible": true,
+            "maintenance": false,
+            "smoke": true,
+            "emergency": false,
+            "short": false
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "grant"
+      },
+      {
+        "case_id": "B2-03",
+        "group_id": "B2",
+        "kind": "unchanged_allowed",
+        "context": {
+          "request_id": "B2-request-3",
+          "subject_id": "B2-subject",
+          "resource_id": "B2-resource",
+          "facts": {
+            "registered": true,
+            "deadline": true,
+            "compatible": true,
+            "maintenance": false,
+            "smoke": true,
+            "emergency": false,
+            "short": true
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "grant"
+      },
+      {
+        "case_id": "B2-04",
+        "group_id": "B2",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "B2-request-4",
+          "subject_id": "B2-subject",
+          "resource_id": "B2-resource",
+          "facts": {
+            "registered": false,
+            "deadline": false,
+            "compatible": false,
+            "maintenance": false,
+            "smoke": false,
+            "emergency": false,
+            "short": false
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "B2-05",
+        "group_id": "B2",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "B2-request-5",
+          "subject_id": "B2-subject",
+          "resource_id": "B2-resource",
+          "facts": {
+            "registered": false,
+            "deadline": false,
+            "compatible": false,
+            "maintenance": false,
+            "smoke": false,
+            "emergency": false,
+            "short": true
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "B2-06",
+        "group_id": "B2",
+        "kind": "unchanged_denied",
+        "context": {
+          "request_id": "B2-request-6",
+          "subject_id": "B2-subject",
+          "resource_id": "B2-resource",
+          "facts": {
+            "registered": false,
+            "deadline": false,
+            "compatible": false,
+            "maintenance": false,
+            "smoke": false,
+            "emergency": true,
+            "short": false
+          }
+        },
+        "expected_before": "deny",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "B2-07",
+        "group_id": "B2",
+        "kind": "new_restriction",
+        "context": {
+          "request_id": "B2-request-7",
+          "subject_id": "B2-subject",
+          "resource_id": "B2-resource",
+          "facts": {
+            "registered": true,
+            "deadline": true,
+            "compatible": true,
+            "maintenance": false,
+            "smoke": false,
+            "emergency": false,
+            "short": false
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "deny"
+      },
+      {
+        "case_id": "B2-08",
+        "group_id": "B2",
+        "kind": "new_restriction",
+        "context": {
+          "request_id": "B2-request-8",
+          "subject_id": "B2-subject",
+          "resource_id": "B2-resource",
+          "facts": {
+            "registered": true,
+            "deadline": true,
+            "compatible": true,
+            "maintenance": false,
+            "smoke": false,
+            "emergency": false,
+            "short": true
+          }
+        },
+        "expected_before": "grant",
+        "expected_after": "deny"
+      }
+    ]
+  }
+]

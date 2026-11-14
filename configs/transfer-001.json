@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "model_revision": "af89d219b53ed9b13b8a4645f9c8028973510324",
+  "seed": 45,
+  "max_new_tokens": 160,
+  "max_actual_generations": 96,
+  "max_block_minutes": 15,
+  "quantization": "NF4 double quantization; bfloat16 compute; eager attention",
+  "integration": "Standalone local inference and independent replay; CuratorKIT/AuditKIT not used"
+}
